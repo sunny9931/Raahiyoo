@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Trip Budget Calculator | RAAHIYOO</title>
+  <meta name="description" content="Calculate the exact cost of your trip across 50+ Indian destinations. Real-time breakdown for stay, food, local travel, and activities." />
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/components.css" />
+</head>
+<body>
+
+  <!-- SITE HEADER -->
+  <header class="site-header">
+    <div class="container nav-wrap">
+      <a href="index.html" class="brand">
+        <svg class="brand-icon" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M14 6l-3.75 5 2.85 3.8-1.6 1.2L7 10l-6 8h22L14 6z"/>
+        </svg>
+        <div class="brand-text-wrap">
+          <span class="brand-title">RAAHIYOO</span>
+          <span class="brand-byline">by sunnio</span>
+        </div>
+      </a>
+
+      <nav class="nav-menu">
+        <a href="index.html#exploreSection" class="nav-item">All Destinations</a>
+        <a href="calculator.html" class="nav-item active" style="color: var(--primary);">Budget Calculator</a>
+        <a href="how-to-reach.html" class="nav-item">How to Reach</a>
+        <a href="index.html#reviewsSection" class="nav-item">Reviews</a>
+      </nav>
+
+      <div class="nav-actions">
+        <!-- Instagram Profile Link -->
+        <a href="https://www.instagram.com/sunnio.3/" target="_blank" rel="noopener" class="insta-header-btn" title="Follow @sunnio.3 on Instagram">
+          <svg class="insta-svg-icon" viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+          <span>@sunnio.3</span>
+        </a>
+
+        <!-- Multi-Currency Selector -->
+        <select class="currency-select" id="currencySelector" aria-label="Select Currency">
+          <option value="INR" selected>₹ INR</option>
+          <option value="USD">$ USD</option>
+          <option value="EUR">€ EUR</option>
+          <option value="AED">د.إ AED</option>
+        </select>
+        <a href="index.html" class="btn btn-secondary btn-sm">&larr; Home</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN CALCULATOR PAGE -->
+  <main class="container section-spacing">
+    
+    <div class="section-header text-center">
+      <div class="section-eyebrow">💰 Real Travel Estimator</div>
+      <h1 style="font-size: clamp(2.2rem, 4.5vw, 3.5rem); margin-bottom: 0.75rem; color: #0f172a;">
+        India Trip Budget Calculator
+      </h1>
+      <p class="section-subtitle" style="max-width: 680px; margin: 0 auto 2.5rem;">
+        Get an authentic, itemized real-time cost estimate for any destination in India based on days and travel style.
+      </p>
+    </div>
+
+    <!-- CALCULATOR ENGINE BOX -->
+    <div class="calc-box">
+      <div class="calc-grid">
+        
+        <!-- Controls Column -->
+        <div style="display: flex; flex-direction: column; gap: 1.75rem;">
+          
+          <!-- Destination Select -->
+          <div>
+            <label for="calcDestSelect" style="display: block; font-weight: 800; color: #0f172a; margin-bottom: 0.5rem; font-size: 1.05rem;">
+              1. Choose Your Destination (50+ Locations):
+            </label>
+            <select id="calcDestSelect" style="width: 100%; padding: 0.95rem 1.25rem; border-radius: 12px; border: 1px solid #cbd5e1; background: #fff; color: #0f172a; font-weight: 700; font-size: 1.05rem; box-shadow: var(--shadow-sm);">
+              <!-- Populated via js/calculator.js -->
+            </select>
+          </div>
+
+          <!-- Stepper Days -->
+          <div>
+            <label style="display: block; font-weight: 800; color: #0f172a; margin-bottom: 0.5rem; font-size: 1.05rem;">
+              2. Number of Travel Days:
+            </label>
+            <div class="calc-stepper-wrap">
+              <button class="calc-stepper-btn" id="calcDaysMinus" type="button" aria-label="Decrease Days">&minus;</button>
+              <div class="calc-stepper-val" id="calcDaysVal">3 Days</div>
+              <button class="calc-stepper-btn" id="calcDaysPlus" type="button" aria-label="Increase Days">&plus;</button>
+            </div>
+          </div>
+
+          <!-- Selectable Style Cards -->
+          <div>
+            <label style="display: block; font-weight: 800; color: #0f172a; margin-bottom: 0.5rem; font-size: 1.05rem;">
+              3. Travel Comfort Style:
+            </label>
+            <div class="calc-styles-grid">
+              
+              <div class="calc-style-card" data-style="budget">
+                <div class="style-icon">🎒</div>
+                <div class="style-title">Backpacker</div>
+                <div class="style-desc">Hostels &amp; Buses</div>
+              </div>
+
+              <div class="calc-style-card active" data-style="moderate">
+                <div class="style-icon">🏨</div>
+                <div class="style-title">Comfort</div>
+                <div class="style-desc">Boutique Stays</div>
+              </div>
+
+              <div class="calc-style-card" data-style="luxury">
+                <div class="style-icon">👑</div>
+                <div class="style-title">Luxury</div>
+                <div class="style-desc">Heritage Resorts</div>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Output Card -->
+        <div class="calc-result-card">
+          <div style="font-family: monospace; font-size: 0.85rem; text-transform: uppercase; color: #94a3b8; font-weight: 700; letter-spacing: 0.05em;">Estimated Total Trip Cost</div>
+          <div class="calc-total-num" id="calcTotalCost">₹0</div>
+
+          <div class="calc-breakdown-row">
+            <span>🏨 Stay &amp; Accommodation</span>
+            <strong id="calcStayCost">₹0</strong>
+          </div>
+          <div class="calc-breakdown-row">
+            <span>🍲 Food &amp; Dining</span>
+            <strong id="calcFoodCost">₹0</strong>
+          </div>
+          <div class="calc-breakdown-row">
+            <span>🚆 Local Travel &amp; Cabs</span>
+            <strong id="calcTransitCost">₹0</strong>
+          </div>
+          <div class="calc-breakdown-row" style="border: none;">
+            <span>🎟️ Activities, Rafting &amp; Passes</span>
+            <strong id="calcActivityCost">₹0</strong>
+          </div>
+
+          <button class="btn btn-primary btn-lg" style="width: 100%; margin-top: 1.75rem;" onclick="openLeadModal('Calculated Budget Trip')">
+            Get Complete Quotation on WhatsApp &rarr;
+          </button>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- BENEFIT CARDS -->
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-top: 3rem;">
+      <div style="background: #ffffff; border: 1px solid var(--border-light); padding: 1.75rem; border-radius: 16px; box-shadow: var(--shadow-sm);">
+        <div style="font-size: 2rem; margin-bottom: 0.5rem;">⚡</div>
+        <h4 style="margin-bottom: 0.35rem; color: #0f172a;">Real-Time Transparency</h4>
+        <p style="color: #64748b; font-size: 0.92rem; line-height: 1.5; margin: 0;">Our estimates are verified with actual ground taxi unions, homestays, and activity operators.</p>
+      </div>
+
+      <div style="background: #ffffff; border: 1px solid var(--border-light); padding: 1.75rem; border-radius: 16px; box-shadow: var(--shadow-sm);">
+        <div style="font-size: 2rem; margin-bottom: 0.5rem;">💳</div>
+        <h4 style="margin-bottom: 0.35rem; color: #0f172a;">Multi-Currency Support</h4>
+        <p style="color: #64748b; font-size: 0.92rem; line-height: 1.5; margin: 0;">Easily switch between INR, USD, EUR, and AED for international travel planning.</p>
+      </div>
+
+      <div style="background: #ffffff; border: 1px solid var(--border-light); padding: 1.75rem; border-radius: 16px; box-shadow: var(--shadow-sm);">
+        <div style="font-size: 2rem; margin-bottom: 0.5rem;">🛡️</div>
+        <h4 style="margin-bottom: 0.35rem; color: #0f172a;">Zero Hidden Charges</h4>
+        <p style="color: #64748b; font-size: 0.92rem; line-height: 1.5; margin: 0;">Includes permit fees, national park tickets, and buffer for fuel and toll taxes.</p>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- LEAD CAPTURE MODAL -->
+  <div class="modal-backdrop" id="leadModalBackdrop">
+    <div class="inquiry-modal">
+      <button class="modal-close-btn" id="leadModalCloseBtn">&times;</button>
+      
+      <div style="text-align: center; margin-bottom: 1.5rem;">
+        <span style="font-family: monospace; font-size: 0.8rem; font-weight: 700; color: var(--primary); text-transform: uppercase;">Custom Trip Quotation</span>
+        <h3 style="font-size: 1.6rem; color: #0f172a; margin: 0.25rem 0 0.5rem;">Get Your Verified Travel Blueprint</h3>
+        <p style="color: #64748b; font-size: 0.92rem;">Direct day-by-day plan, hotel recommendations &amp; cost estimate.</p>
+      </div>
+
+      <form id="leadCaptureForm">
+        <input type="hidden" id="leadDestField" value="" />
+
+        <div class="form-group">
+          <label class="form-label" for="leadName">Your Full Name</label>
+          <input type="text" id="leadName" class="form-input" placeholder="e.g. Rahul Sharma" required />
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="leadPhone">WhatsApp Phone Number</label>
+          <input type="tel" id="leadPhone" class="form-input" placeholder="e.g. +91 98765 43210" required />
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="leadTravelDate">Estimated Travel Month / Dates</label>
+          <input type="text" id="leadTravelDate" class="form-input" placeholder="e.g. Next Month / Diwali Holidays" />
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-lg" style="width: 100%; margin-top: 0.5rem;">
+          Send Me Plan on WhatsApp &rarr;
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- SITE FOOTER -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <!-- Col 1 -->
+        <div>
+          <a href="index.html" class="brand" style="margin-bottom: 0.75rem;">
+        <svg class="brand-icon" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M14 6l-3.75 5 2.85 3.8-1.6 1.2L7 10l-6 8h22L14 6z"/>
+        </svg>
+        <div class="brand-text-wrap">
+          <span class="brand-title">RAAHIYOO</span>
+          <span class="brand-byline">by sunnio</span>
+        </div>
+      </a>
+          <p style="color: #64748b; font-size: 0.95rem; max-width: 320px; line-height: 1.6; margin-bottom: 1rem;">
+            Discover authentic destinations, calculate exact trip budgets, and travel India with confidence. Handcrafted with ❤️ by <strong>Sunnio</strong>.
+          </p>
+          <div style="display: flex; flex-direction: column; gap: 0.65rem; align-items: flex-start;">
+            <a href="https://www.instagram.com/sunnio.3/" target="_blank" rel="noopener" class="insta-badge-link" title="Follow @sunnio.3 on Instagram">
+              <svg class="insta-svg-icon" viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+              <span>Follow @sunnio.3 on Instagram</span>
+            </a>
+            <div style="display: inline-flex; align-items: center; gap: 0.5rem; background: #ecfdf5; border: 1px solid #a7f3d0; padding: 0.35rem 0.8rem; border-radius: 9999px; font-size: 0.8rem; color: #047857; font-weight: 700;">
+              🌿 100% Free Travel Advice &bull; 0 Fake Reviews
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <div class="footer-col-title">Himalayan &amp; Sacred Trips</div>
+          <div class="footer-list">
+            <a href="destination.html?id=leh-ladakh">Leh Ladakh &amp; Pangong</a>
+            <a href="destination.html?id=spiti-valley">Spiti Valley</a>
+            <a href="destination.html?id=kedarnath">Kedarnath Dham</a>
+            <a href="destination.html?id=rishikesh">Rishikesh Rafting</a>
+            <a href="destination.html?id=varanasi">Varanasi Maha Aarti</a>
+          </div>
+        </div>
+
+        <div>
+          <div class="footer-col-title">Heritage &amp; Coast</div>
+          <div class="footer-list">
+            <a href="destination.html?id=jaipur">Jaipur Forts</a>
+            <a href="destination.html?id=udaipur">Udaipur City of Lakes</a>
+            <a href="destination.html?id=jaisalmer">Jaisalmer Dunes</a>
+            <a href="destination.html?id=goa">Goa Beaches</a>
+            <a href="destination.html?id=munnar">Munnar Tea Hills</a>
+          </div>
+        </div>
+
+        <div>
+          <div class="footer-col-title">Travel Tools</div>
+          <div class="footer-list">
+            <a href="calculator.html">Budget Calculator</a>
+            <a href="how-to-reach.html">Transit Route Planner</a>
+            <a href="index.html#exploreSection">All Destinations</a>
+            <a href="javascript:void(0)">Privacy &amp; Terms</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>&copy; 2026 RAAHIYOO &bull; Handcrafted with ❤️ by <a href="https://www.instagram.com/sunnio.3/" target="_blank" rel="noopener" style="color: #e1306c; font-weight: 700; text-decoration: none;">Sunnio (@sunnio.3)</a>. All rights reserved.</div>
+        <div style="font-weight: 700; color: #ff6b35;">Your Journey Begins Here.</div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/data.js"></script>
+  <script src="js/calculator.js"></script>
+  <script>
+    function openLeadModal(destName = 'Custom Trip') {
+      const modal = document.getElementById('leadModalBackdrop');
+      const destField = document.getElementById('leadDestField');
+      if (modal) {
+        if (destField) destField.value = destName;
+        modal.classList.add('active');
+      }
+    }
+    function closeLeadModal() {
+      const modal = document.getElementById('leadModalBackdrop');
+      if (modal) modal.classList.remove('active');
+    }
+    document.getElementById('leadModalCloseBtn').onclick = closeLeadModal;
+    document.getElementById('leadCaptureForm').onsubmit = (e) => {
+      e.preventDefault();
+      const name = document.getElementById('leadName').value;
+      const phone = document.getElementById('leadPhone').value;
+      document.getElementById('leadCaptureForm').innerHTML = `
+        <div style="text-align: center; padding: 2rem 1rem;">
+          <div style="font-size: 3rem; color: #10b981; margin-bottom: 1rem;">✓</div>
+          <h3 style="color: #0f172a; margin-bottom: 0.5rem;">Inquiry Sent, ${name}!</h3>
+          <p style="color: #475569; font-size: 0.95rem; margin-bottom: 1.5rem;">
+            Our travel expert will send the complete verified itinerary and cost breakdown to <strong>${phone}</strong> via WhatsApp within 15 minutes.
+          </p>
+          <button class="btn btn-primary" onclick="closeLeadModal()">Done</button>
+        </div>
+      `;
+    };
+  </script>
+</body>
+</html>

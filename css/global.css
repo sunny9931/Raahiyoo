@@ -1,0 +1,267 @@
+/* ==========================================================================
+   RAAHIYOO — TRANSPARENT GLASSMORPHISM TRAVEL DESIGN SYSTEM
+   Panoramic Fixed Mountain Landscape Backdrop + Ultra-Clean Frosted Glass UI
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap');
+
+:root {
+  /* 🏔️ Transparent Glassmorphism Layers */
+  --bg-glass-card: rgba(16, 26, 40, 0.42);
+  --bg-glass-card-hover: rgba(25, 42, 65, 0.58);
+  --bg-glass-nav: rgba(10, 18, 30, 0.45);
+  --bg-glass-input: rgba(255, 255, 255, 0.07);
+  --bg-glass-badge: rgba(255, 255, 255, 0.1);
+
+  /* 🌅 Glowing Warm Accents */
+  --accent-sunset: #ff6b35;
+  --accent-amber: #f77f00;
+  --accent-gold: #fcbf49;
+  --accent-emerald: #10b981;
+  --accent-cyan: #06b6d4;
+
+  /* 🖋️ Clean, High-Contrast Typography */
+  --text-primary: #ffffff;
+  --text-secondary: #e2e8f0;
+  --text-muted: #cbd5e1;
+  --text-gold: #fcd34d;
+
+  /* 🛡️ Frosted Glass Borders & Glowing Edges */
+  --border-glass: rgba(255, 255, 255, 0.16);
+  --border-glass-hover: rgba(252, 191, 73, 0.5);
+  --border-glow: rgba(255, 107, 53, 0.6);
+
+  /* 🖋️ Fonts */
+  --font-display: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-heading: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-body: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: 'Space Grotesk', monospace;
+
+  /* 📏 Spacing & Radii */
+  --radius-sm: 10px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-xl: 32px;
+  --radius-full: 9999px;
+  --container-max: 1280px;
+
+  /* 🌌 Glass Elevation Shadows */
+  --shadow-glass: 0 15px 35px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  --shadow-glass-hover: 0 20px 45px rgba(0, 0, 0, 0.5), 0 0 25px rgba(255, 107, 53, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+
+  /* ⚡ Transitions */
+  --ease-spring: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ==========================================================================
+   CSS RESET & PANORAMIC FIXED BACKGROUND
+   ========================================================================== */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  color-scheme: dark;
+}
+
+body {
+  /* 🏔️ Fixed Panoramic High-Res Himalayan Landscape visible through glass */
+  background: 
+    linear-gradient(180deg, rgba(8, 14, 24, 0.55) 0%, rgba(8, 14, 24, 0.72) 40%, rgba(6, 10, 18, 0.85) 100%),
+    url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=2200&q=85') no-repeat center center fixed;
+  background-size: cover;
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1 0 auto;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: all 0.2s var(--ease-smooth);
+}
+
+ul, ol {
+  list-style: none;
+}
+
+/* ==========================================================================
+   TYPOGRAPHY
+   ========================================================================== */
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  color: var(--text-primary);
+  line-height: 1.2;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+h1 { font-size: clamp(2.4rem, 5.8vw, 4.2rem); font-weight: 900; }
+h2 { font-size: clamp(1.8rem, 3.8vw, 2.8rem); font-weight: 800; }
+h3 { font-size: clamp(1.3rem, 2.5vw, 1.85rem); font-weight: 700; }
+h4 { font-size: 1.2rem; font-weight: 600; }
+
+p {
+  color: var(--text-secondary);
+  margin-bottom: 1rem;
+}
+
+p:last-child {
+  margin-bottom: 0;
+}
+
+.lead-text {
+  font-size: clamp(1.05rem, 2vw, 1.25rem);
+  line-height: 1.65;
+  color: var(--text-secondary);
+}
+
+.gradient-title {
+  background: linear-gradient(135deg, #ffffff 20%, var(--accent-gold) 65%, var(--accent-sunset) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 2px 15px rgba(255, 107, 53, 0.3));
+}
+
+/* ==========================================================================
+   CONTAINERS & FROSTED GLASS PANELS
+   ========================================================================== */
+
+.container {
+  width: 100%;
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 0 clamp(1rem, 4vw, 2rem);
+}
+
+.container-narrow {
+  width: 100%;
+  max-width: 880px;
+  margin: 0 auto;
+  padding: 0 clamp(1rem, 4vw, 2rem);
+}
+
+.section-spacing {
+  padding-top: clamp(4rem, 8vw, 6.5rem);
+  padding-bottom: clamp(4rem, 8vw, 6.5rem);
+  position: relative;
+}
+
+.section-header {
+  margin-bottom: clamp(2rem, 4vw, 3.5rem);
+  position: relative;
+}
+
+.section-header.text-center {
+  text-align: center;
+}
+
+.section-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--accent-gold);
+  margin-bottom: 0.75rem;
+  padding: 0.35rem 1rem;
+  background: rgba(252, 191, 73, 0.15);
+  border: 1px solid rgba(252, 191, 73, 0.4);
+  border-radius: var(--radius-full);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.section-subtitle {
+  font-size: clamp(1rem, 1.6vw, 1.15rem);
+  color: var(--text-muted);
+  max-width: 660px;
+  margin-top: 0.5rem;
+}
+
+.section-header.text-center .section-subtitle {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ==========================================================================
+   GRID UTILITIES
+   ========================================================================== */
+
+.grid-3 {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: clamp(1.25rem, 3vw, 2rem);
+}
+
+.grid-2 {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+  gap: clamp(1.25rem, 3vw, 2rem);
+}
+
+@media (max-width: 480px) {
+  .grid-2, .grid-3 {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ==========================================================================
+   ACCESSIBILITY & SELECTION
+   ========================================================================== */
+
+:focus-visible {
+  outline: 2px solid var(--accent-sunset);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+.skip-link {
+  position: absolute;
+  top: -100px;
+  left: 1rem;
+  background: var(--accent-sunset);
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius-sm);
+  z-index: 10000;
+  font-weight: 600;
+  transition: top 0.2s;
+}
+
+.skip-link:focus {
+  top: 1rem;
+}
+
+::selection {
+  background-color: var(--accent-sunset);
+  color: #fff;
+}

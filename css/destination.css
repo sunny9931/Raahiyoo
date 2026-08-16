@@ -1,0 +1,314 @@
+/* ==========================================================================
+   RAAHIYOO — DESTINATION DETAIL FROSTED GLASS STYLES
+   ========================================================================== */
+
+/* ==========================================================================
+   DESTINATION HERO
+   ========================================================================== */
+
+.dest-hero {
+  position: relative;
+  min-height: 65vh;
+  display: flex;
+  align-items: flex-end;
+  padding: 8rem 0 3.5rem;
+  overflow: hidden;
+  margin-bottom: 3.5rem;
+}
+
+.dest-hero-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+  transform: scale(1.05);
+}
+
+.dest-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(8, 14, 24, 0.4) 0%, rgba(8, 14, 24, 0.88) 100%);
+  z-index: 2;
+}
+
+.dest-hero-content {
+  position: relative;
+  z-index: 3;
+  width: 100%;
+}
+
+.dest-hero-breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-bottom: 1rem;
+}
+
+.dest-hero-breadcrumb a {
+  color: var(--accent-gold);
+}
+
+.dest-hero-title {
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  font-weight: 900;
+  color: #ffffff;
+  margin-bottom: 0.5rem;
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+}
+
+.dest-hero-tagline {
+  font-size: clamp(1.1rem, 2vw, 1.4rem);
+  color: var(--text-secondary);
+  margin-bottom: 1.5rem;
+  max-width: 750px;
+}
+
+.dest-badges-row {
+  display: flex;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+
+/* ==========================================================================
+   FACTS MATRIX (FROSTED GLASS)
+   ========================================================================== */
+
+.facts-matrix-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.25rem;
+}
+
+.fact-card {
+  background: var(--bg-glass-card);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  box-shadow: var(--shadow-glass);
+  transition: transform 0.2s, border-color 0.2s;
+}
+
+.fact-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--border-glass-hover);
+}
+
+.fact-icon-label {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--accent-gold);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 0.35rem;
+  font-weight: 700;
+}
+
+.fact-value {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+/* ==========================================================================
+   WHY THIS JOURNEY MATTERS (EDITORIAL GLASS BOX)
+   ========================================================================== */
+
+.why-matters-box {
+  background: linear-gradient(135deg, rgba(255, 107, 53, 0.15) 0%, rgba(16, 26, 40, 0.6) 100%);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 107, 53, 0.35);
+  border-radius: var(--radius-xl);
+  padding: clamp(2rem, 5vw, 3.5rem);
+  box-shadow: var(--shadow-glass), 0 0 30px rgba(255, 107, 53, 0.15);
+}
+
+.why-matters-content {
+  font-size: 1.15rem;
+  line-height: 1.75;
+  color: var(--text-secondary);
+}
+
+/* ==========================================================================
+   ATTRACTION CARDS (GLASS)
+   ========================================================================== */
+
+.attraction-card {
+  background: var(--bg-glass-card);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius-lg);
+  padding: 1.75rem;
+  box-shadow: var(--shadow-glass);
+  transition: transform 0.2s, border-color 0.2s;
+}
+
+.attraction-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--border-glass-hover);
+}
+
+.attraction-title {
+  font-size: 1.3rem;
+  margin-bottom: 0.5rem;
+  color: var(--text-primary);
+}
+
+.attraction-desc {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
+
+.attraction-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: 0.75rem;
+}
+
+/* ==========================================================================
+   ITINERARIES (GLASS TABS & DAYS)
+   ========================================================================== */
+
+.itinerary-selector-tabs {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-bottom: 2rem;
+}
+
+.itinerary-tab-btn {
+  padding: 0.75rem 1.5rem;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: var(--radius-full);
+  color: var(--text-secondary);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.itinerary-tab-btn.active {
+  background: linear-gradient(135deg, var(--accent-sunset) 0%, var(--accent-amber) 100%);
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.3);
+  box-shadow: 0 4px 16px rgba(255, 107, 53, 0.4);
+}
+
+.itinerary-days-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.itinerary-day-card {
+  background: var(--bg-glass-card);
+  backdrop-filter: blur(16px);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  display: flex;
+  gap: 1.5rem;
+  align-items: flex-start;
+  box-shadow: var(--shadow-glass);
+}
+
+.itinerary-day-num {
+  width: 50px;
+  height: 50px;
+  border-radius: 14px;
+  background: rgba(255, 107, 53, 0.2);
+  border: 1px solid rgba(255, 107, 53, 0.4);
+  color: var(--accent-sunset);
+  font-family: var(--font-mono);
+  font-size: 1.2rem;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.itinerary-day-content h4 {
+  font-size: 1.2rem;
+  margin-bottom: 0.35rem;
+}
+
+.itinerary-day-content p {
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+/* ==========================================================================
+   MASONRY PHOTO GALLERY
+   ========================================================================== */
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.25rem;
+}
+
+.gallery-item {
+  position: relative;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  aspect-ratio: 4 / 3;
+  cursor: pointer;
+  border: 1px solid var(--border-glass);
+  box-shadow: var(--shadow-glass);
+}
+
+.gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s var(--ease-spring);
+}
+
+.gallery-item:hover img {
+  transform: scale(1.08);
+}
+
+.gallery-item-caption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 1rem;
+  background: linear-gradient(180deg, transparent 0%, rgba(8, 14, 24, 0.9) 100%);
+  color: #ffffff;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.sources-box {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-md);
+  padding: 1.25rem;
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}

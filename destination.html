@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+  <title>Destination Guide | RAAHIYOO</title>
+  <meta name="description" content="Complete travel blueprint with exact train routes, itineraries, daily budgets, and packing lists." />
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <style>
+    .dest-page-hero {
+      position: relative;
+      min-height: 60vh;
+      display: flex;
+      align-items: flex-end;
+      padding: clamp(5rem, 8vw, 7rem) 0 3.5rem;
+      color: #fff;
+      overflow: hidden;
+    }
+    .dest-hero-bg-img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 1;
+    }
+    .dest-hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(15, 23, 42, 0.3) 0%, rgba(15, 23, 42, 0.85) 100%);
+      z-index: 2;
+    }
+    .dest-hero-content {
+      position: relative;
+      z-index: 3;
+      width: 100%;
+    }
+    .fact-box {
+      background: #ffffff;
+      border: 1px solid var(--border-light);
+      border-radius: var(--radius-lg);
+      padding: 1.25rem;
+      box-shadow: var(--shadow-sm);
+    }
+    .fact-box-label {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      font-weight: 700;
+      margin-bottom: 0.25rem;
+    }
+    .fact-box-val {
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: var(--text-main);
+    }
+    .story-box {
+      background: #ffffff;
+      border: 1px solid var(--border-light);
+      border-radius: var(--radius-xl);
+      padding: clamp(1.5rem, 4vw, 3rem);
+      box-shadow: var(--shadow-sm);
+      margin-bottom: 3rem;
+    }
+    .transit-highlight-box {
+      background: #f8fafc;
+      border-left: 4px solid var(--primary);
+      padding: 1.25rem;
+      border-radius: 8px;
+      margin-bottom: 1.5rem;
+      font-size: 1.02rem;
+      color: var(--text-body);
+      line-height: 1.65;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- SITE HEADER -->
+  <header class="site-header">
+    <div class="container nav-wrap">
+      <a href="index.html" class="brand">
+        <svg class="brand-icon" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M14 6l-3.75 5 2.85 3.8-1.6 1.2L7 10l-6 8h22L14 6z"/>
+        </svg>
+        <div class="brand-text-wrap">
+          <span class="brand-title">RAAHIYOO</span>
+          <span class="brand-byline">by sunnio</span>
+        </div>
+      </a>
+
+      <nav class="nav-menu">
+        <a href="index.html#exploreSection" class="nav-item">All Destinations</a>
+        <a href="calculator.html" class="nav-item">Budget Calculator</a>
+        <a href="how-to-reach.html" class="nav-item">How to Reach</a>
+      </nav>
+
+      <div class="nav-actions">
+        <!-- Instagram Profile Link -->
+        <a href="https://www.instagram.com/sunnio.3/" target="_blank" rel="noopener" class="insta-header-btn" title="Follow @sunnio.3 on Instagram">
+          <svg class="insta-svg-icon" viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+          <span>@sunnio.3</span>
+        </a>
+        <button class="btn btn-secondary btn-sm" onclick="window.print()">🖨️ Print / PDF</button>
+        <a href="index.html" class="btn btn-secondary btn-sm">&larr; Home</a>
+        <button class="btn btn-primary btn-sm" id="pageInquiryBtn">Plan Trip</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- DYNAMIC DESTINATION CONTENT -->
+  <main id="destPageMain">
+    <!-- Populated via script -->
+  </main>
+
+  <!-- LEAD CAPTURE MODAL -->
+  <div class="modal-backdrop" id="leadModalBackdrop">
+    <div class="inquiry-modal">
+      <button class="modal-close-btn" id="leadModalCloseBtn">&times;</button>
+      <div style="text-align: center; margin-bottom: 1.25rem;">
+        <span style="font-family: monospace; font-size: 0.8rem; font-weight: 700; color: var(--primary); text-transform: uppercase;">Custom Trip Consultation</span>
+        <h3 style="font-size: 1.5rem; color: #0f172a; margin: 0.25rem 0 0.4rem;" id="modalDestTitle">Plan Your Journey</h3>
+        <p style="color: #64748b; font-size: 0.9rem;">Direct verified itinerary, stays &amp; cost estimate via WhatsApp.</p>
+      </div>
+
+      <form id="leadCaptureForm">
+        <input type="hidden" id="leadDestField" value="" />
+        <div class="form-group">
+          <label class="form-label" for="leadName">Your Full Name</label>
+          <input type="text" id="leadName" class="form-input" placeholder="e.g. Rahul Sharma" required />
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="leadPhone">WhatsApp Number</label>
+          <input type="tel" id="leadPhone" class="form-input" placeholder="e.g. +91 98765 43210" required />
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="leadTravelDate">Estimated Month / Dates</label>
+          <input type="text" id="leadTravelDate" class="form-input" placeholder="e.g. Next Month / Diwali" />
+        </div>
+        <button type="submit" class="btn btn-primary btn-lg" style="width: 100%; margin-top: 0.5rem;">
+          Send Me Itinerary on WhatsApp &rarr;
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- CLEAN STRUCTURED FOOTER -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <a href="index.html" class="brand" style="margin-bottom: 0.75rem;">
+        <svg class="brand-icon" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M14 6l-3.75 5 2.85 3.8-1.6 1.2L7 10l-6 8h22L14 6z"/>
+        </svg>
+        <div class="brand-text-wrap">
+          <span class="brand-title">RAAHIYOO</span>
+          <span class="brand-byline">by sunnio</span>
+        </div>
+      </a>
+          <p style="color: #64748b; font-size: 0.95rem; max-width: 320px; line-height: 1.6; margin-bottom: 1rem;">
+            Discover authentic destinations, calculate exact trip budgets, and travel India with confidence. Handcrafted with ❤️ by <strong>Sunnio</strong>.
+          </p>
+          <div style="display: flex; flex-direction: column; gap: 0.65rem; align-items: flex-start;">
+            <a href="https://www.instagram.com/sunnio.3/" target="_blank" rel="noopener" class="insta-badge-link" title="Follow @sunnio.3 on Instagram">
+              <svg class="insta-svg-icon" viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+              <span>Follow @sunnio.3 on Instagram</span>
+            </a>
+            <div style="display: inline-flex; align-items: center; gap: 0.5rem; background: #ecfdf5; border: 1px solid #a7f3d0; padding: 0.35rem 0.8rem; border-radius: 9999px; font-size: 0.8rem; color: #047857; font-weight: 700;">
+              🌿 100% Free Travel Advice &bull; 0 Fake Reviews
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <div class="footer-col-title">Popular Trips</div>
+          <div class="footer-list">
+            <a href="destination.html?id=rishikesh">Rishikesh Rafting</a>
+            <a href="destination.html?id=manali">Manali &amp; Sissu</a>
+            <a href="destination.html?id=leh-ladakh">Leh Ladakh</a>
+            <a href="destination.html?id=spiti-valley">Spiti Valley</a>
+            <a href="destination.html?id=varanasi">Varanasi Aarti</a>
+          </div>
+        </div>
+
+        <div>
+          <div class="footer-col-title">Explore Regions</div>
+          <div class="footer-list">
+            <a href="destination.html?id=kedarnath">Kedarnath Dham</a>
+            <a href="destination.html?id=jaipur">Jaipur Forts</a>
+            <a href="destination.html?id=goa">Goa Beaches</a>
+            <a href="destination.html?id=munnar">Munnar Tea Hills</a>
+            <a href="destination.html?id=darjeeling">Darjeeling Kanchenjunga</a>
+          </div>
+        </div>
+
+        <div>
+          <div class="footer-col-title">Trust &amp; Tools</div>
+          <div class="footer-list">
+            <a href="calculator.html">Budget Calculator</a>
+            <a href="how-to-reach.html">Transit Planner</a>
+            <a href="javascript:void(0)">Clean Mountain Pledge</a>
+            <a href="javascript:void(0)">Privacy &amp; Terms</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>&copy; 2026 RAAHIYOO &bull; Handcrafted with ❤️ by <a href="https://www.instagram.com/sunnio.3/" target="_blank" rel="noopener" style="color: #e1306c; font-weight: 700; text-decoration: none;">Sunnio (@sunnio.3)</a>. All rights reserved.</div>
+        <div style="font-weight: 700; color: #ff6b35;">Your Journey Begins Here.</div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/data.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const main = document.getElementById('destPageMain');
+      if (!main || typeof DESTINATIONS === 'undefined') return;
+
+      const urlParams = new URLSearchParams(window.location.search);
+      const destId = urlParams.get('id') || 'rishikesh';
+      const dest = DESTINATIONS.find(d => d.id === destId) || DESTINATIONS[0];
+
+      document.title = `${dest.name} Travel Guide — Transit, Itinerary & Budget | RAAHIYOO`;
+
+      const storageKey = `raahiyoo_chk_${dest.id}`;
+      const savedChecklist = JSON.parse(localStorage.getItem(storageKey) || '{}');
+
+      main.innerHTML = `
+        <!-- HERO -->
+        <section class="dest-page-hero">
+          <img src="${dest.heroImage}" alt="${dest.name}" class="dest-hero-bg-img" />
+          <div class="dest-hero-overlay"></div>
+          <div class="container dest-hero-content">
+            <div style="font-family: monospace; font-size: 0.85rem; font-weight: 700; color: #ff6b35; margin-bottom: 0.5rem; text-transform: uppercase;">
+              📍 ${dest.state} &bull; ${dest.elevation}
+            </div>
+            <h1 style="font-size: clamp(2.3rem, 6vw, 4.2rem); color: #fff; margin-bottom: 0.5rem;">${dest.name}</h1>
+            <p style="font-size: clamp(1rem, 2vw, 1.25rem); color: #e2e8f0; max-width: 750px; margin-bottom: 1.5rem;">
+              ${dest.tagline}
+            </p>
+            <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
+              <button class="btn btn-primary btn-lg" onclick="openLeadModal('${dest.name}')">Plan Custom Itinerary &rarr;</button>
+              <button class="btn btn-secondary btn-lg" onclick="window.print()">📄 Save / Print PDF</button>
+              <a href="#howToReachSection" class="btn btn-secondary btn-lg">How to Reach &darr;</a>
+            </div>
+          </div>
+        </section>
+
+        <!-- FACTS MATRIX -->
+        <div class="container" style="margin-top: -2rem; position: relative; z-index: 10;">
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
+            <div class="fact-box">
+              <div class="fact-box-label">🗓️ Best Season</div>
+              <div class="fact-box-val">${dest.bestTime}</div>
+            </div>
+            <div class="fact-box">
+              <div class="fact-box-label">⏱️ Trip Length</div>
+              <div class="fact-box-val">${dest.idealDays}</div>
+            </div>
+            <div class="fact-box">
+              <div class="fact-box-label">💰 Daily Budget Avg</div>
+              <div class="fact-box-val">₹${dest.basePriceINR.toLocaleString('en-IN')}</div>
+            </div>
+            <div class="fact-box">
+              <div class="fact-box-label">⭐ Traveler Rating</div>
+              <div class="fact-box-val">${dest.rating} (${dest.reviewsCount} reviews)</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="container section-spacing">
+          
+          <!-- STORY & HIGHLIGHTS -->
+          <div class="story-box">
+            <div class="section-eyebrow">About The Journey</div>
+            <h2 style="margin-bottom: 1rem; color: #0f172a;">Why ${dest.name} is Unforgettable</h2>
+            <p style="font-size: 1.05rem; color: #334155; line-height: 1.7; margin-bottom: 2rem;">
+              ${dest.description}
+            </p>
+
+            <h3 style="margin-bottom: 1rem; font-size: 1.25rem;">Top Highlights You Can't Miss:</h3>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem;">
+              ${dest.highlights.map(h => `
+                <div style="background: #f8fafc; border: 1px solid #e2e8f0; padding: 1.15rem; border-radius: 12px; display: flex; gap: 0.75rem; align-items: flex-start;">
+                  <span style="color: #ff6b35; font-size: 1.2rem; font-weight: 800;">✓</span>
+                  <span style="color: #1e293b; font-weight: 600; font-size: 0.95rem;">${h}</span>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+
+          <!-- HOW TO REACH -->
+          <section id="howToReachSection" class="story-box">
+            <div class="section-eyebrow">Transit Blueprint</div>
+            <h2 style="margin-bottom: 1rem; color: #0f172a;">How to Reach ${dest.name}</h2>
+            
+            <div class="transit-highlight-box">
+              ${dest.transitSummary}
+            </div>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.25rem; margin-top: 1.5rem;">
+              <div style="background: #f1f5f9; padding: 1.25rem; border-radius: 12px;">
+                <div style="font-family: monospace; font-size: 0.75rem; font-weight: 700; color: #64748b; text-transform: uppercase;">✈️ Nearest Airport</div>
+                <div style="font-size: 1.05rem; font-weight: 800; color: #0f172a; margin-top: 0.25rem;">${dest.nearestHubs.airport}</div>
+              </div>
+              <div style="background: #f1f5f9; padding: 1.25rem; border-radius: 12px;">
+                <div style="font-family: monospace; font-size: 0.75rem; font-weight: 700; color: #64748b; text-transform: uppercase;">🚆 Nearest Railway Station</div>
+                <div style="font-size: 1.05rem; font-weight: 800; color: #0f172a; margin-top: 0.25rem;">${dest.nearestHubs.railway}</div>
+              </div>
+              <div style="background: #f1f5f9; padding: 1.25rem; border-radius: 12px;">
+                <div style="font-family: monospace; font-size: 0.75rem; font-weight: 700; color: #64748b; text-transform: uppercase;">🚗 Highway / Road Route</div>
+                <div style="font-size: 1.05rem; font-weight: 800; color: #0f172a; margin-top: 0.25rem;">${dest.nearestHubs.road}</div>
+              </div>
+            </div>
+          </section>
+
+          <!-- 3-DAY ITINERARY -->
+          <div class="story-box">
+            <div class="section-eyebrow">Day-by-Day Blueprint</div>
+            <h2 style="margin-bottom: 1.5rem; color: #0f172a;">Suggested ${dest.idealDays} Itinerary</h2>
+            
+            <div style="display: flex; flex-direction: column; gap: 1.25rem;">
+              ${dest.itinerary.map(item => `
+                <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 16px; padding: 1.25rem; display: flex; gap: 1.25rem; align-items: flex-start;">
+                  <div style="background: #ff6b35; color: #fff; width: 46px; height: 46px; border-radius: 12px; font-weight: 800; font-family: monospace; display: flex; align-items: center; justify-content: center; font-size: 1.15rem; flex-shrink: 0;">
+                    0${item.day}
+                  </div>
+                  <div>
+                    <h4 style="font-size: 1.15rem; color: #0f172a; margin-bottom: 0.3rem;">${item.title}</h4>
+                    <p style="margin: 0; color: #475569; font-size: 0.95rem; line-height: 1.6;">${item.desc}</p>
+                  </div>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+
+          <!-- INTERACTIVE CHECKLIST -->
+          <div class="story-box">
+            <div class="section-eyebrow">Smart Packing</div>
+            <h2 style="margin-bottom: 0.5rem; color: #0f172a;">Essential Packing Checklist</h2>
+            <p style="color: #64748b; margin-bottom: 1.5rem;">Check off items as you pack. Automatically saved in your browser!</p>
+
+            <div style="display: flex; flex-direction: column; gap: 0.75rem;">
+              ${dest.packing.map((item, idx) => `
+                <label style="display: flex; align-items: center; gap: 0.85rem; background: #f8fafc; padding: 0.85rem 1.15rem; border-radius: 10px; border: 1px solid #e2e8f0; cursor: pointer;">
+                  <input type="checkbox" ${savedChecklist[idx] ? 'checked' : ''} onchange="toggleChecklistItem('${dest.id}', ${idx}, this.checked)" style="width: 20px; height: 20px; accent-color: #ff6b35;" />
+                  <span style="font-size: 0.98rem; font-weight: 600; color: #1e293b; ${savedChecklist[idx] ? 'text-decoration: line-through; color: #94a3b8;' : ''}">${item}</span>
+                </label>
+              `).join('')}
+            </div>
+          </div>
+
+          <!-- REAL GROUND TIPS -->
+          <div class="story-box" style="background: #fffbeb; border-color: #fef3c7;">
+            <div class="section-eyebrow" style="background: rgba(245, 158, 11, 0.2); color: #b45309;">💡 Insider Ground Truth</div>
+            <h2 style="margin-bottom: 1rem; color: #78350f;">Important Things to Know Before You Go</h2>
+            <ul style="display: flex; flex-direction: column; gap: 0.75rem;">
+              ${dest.tips.map(tip => `
+                <li style="display: flex; gap: 0.75rem; color: #92400e; font-size: 0.98rem; line-height: 1.6;">
+                  <span>👉</span>
+                  <span>${tip}</span>
+                </li>
+              `).join('')}
+            </ul>
+          </div>
+
+        </div>
+      `;
+
+      document.getElementById('pageInquiryBtn').onclick = () => openLeadModal(dest.name);
+    });
+
+    function toggleChecklistItem(destId, index, isChecked) {
+      const storageKey = `raahiyoo_chk_${destId}`;
+      const saved = JSON.parse(localStorage.getItem(storageKey) || '{}');
+      saved[index] = isChecked;
+      localStorage.setItem(storageKey, JSON.stringify(saved));
+      location.reload();
+    }
+
+    function openLeadModal(destName) {
+      const modal = document.getElementById('leadModalBackdrop');
+      const title = document.getElementById('modalDestTitle');
+      const field = document.getElementById('leadDestField');
+      if (modal) {
+        if (title) title.textContent = `Plan Trip to ${destName}`;
+        if (field) field.value = destName;
+        modal.classList.add('active');
+      }
+    }
+
+    function closeLeadModal() {
+      const modal = document.getElementById('leadModalBackdrop');
+      if (modal) modal.classList.remove('active');
+    }
+
+    document.getElementById('leadModalCloseBtn').onclick = closeLeadModal;
+    document.getElementById('leadCaptureForm').onsubmit = (e) => {
+      e.preventDefault();
+      const name = document.getElementById('leadName').value;
+      const phone = document.getElementById('leadPhone').value;
+      const dest = document.getElementById('leadDestField').value;
+
+      document.getElementById('leadCaptureForm').innerHTML = `
+        <div style="text-align: center; padding: 2rem 1rem;">
+          <div style="font-size: 3rem; color: #10b981; margin-bottom: 1rem;">✓</div>
+          <h3 style="color: #0f172a; margin-bottom: 0.5rem;">Inquiry Sent, ${name}!</h3>
+          <p style="color: #475569; font-size: 0.95rem; margin-bottom: 1.5rem;">
+            Our travel expert will send the complete verified itinerary and cost breakdown for <strong>${dest}</strong> to <strong>${phone}</strong> via WhatsApp within 15 minutes.
+          </p>
+          <button class="btn btn-primary" onclick="closeLeadModal()">Done</button>
+        </div>
+      `;
+    };
+  </script>
+</body>
+</html>

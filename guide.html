@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Travel Guide | RAAHIYOO</title>
+  <meta name="description" content="Editorial travel guide with practical advice, safety tips, and route details." />
+
+  <link rel="stylesheet" href="css/global.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/navigation.css" />
+  <link rel="stylesheet" href="css/guides.css" />
+</head>
+<body>
+  <a href="#guideContent" class="skip-link">Skip to main content</a>
+
+  <!-- SITE HEADER -->
+  <header class="site-header" id="siteHeader">
+    <div class="container nav-container">
+      <a href="index.html" class="brand-logo" aria-label="RAAHIYOO Home">
+        <svg class="brand-mountain-icon" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M14 6l-3.75 5 2.85 3.8-1.6 1.2L7 10l-6 8h22L14 6z"/>
+        </svg>
+        <span>RAAHIYOO</span>
+        <span class="brand-subtext">Guide</span>
+      </a>
+
+      <nav class="nav-links" aria-label="Main Navigation">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="destinations.html" class="nav-link">Destinations</a>
+        <a href="how-to-reach.html" class="nav-link">How to Reach</a>
+        <a href="collections.html" class="nav-link">Collections</a>
+        <a href="guides.html" class="nav-link active">Travel Guides</a>
+        <a href="about.html" class="nav-link">About</a>
+      </nav>
+
+      <div class="nav-actions">
+        <button class="search-trigger-btn" aria-label="Quick Search">
+          <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+          </svg>
+          <span>Search</span>
+          <kbd class="search-shortcut-key">⌘K</kbd>
+        </button>
+
+        <button class="hamburger-btn" id="hamburgerBtn" aria-label="Toggle Menu" aria-expanded="false" aria-controls="mobileDrawer">
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- MOBILE DRAWER -->
+  <div class="drawer-backdrop" id="drawerBackdrop"></div>
+  <aside class="mobile-drawer" id="mobileDrawer" aria-label="Mobile Navigation">
+    <div class="drawer-links">
+      <a href="index.html" class="drawer-link">Home</a>
+      <a href="destinations.html" class="drawer-link">Destinations</a>
+      <a href="how-to-reach.html" class="drawer-link">How to Reach</a>
+      <a href="collections.html" class="drawer-link">Collections</a>
+      <a href="guides.html" class="drawer-link active">Travel Guides</a>
+      <a href="about.html" class="drawer-link">About RAAHIYOO</a>
+      <a href="contact.html" class="drawer-link">Contact</a>
+    </div>
+    <div class="drawer-footer">
+      <div class="drawer-tagline">Your Journey Begins Here.</div>
+      <a href="destinations.html" class="btn btn-primary" style="width: 100%;">Explore All Journeys</a>
+    </div>
+  </aside>
+
+  <!-- SEARCH MODAL -->
+  <div class="search-modal-overlay" id="searchModalOverlay" role="dialog" aria-modal="true" aria-label="Search Destinations">
+    <div class="search-modal-container">
+      <div class="search-input-wrapper">
+        <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="color: var(--accent-terracotta);">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+        </svg>
+        <input type="text" class="search-modal-input" id="searchModalInput" placeholder="Where do you want to go?" />
+        <span style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-muted);">ESC</span>
+      </div>
+      <div class="search-modal-results" id="searchModalResults"></div>
+    </div>
+  </div>
+
+  <main id="guideContent">
+    <!-- Injected dynamically via script -->
+  </main>
+
+  <!-- GLOBAL FOOTER -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <a href="index.html" class="brand-logo" style="margin-bottom: 0.75rem;">
+            <svg class="brand-mountain-icon" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M14 6l-3.75 5 2.85 3.8-1.6 1.2L7 10l-6 8h22L14 6z"/>
+            </svg>
+            <span>RAAHIYOO</span>
+          </a>
+          <p class="footer-brand-desc">
+            Discover destinations, understand multi-modal transit, and plan your journey with confidence.
+          </p>
+        </div>
+
+        <div>
+          <h4 class="footer-heading">Destinations</h4>
+          <div class="footer-links">
+            <a href="destination.html?id=rishikesh" class="footer-link">Rishikesh</a>
+            <a href="destination.html?id=tungnath" class="footer-link">Tungnath</a>
+            <a href="destination.html?id=manali" class="footer-link">Manali</a>
+          </div>
+        </div>
+
+        <div>
+          <h4 class="footer-heading">Explore</h4>
+          <div class="footer-links">
+            <a href="how-to-reach.html" class="footer-link">How to Reach</a>
+            <a href="collections.html" class="footer-link">Collections</a>
+            <a href="guides.html" class="footer-link">Travel Guides</a>
+          </div>
+        </div>
+
+        <div>
+          <h4 class="footer-heading">Trust &amp; Legal</h4>
+          <div class="footer-links">
+            <a href="about.html" class="footer-link">About RAAHIYOO</a>
+            <a href="privacy.html" class="footer-link">Privacy Policy</a>
+            <a href="terms.html" class="footer-link">Terms of Service</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>&copy; <span class="dynamic-year">2026</span> RAAHIYOO. All rights reserved.</div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="data/destinations.js"></script>
+  <script src="data/guides.js"></script>
+  <script src="data/collections.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/navigation.js"></script>
+  <script src="js/animations.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const container = document.getElementById('guideContent');
+      if (!container || typeof GUIDES_DATA === 'undefined') return;
+
+      const urlParams = new URLSearchParams(window.location.search);
+      const guideId = urlParams.get('id') || 'how-to-plan-himalayan-journey';
+
+      const guide = GUIDES_DATA.find(g => g.id === guideId) || GUIDES_DATA[0];
+
+      document.title = `${guide.title} | RAAHIYOO Travel Guides`;
+
+      container.innerHTML = `
+        <header class="guide-hero">
+          <img src="${guide.heroImage}" alt="${guide.title}" class="guide-hero-bg" />
+          <div class="guide-hero-overlay"></div>
+          <div class="container guide-hero-content">
+            <nav class="dest-hero-breadcrumb" aria-label="Breadcrumb">
+              <a href="index.html">Home</a> &rsaquo;
+              <a href="guides.html">Travel Guides</a> &rsaquo;
+              <span>${guide.category}</span>
+            </nav>
+            <div class="guide-meta-row">
+              <span class="badge badge-terracotta">${guide.category}</span>
+              <span>⏱️ ${guide.readTime}</span>
+              <span>🗓️ ${guide.publishedDate}</span>
+              <span>✍️ ${guide.author}</span>
+            </div>
+            <h1 class="guide-hero-title">${guide.title}</h1>
+            <p class="guide-hero-subtitle">${guide.subtitle}</p>
+          </div>
+        </header>
+
+        <div class="container">
+          <div class="article-layout">
+            <article class="article-body">
+              ${guide.content}
+            </article>
+
+            <aside class="article-sidebar">
+              <div class="sidebar-box">
+                <h4>Related Destinations</h4>
+                <div style="display: flex; flex-direction: column; gap: 0.75rem;">
+                  ${guide.relatedDestinations.map(dId => {
+                    const d = (typeof DESTINATIONS_DATA !== 'undefined') ? DESTINATIONS_DATA.find(x => x.id === dId) : null;
+                    if (!d) return '';
+                    return `
+                      <a href="destination.html?id=${d.id}" style="display: flex; align-items: center; gap: 0.75rem; color: var(--text-secondary); text-decoration: none;">
+                        <img src="${d.heroImage}" alt="${d.name}" style="width: 44px; height: 44px; border-radius: 6px; object-fit: cover;" />
+                        <div>
+                          <div style="font-weight: 600; color: var(--text-primary); font-size: 0.95rem;">${d.name}</div>
+                          <div style="font-size: 0.78rem; color: var(--text-muted);">${d.state}</div>
+                        </div>
+                      </a>
+                    `;
+                  }).join('')}
+                </div>
+              </div>
+
+              <div class="sidebar-box" style="background-color: rgba(45, 90, 71, 0.15); border-color: rgba(82, 183, 136, 0.25);">
+                <h4 style="color: #52b788;">Traveler Checklist</h4>
+                <p style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 1rem;">
+                  Get interactive packing and preparation checklists with automatic browser persistence.
+                </p>
+                <a href="destinations.html" class="btn btn-secondary btn-sm" style="width: 100%;">
+                  Choose Destination &rarr;
+                </a>
+              </div>
+            </aside>
+          </div>
+        </div>
+      `;
+    });
+  </script>
+</body>
+</html>

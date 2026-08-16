@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About RAAHIYOO &bull; Discover the Destination. Understand the Journey.</title>
+  <meta name="description" content="The story, philosophy, and environmental ethics of RAAHIYOO — India's premier commercial travel discovery platform." />
+
+  <link rel="stylesheet" href="css/global.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/navigation.css" />
+  <link rel="stylesheet" href="css/home.css" />
+</head>
+<body>
+  <a href="#mainContent" class="skip-link">Skip to main content</a>
+
+  <!-- SITE HEADER -->
+  <header class="site-header" id="siteHeader">
+    <div class="container nav-container">
+      <a href="index.html" class="brand-logo" aria-label="RAAHIYOO Home">
+        <svg class="brand-mountain-icon" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M14 6l-3.75 5 2.85 3.8-1.6 1.2L7 10l-6 8h22L14 6z"/>
+        </svg>
+        <span>RAAHIYOO</span>
+        <span class="brand-subtext">About</span>
+      </a>
+
+      <nav class="nav-links" aria-label="Main Navigation">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="destinations.html" class="nav-link">Destinations</a>
+        <a href="how-to-reach.html" class="nav-link">How to Reach</a>
+        <a href="collections.html" class="nav-link">Collections</a>
+        <a href="guides.html" class="nav-link">Travel Guides</a>
+        <a href="about.html" class="nav-link active">About</a>
+      </nav>
+
+      <div class="nav-actions">
+        <button class="search-trigger-btn" aria-label="Quick Search">
+          <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+          </svg>
+          <span>Search</span>
+          <kbd class="search-shortcut-key">⌘K</kbd>
+        </button>
+
+        <button class="hamburger-btn" id="hamburgerBtn" aria-label="Toggle Menu" aria-expanded="false" aria-controls="mobileDrawer">
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- MOBILE DRAWER -->
+  <div class="drawer-backdrop" id="drawerBackdrop"></div>
+  <aside class="mobile-drawer" id="mobileDrawer" aria-label="Mobile Navigation">
+    <div class="drawer-links">
+      <a href="index.html" class="drawer-link">Home</a>
+      <a href="destinations.html" class="drawer-link">Destinations</a>
+      <a href="how-to-reach.html" class="drawer-link">How to Reach</a>
+      <a href="collections.html" class="drawer-link">Collections</a>
+      <a href="guides.html" class="drawer-link">Travel Guides</a>
+      <a href="about.html" class="drawer-link active">About RAAHIYOO</a>
+      <a href="contact.html" class="drawer-link">Contact</a>
+    </div>
+    <div class="drawer-footer">
+      <div class="drawer-tagline">Your Journey Begins Here.</div>
+      <a href="destinations.html" class="btn btn-primary" style="width: 100%;">Explore All Journeys</a>
+    </div>
+  </aside>
+
+  <!-- SEARCH MODAL -->
+  <div class="search-modal-overlay" id="searchModalOverlay" role="dialog" aria-modal="true" aria-label="Search Destinations">
+    <div class="search-modal-container">
+      <div class="search-input-wrapper">
+        <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="color: var(--accent-terracotta);">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+        </svg>
+        <input type="text" class="search-modal-input" id="searchModalInput" placeholder="Where do you want to go?" />
+        <span style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-muted);">ESC</span>
+      </div>
+      <div class="search-modal-results" id="searchModalResults"></div>
+    </div>
+  </div>
+
+  <main id="mainContent" style="padding-top: 8rem; min-height: 85vh;">
+    <div class="container container-narrow">
+      
+      <!-- HERO -->
+      <div class="section-header text-center" style="margin-bottom: 4rem;">
+        <div class="section-eyebrow">Our Story &amp; Purpose</div>
+        <h1 style="font-family: var(--font-display); font-size: clamp(2.5rem, 5vw, 3.8rem);">RAAHIYOO</h1>
+        <p class="lead-text" style="color: var(--accent-terracotta); font-weight: 500;">
+          Discover the destination. Understand the journey.
+        </p>
+      </div>
+
+      <!-- EDITORIAL STORY -->
+      <div class="why-matters-box" style="margin-bottom: 4rem;">
+        <h2 style="font-size: 1.8rem; margin-bottom: 1rem; color: var(--text-primary);">Why RAAHIYOO Exists</h2>
+        <div class="why-matters-content">
+          <p>
+            Modern travel platforms have reduced the profound human act of wandering into superficial booking engines and cookie-cutter top-10 lists. Travelers are shown where to click "Book Now", but are rarely guided through the <em>soul of the destination</em> or the real logistics of getting there.
+          </p>
+          <p>
+            <strong>RAAHIYOO</strong> was founded on a simple truth: <em>The journey is as transformative as the destination.</em> A traveler should leave every page feeling informed, inspired, and prepared rather than simply entertained.
+          </p>
+        </div>
+      </div>
+
+      <!-- 4 PILLARS -->
+      <div class="section-header">
+        <div class="section-eyebrow">Guiding Principles</div>
+        <h2>Our Core Standards</h2>
+      </div>
+
+      <div class="grid-2" style="margin-bottom: 4rem;">
+        <div class="philosophy-card">
+          <div class="philosophy-step">01 / TRUTHFULNESS</div>
+          <h3 class="philosophy-title">Zero Fake Urgency</h3>
+          <p class="philosophy-desc">No fake countdown timers, no fabricated booking reviews, and no simulated live tickers. Trust is our primary product currency.</p>
+        </div>
+
+        <div class="philosophy-card">
+          <div class="philosophy-step">02 / DEPTH</div>
+          <h3 class="philosophy-title">Substantial Geography</h3>
+          <p class="philosophy-desc">Every destination includes real altitude data, seasonal breakdowns, multi-modal transport guides, and cultural context.</p>
+        </div>
+
+        <div class="philosophy-card">
+          <div class="philosophy-step">03 / STEWARDSHIP</div>
+          <h3 class="philosophy-title">Leave No Trace</h3>
+          <p class="philosophy-desc">We advocate fiercely for protecting the fragile Himalayan ecology, zero single-use plastics, and supporting local village economies.</p>
+        </div>
+
+        <div class="philosophy-card">
+          <div class="philosophy-step">04 / ACCESSIBILITY</div>
+          <h3 class="philosophy-title">100% Free &amp; Open</h3>
+          <p class="philosophy-desc">Editorial travel intelligence designed to serve wanderers without paywalls or forced account creation.</p>
+        </div>
+      </div>
+
+      <!-- HANDOVER & COMMERCIAL NOTE -->
+      <div style="background-color: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: var(--radius-lg); padding: 2rem; margin-bottom: 5rem;">
+        <h3 style="font-size: 1.3rem; margin-bottom: 0.75rem; color: var(--text-primary);">Commercial &amp; Scalable Architecture</h3>
+        <p style="font-size: 0.95rem; color: var(--text-secondary); line-height: 1.7;">
+          RAAHIYOO is architected to scale to 500+ Indian destinations through a clean, decoupled data layer. Built using pure semantic HTML5, Vanilla CSS design tokens, and modular JavaScript with zero runtime bloat.
+        </p>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- GLOBAL FOOTER -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <a href="index.html" class="brand-logo" style="margin-bottom: 0.75rem;">
+            <svg class="brand-mountain-icon" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M14 6l-3.75 5 2.85 3.8-1.6 1.2L7 10l-6 8h22L14 6z"/>
+            </svg>
+            <span>RAAHIYOO</span>
+          </a>
+          <p class="footer-brand-desc">
+            Discover destinations, understand multi-modal transit, and plan your journey with confidence.
+          </p>
+        </div>
+
+        <div>
+          <h4 class="footer-heading">Destinations</h4>
+          <div class="footer-links">
+            <a href="destination.html?id=rishikesh" class="footer-link">Rishikesh</a>
+            <a href="destination.html?id=tungnath" class="footer-link">Tungnath</a>
+            <a href="destination.html?id=manali" class="footer-link">Manali</a>
+          </div>
+        </div>
+
+        <div>
+          <h4 class="footer-heading">Explore</h4>
+          <div class="footer-links">
+            <a href="how-to-reach.html" class="footer-link">How to Reach</a>
+            <a href="collections.html" class="footer-link">Collections</a>
+            <a href="guides.html" class="footer-link">Travel Guides</a>
+          </div>
+        </div>
+
+        <div>
+          <h4 class="footer-heading">Trust &amp; Legal</h4>
+          <div class="footer-links">
+            <a href="about.html" class="footer-link">About RAAHIYOO</a>
+            <a href="privacy.html" class="footer-link">Privacy Policy</a>
+            <a href="terms.html" class="footer-link">Terms of Service</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>&copy; <span class="dynamic-year">2026</span> RAAHIYOO. All rights reserved.</div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="data/destinations.js"></script>
+  <script src="data/guides.js"></script>
+  <script src="data/collections.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/navigation.js"></script>
+  <script src="js/animations.js"></script>
+</body>
+</html>

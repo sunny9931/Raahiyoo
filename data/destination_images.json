@@ -1,0 +1,638 @@
+[
+  {
+    "id": "agra",
+    "name": "Agra Taj Mahal",
+    "state": "Uttar Pradesh",
+    "current_image": "images/agra.jpg"
+  },
+  {
+    "id": "ajanta-ellora",
+    "name": "Ajanta & Ellora Caves",
+    "state": "Maharashtra",
+    "current_image": "images/ajanta-ellora.jpg"
+  },
+  {
+    "id": "alibaug",
+    "name": "Alibaug & Kolaba Fort",
+    "state": "Maharashtra",
+    "current_image": "images/alibaug.jpg"
+  },
+  {
+    "id": "alleppey",
+    "name": "Alleppey Houseboats",
+    "state": "Kerala",
+    "current_image": "images/alleppey.jpg"
+  },
+  {
+    "id": "amritsar",
+    "name": "Amritsar Golden Temple",
+    "state": "Punjab",
+    "current_image": "images/amritsar.jpg"
+  },
+  {
+    "id": "andaman",
+    "name": "Andaman & Havelock Island",
+    "state": "Andaman & Nicobar Islands",
+    "current_image": "images/andaman.jpg"
+  },
+  {
+    "id": "araku-valley",
+    "name": "Araku Valley & Vizag",
+    "state": "Andhra Pradesh",
+    "current_image": "images/araku-valley.jpg"
+  },
+  {
+    "id": "auli",
+    "name": "Auli Ski Slopes",
+    "state": "Uttarakhand",
+    "current_image": "images/auli.jpg"
+  },
+  {
+    "id": "ayodhya",
+    "name": "Ayodhya Ram Mandir",
+    "state": "Uttar Pradesh",
+    "current_image": "images/ayodhya.jpg"
+  },
+  {
+    "id": "badrinath",
+    "name": "Badrinath & Mana",
+    "state": "Uttarakhand",
+    "current_image": "images/badrinath.jpg"
+  },
+  {
+    "id": "bandhavgarh",
+    "name": "Bandhavgarh National Park",
+    "state": "Madhya Pradesh",
+    "current_image": "images/bandhavgarh.jpg"
+  },
+  {
+    "id": "bhandardara",
+    "name": "Bhandardara & Arthur Lake",
+    "state": "Maharashtra",
+    "current_image": "images/bhandardara.jpg"
+  },
+  {
+    "id": "bhedaghat",
+    "name": "Bhedaghat & Marble Rocks",
+    "state": "Madhya Pradesh",
+    "current_image": "images/bhedaghat.jpg"
+  },
+  {
+    "id": "bikaner",
+    "name": "Bikaner & Junagarh Fort",
+    "state": "Rajasthan",
+    "current_image": "images/bikaner.jpg"
+  },
+  {
+    "id": "bir-billing",
+    "name": "Bir Billing",
+    "state": "Himachal Pradesh",
+    "current_image": "images/bir-billing.jpg"
+  },
+  {
+    "id": "bodh-gaya",
+    "name": "Bodh Gaya & Rajgir",
+    "state": "Bihar",
+    "current_image": "images/bodh-gaya.jpg"
+  },
+  {
+    "id": "chikmagalur",
+    "name": "Chikmagalur & Mullayanagiri",
+    "state": "Karnataka",
+    "current_image": "images/chikmagalur.jpg"
+  },
+  {
+    "id": "chitrakote-falls",
+    "name": "Chitrakote Falls (Bastar)",
+    "state": "Chhattisgarh",
+    "current_image": "images/chitrakote-falls.jpg"
+  },
+  {
+    "id": "chittorgarh",
+    "name": "Chittorgarh Fort",
+    "state": "Rajasthan",
+    "current_image": "images/chittorgarh.jpg"
+  },
+  {
+    "id": "chopta",
+    "name": "Chopta & Tungnath",
+    "state": "Uttarakhand",
+    "current_image": "images/chopta.jpg"
+  },
+  {
+    "id": "coorg",
+    "name": "Coorg Coffee Hills",
+    "state": "Karnataka",
+    "current_image": "images/coorg.jpg"
+  },
+  {
+    "id": "dalhousie",
+    "name": "Dalhousie & Khajjiar",
+    "state": "Himachal Pradesh",
+    "current_image": "images/dalhousie.jpg"
+  },
+  {
+    "id": "darjeeling",
+    "name": "Darjeeling",
+    "state": "West Bengal",
+    "current_image": "images/darjeeling.jpg"
+  },
+  {
+    "id": "dawki-mawlynnong",
+    "name": "Dawki & Mawlynnong",
+    "state": "Meghalaya",
+    "current_image": "images/dawki-mawlynnong.jpg"
+  },
+  {
+    "id": "delhi-heritage",
+    "name": "Delhi Heritage Capital",
+    "state": "Delhi",
+    "current_image": "images/delhi-heritage.jpg"
+  },
+  {
+    "id": "deoghar",
+    "name": "Deoghar (Baba Baidyanath)",
+    "state": "Jharkhand",
+    "current_image": "images/deoghar.jpg"
+  },
+  {
+    "id": "dharamshala",
+    "name": "Dharamshala & McLeodganj",
+    "state": "Himachal Pradesh",
+    "current_image": "images/dharamshala.jpg"
+  },
+  {
+    "id": "dzukou-valley",
+    "name": "Dzukou Valley & Kohima",
+    "state": "Nagaland",
+    "current_image": "images/dzukou-valley.jpg"
+  },
+  {
+    "id": "gandikota",
+    "name": "Gandikota & Lepakshi",
+    "state": "Andhra Pradesh",
+    "current_image": "images/gandikota.jpg"
+  },
+  {
+    "id": "gangtok",
+    "name": "Gangtok & Nathu La",
+    "state": "Sikkim",
+    "current_image": "images/gangtok.jpg"
+  },
+  {
+    "id": "gir-national-park",
+    "name": "Gir National Park",
+    "state": "Gujarat",
+    "current_image": "images/gir-national-park.jpg"
+  },
+  {
+    "id": "goa",
+    "name": "Goa Beaches",
+    "state": "Goa",
+    "current_image": "images/goa.jpg"
+  },
+  {
+    "id": "gokarna",
+    "name": "Gokarna Beaches",
+    "state": "Karnataka",
+    "current_image": "images/gokarna.jpg"
+  },
+  {
+    "id": "gulmarg",
+    "name": "Gulmarg",
+    "state": "Jammu & Kashmir",
+    "current_image": "images/gulmarg.jpg"
+  },
+  {
+    "id": "hampi",
+    "name": "Hampi",
+    "state": "Karnataka",
+    "current_image": "images/hampi.jpg"
+  },
+  {
+    "id": "hanle",
+    "name": "Hanle & Dark Sky Reserve",
+    "state": "Ladakh",
+    "current_image": "images/hanle.jpg"
+  },
+  {
+    "id": "haridwar",
+    "name": "Haridwar",
+    "state": "Uttarakhand",
+    "current_image": "images/haridwar.jpg"
+  },
+  {
+    "id": "hyderabad",
+    "name": "Hyderabad Heritage",
+    "state": "Telangana",
+    "current_image": "images/hyderabad.jpg"
+  },
+  {
+    "id": "jaipur",
+    "name": "Jaipur Pink City",
+    "state": "Rajasthan",
+    "current_image": "images/jaipur.jpg"
+  },
+  {
+    "id": "jaisalmer",
+    "name": "Jaisalmer Desert Dunes",
+    "state": "Rajasthan",
+    "current_image": "images/jaisalmer.jpg"
+  },
+  {
+    "id": "jibhi",
+    "name": "Jibhi & Tirthan Valley",
+    "state": "Himachal Pradesh",
+    "current_image": "images/jibhi.jpg"
+  },
+  {
+    "id": "jim-corbett",
+    "name": "Jim Corbett National Park",
+    "state": "Uttarakhand",
+    "current_image": "images/jim-corbett.jpg"
+  },
+  {
+    "id": "jodhpur",
+    "name": "Jodhpur Blue City",
+    "state": "Rajasthan",
+    "current_image": "images/jodhpur.jpg"
+  },
+  {
+    "id": "kaas-plateau",
+    "name": "Kaas Plateau (Satara)",
+    "state": "Maharashtra",
+    "current_image": "images/kaas-plateau.jpg"
+  },
+  {
+    "id": "kanyakumari",
+    "name": "Kanyakumari",
+    "state": "Tamil Nadu",
+    "current_image": "images/kanyakumari.jpg"
+  },
+  {
+    "id": "kasol",
+    "name": "Kasol & Parvati Valley",
+    "state": "Himachal Pradesh",
+    "current_image": "images/kasol.jpg"
+  },
+  {
+    "id": "kausani",
+    "name": "Kausani & Ranikhet",
+    "state": "Uttarakhand",
+    "current_image": "images/kausani.jpg"
+  },
+  {
+    "id": "kaziranga",
+    "name": "Kaziranga National Park",
+    "state": "Assam",
+    "current_image": "images/kaziranga.jpg"
+  },
+  {
+    "id": "kedarnath",
+    "name": "Kedarnath Dham",
+    "state": "Uttarakhand",
+    "current_image": "images/kedarnath.jpg"
+  },
+  {
+    "id": "khajuraho",
+    "name": "Khajuraho UNESCO Temples",
+    "state": "Madhya Pradesh",
+    "current_image": "images/khajuraho.jpg"
+  },
+  {
+    "id": "kinnaur",
+    "name": "Kinnaur & Kalpa",
+    "state": "Himachal Pradesh",
+    "current_image": "images/kinnaur.jpg"
+  },
+  {
+    "id": "kodaikanal",
+    "name": "Kodaikanal",
+    "state": "Tamil Nadu",
+    "current_image": "images/kodaikanal.jpg"
+  },
+  {
+    "id": "kumbhalgarh",
+    "name": "Kumbhalgarh (Great Wall of India)",
+    "state": "Rajasthan",
+    "current_image": "images/kumbhalgarh.jpg"
+  },
+  {
+    "id": "lachung-yumthang",
+    "name": "Lachung & Yumthang Valley",
+    "state": "Sikkim",
+    "current_image": "images/lachung-yumthang.jpg"
+  },
+  {
+    "id": "lakshadweep",
+    "name": "Lakshadweep (Agatti & Bangaram)",
+    "state": "Lakshadweep",
+    "current_image": "images/lakshadweep.jpg"
+  },
+  {
+    "id": "leh-ladakh",
+    "name": "Leh Ladakh & Pangong",
+    "state": "Ladakh",
+    "current_image": "images/leh-ladakh.jpg"
+  },
+  {
+    "id": "loktak-lake",
+    "name": "Loktak Lake & Keibul Lamjao",
+    "state": "Manipur",
+    "current_image": "images/loktak-lake.jpg"
+  },
+  {
+    "id": "lonavala",
+    "name": "Lonavala & Khandala",
+    "state": "Maharashtra",
+    "current_image": "images/lonavala.jpg"
+  },
+  {
+    "id": "lucknow",
+    "name": "Lucknow Nawabi Heritage",
+    "state": "Uttar Pradesh",
+    "current_image": "images/lucknow.jpg"
+  },
+  {
+    "id": "madurai",
+    "name": "Madurai (Meenakshi Amman)",
+    "state": "Tamil Nadu",
+    "current_image": "images/madurai.jpg"
+  },
+  {
+    "id": "mahabaleshwar",
+    "name": "Mahabaleshwar & Panchgani",
+    "state": "Maharashtra",
+    "current_image": "images/mahabaleshwar.jpg"
+  },
+  {
+    "id": "majuli",
+    "name": "Majuli River Island",
+    "state": "Assam",
+    "current_image": "images/majuli.jpg"
+  },
+  {
+    "id": "manali",
+    "name": "Manali",
+    "state": "Himachal Pradesh",
+    "current_image": "images/manali.jpg"
+  },
+  {
+    "id": "matheran",
+    "name": "Matheran Hill Station",
+    "state": "Maharashtra",
+    "current_image": "images/matheran.jpg"
+  },
+  {
+    "id": "mathura-vrindavan",
+    "name": "Mathura & Vrindavan",
+    "state": "Uttar Pradesh",
+    "current_image": "images/mathura-vrindavan.jpg"
+  },
+  {
+    "id": "mount-abu",
+    "name": "Mount Abu",
+    "state": "Rajasthan",
+    "current_image": "images/mount-abu.jpg"
+  },
+  {
+    "id": "munnar",
+    "name": "Munnar Tea Hills",
+    "state": "Kerala",
+    "current_image": "images/munnar.jpg"
+  },
+  {
+    "id": "mussoorie",
+    "name": "Mussoorie & Dhanaulti",
+    "state": "Uttarakhand",
+    "current_image": "images/mussoorie.jpg"
+  },
+  {
+    "id": "mysore",
+    "name": "Mysore (Mysuru Palace)",
+    "state": "Karnataka",
+    "current_image": "images/mysore.jpg"
+  },
+  {
+    "id": "nainital",
+    "name": "Nainital & Bhimtal",
+    "state": "Uttarakhand",
+    "current_image": "images/nainital.jpg"
+  },
+  {
+    "id": "ooty",
+    "name": "Ooty & Nilgiris",
+    "state": "Tamil Nadu",
+    "current_image": "images/ooty.jpg"
+  },
+  {
+    "id": "pachmarhi",
+    "name": "Pachmarhi (Queen of Satpura)",
+    "state": "Madhya Pradesh",
+    "current_image": "images/pachmarhi.jpg"
+  },
+  {
+    "id": "pahalgam",
+    "name": "Pahalgam & Betaab Valley",
+    "state": "Jammu & Kashmir",
+    "current_image": "images/pahalgam.jpg"
+  },
+  {
+    "id": "patnitop",
+    "name": "Patnitop & Sanasar",
+    "state": "Jammu & Kashmir",
+    "current_image": "images/patnitop.jpg"
+  },
+  {
+    "id": "pondicherry",
+    "name": "Pondicherry & Auroville",
+    "state": "Puducherry",
+    "current_image": "images/pondicherry.jpg"
+  },
+  {
+    "id": "prayagraj",
+    "name": "Prayagraj (Triveni Sangam)",
+    "state": "Uttar Pradesh",
+    "current_image": "images/prayagraj.jpg"
+  },
+  {
+    "id": "puri",
+    "name": "Puri & Konark Sun Temple",
+    "state": "Odisha",
+    "current_image": "images/puri.jpg"
+  },
+  {
+    "id": "pushkar",
+    "name": "Pushkar & Ajmer",
+    "state": "Rajasthan",
+    "current_image": "images/pushkar.jpg"
+  },
+  {
+    "id": "rameswaram",
+    "name": "Rameswaram & Dhanushkodi",
+    "state": "Tamil Nadu",
+    "current_image": "images/rameswaram.jpg"
+  },
+  {
+    "id": "rani-ki-vav",
+    "name": "Rani Ki Vav & Modhera Sun Temple",
+    "state": "Gujarat",
+    "current_image": "images/rani-ki-vav.jpg"
+  },
+  {
+    "id": "rann-of-kutch",
+    "name": "Rann of Kutch",
+    "state": "Gujarat",
+    "current_image": "images/rann-of-kutch.jpg"
+  },
+  {
+    "id": "ranthambore",
+    "name": "Ranthambore Tiger Reserve",
+    "state": "Rajasthan",
+    "current_image": "images/ranthambore.jpg"
+  },
+  {
+    "id": "rishikesh",
+    "name": "Rishikesh",
+    "state": "Uttarakhand",
+    "current_image": "images/rishikesh.jpg"
+  },
+  {
+    "id": "saputara",
+    "name": "Saputara Hill Station",
+    "state": "Gujarat",
+    "current_image": "images/saputara.jpg"
+  },
+  {
+    "id": "shillong",
+    "name": "Shillong & Cherrapunji",
+    "state": "Meghalaya",
+    "current_image": "images/shillong.jpg"
+  },
+  {
+    "id": "shimla",
+    "name": "Shimla & Kufri",
+    "state": "Himachal Pradesh",
+    "current_image": "images/shimla.jpg"
+  },
+  {
+    "id": "shirdi",
+    "name": "Shirdi Sai Baba",
+    "state": "Maharashtra",
+    "current_image": "images/shirdi.jpg"
+  },
+  {
+    "id": "somnath-dwarka",
+    "name": "Somnath & Dwarka",
+    "state": "Gujarat",
+    "current_image": "images/somnath-dwarka.jpg"
+  },
+  {
+    "id": "sonamarg",
+    "name": "Sonamarg",
+    "state": "Jammu & Kashmir",
+    "current_image": "images/sonamarg.jpg"
+  },
+  {
+    "id": "spiti-valley",
+    "name": "Spiti Valley",
+    "state": "Himachal Pradesh",
+    "current_image": "images/spiti-valley.jpg"
+  },
+  {
+    "id": "srinagar",
+    "name": "Srinagar & Dal Lake",
+    "state": "Jammu & Kashmir",
+    "current_image": "images/srinagar.jpg"
+  },
+  {
+    "id": "statue-of-unity",
+    "name": "Statue of Unity (Kevadia)",
+    "state": "Gujarat",
+    "current_image": "images/statue-of-unity.jpg"
+  },
+  {
+    "id": "sundarbans",
+    "name": "Sundarbans Delta",
+    "state": "West Bengal",
+    "current_image": "images/sundarbans.jpg"
+  },
+  {
+    "id": "tadoba",
+    "name": "Tadoba Andhari Tiger Reserve",
+    "state": "Maharashtra",
+    "current_image": "images/tadoba.jpg"
+  },
+  {
+    "id": "tawang",
+    "name": "Tawang & Sela Pass",
+    "state": "Arunachal Pradesh",
+    "current_image": "images/tawang.jpg"
+  },
+  {
+    "id": "thekkady",
+    "name": "Thekkady (Periyar Wildlife)",
+    "state": "Kerala",
+    "current_image": "images/thekkady.jpg"
+  },
+  {
+    "id": "tirupati",
+    "name": "Tirupati Balaji",
+    "state": "Andhra Pradesh",
+    "current_image": "images/tirupati.jpg"
+  },
+  {
+    "id": "udaipur",
+    "name": "Udaipur City of Lakes",
+    "state": "Rajasthan",
+    "current_image": "images/udaipur.jpg"
+  },
+  {
+    "id": "ujjain",
+    "name": "Ujjain Mahakal",
+    "state": "Madhya Pradesh",
+    "current_image": "images/ujjain.jpg"
+  },
+  {
+    "id": "vaishno-devi",
+    "name": "Vaishno Devi (Katra)",
+    "state": "Jammu & Kashmir",
+    "current_image": "images/vaishno-devi.jpg"
+  },
+  {
+    "id": "valley-of-flowers",
+    "name": "Valley of Flowers & Hemkund",
+    "state": "Uttarakhand",
+    "current_image": "images/valley-of-flowers.jpg"
+  },
+  {
+    "id": "varanasi",
+    "name": "Varanasi (Kashi)",
+    "state": "Uttar Pradesh",
+    "current_image": "images/varanasi.jpg"
+  },
+  {
+    "id": "varkala",
+    "name": "Varkala Cliff",
+    "state": "Kerala",
+    "current_image": "images/varkala.jpg"
+  },
+  {
+    "id": "wayanad",
+    "name": "Wayanad Rainforests",
+    "state": "Kerala",
+    "current_image": "images/wayanad.jpg"
+  },
+  {
+    "id": "zanskar",
+    "name": "Zanskar Valley & Padum",
+    "state": "Ladakh",
+    "current_image": "images/zanskar.jpg"
+  },
+  {
+    "id": "ziro-valley",
+    "name": "Ziro Valley",
+    "state": "Arunachal Pradesh",
+    "current_image": "images/ziro-valley.jpg"
+  }
+]
