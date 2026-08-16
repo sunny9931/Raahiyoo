@@ -75,15 +75,39 @@ function renderDestinations() {
   const filtered = DESTINATIONS.filter(dest => {
     let matchesCategory = currentFilter === 'all';
     if (currentFilter === 'mountains') {
-      matchesCategory = dest.category === 'mountains' || dest.region === 'north';
+      const nonMountainIds = [
+        'delhi-heritage', 'amritsar', 'agra', 'lucknow', 'mathura-vrindavan', 
+        'varanasi', 'ayodhya', 'prayagraj', 'bodh-gaya', 'deoghar', 'puri', 
+        'hyderabad', 'mysore', 'madurai', 'tirupati', 'shirdi', 'ujjain', 
+        'rani-ki-vav', 'statue-of-unity', 'bikaner', 'jaipur', 'jodhpur', 
+        'jaisalmer', 'chittorgarh', 'kumbhalgarh', 'pushkar', 'khajuraho', 
+        'alibaug', 'goa', 'gokarna', 'pondicherry', 'kanyakumari', 'andaman', 
+        'lakshadweep', 'rann-of-kutch', 'gir-national-park', 'ranthambore', 
+        'tadoba', 'bandhavgarh', 'jim-corbett', 'chitrakote-falls', 'dawki-mawlynnong'
+      ];
+      matchesCategory = !nonMountainIds.includes(dest.id) && (
+        dest.category === 'mountains' || 
+        (dest.mood && (dest.mood.includes('Mountains') || dest.mood.includes('High Treks') || dest.mood.includes('Snow') || dest.mood.includes('Skiing') || dest.mood.includes('High Altitude'))) ||
+        ['leh-ladakh', 'spiti-valley', 'kedarnath', 'badrinath', 'auli', 'gulmarg', 'pahalgam', 'sonamarg', 'zanskar', 'hanle', 'manali', 'shimla', 'chopta', 'kausani', 'valley-of-flowers', 'kinnaur', 'dharamshala', 'dalhousie', 'kasol', 'jibhi', 'bir-billing', 'nainital', 'mussoorie', 'patnitop', 'darjeeling', 'gangtok', 'lachung-yumthang', 'tawang', 'shillong', 'ziro-valley', 'dzukou-valley', 'munnar', 'ooty', 'kodaikanal', 'coorg', 'chikmagalur', 'wayanad', 'araku-valley', 'pachmarhi', 'mahabaleshwar', 'matheran', 'bhandardara', 'saputara', 'mount-abu', 'lonavala', 'vaishno-devi', 'srinagar'].includes(dest.id)
+      );
     } else if (currentFilter === 'spiritual' || currentFilter === 'sacred') {
-      matchesCategory = dest.category === 'sacred' || (dest.mood && dest.mood.includes('Spiritual'));
+      matchesCategory = dest.category === 'sacred' || (dest.mood && (dest.mood.includes('Spiritual') || dest.mood.includes('Sacred') || dest.mood.includes('Temple') || dest.mood.includes('Pilgrimage')));
     } else if (currentFilter === 'heritage') {
-      matchesCategory = dest.category === 'heritage' || (dest.mood && dest.mood.includes('Heritage'));
+      matchesCategory = dest.category === 'heritage' || (dest.mood && (dest.mood.includes('Heritage') || dest.mood.includes('Architecture') || dest.mood.includes('Forts') || dest.mood.includes('Palaces')));
     } else if (currentFilter === 'beach' || currentFilter === 'beaches') {
-      matchesCategory = dest.category === 'beaches' || (dest.mood && dest.mood.includes('Beaches'));
+      matchesCategory = dest.category === 'beaches' || dest.region === 'islands' || (dest.mood && (dest.mood.includes('Beaches') || dest.mood.includes('Coastal') || dest.mood.includes('Backwaters') || dest.mood.includes('Scuba')));
     } else if (currentFilter === 'adventure') {
-      matchesCategory = dest.mood && (dest.mood.includes('Adventure') || dest.mood.includes('High Treks') || dest.mood.includes('Rafting') || dest.mood.includes('Wildlife'));
+      matchesCategory = dest.mood && (dest.mood.includes('Adventure') || dest.mood.includes('High Treks') || dest.mood.includes('Rafting') || dest.mood.includes('Wildlife') || dest.mood.includes('Paragliding') || dest.mood.includes('Scuba'));
+    } else if (currentFilter === 'north') {
+      matchesCategory = dest.region === 'north' || ['Ladakh', 'Jammu & Kashmir', 'Himachal Pradesh', 'Uttarakhand', 'Punjab', 'Delhi', 'Haryana'].includes(dest.state);
+    } else if (currentFilter === 'west') {
+      matchesCategory = dest.region === 'west' || ['Rajasthan', 'Gujarat', 'Goa', 'Maharashtra'].includes(dest.state);
+    } else if (currentFilter === 'south') {
+      matchesCategory = dest.region === 'south' || dest.region === 'islands' || ['Kerala', 'Karnataka', 'Tamil Nadu', 'Andhra Pradesh', 'Telangana', 'Puducherry', 'Andaman & Nicobar', 'Lakshadweep'].includes(dest.state);
+    } else if (currentFilter === 'central') {
+      matchesCategory = dest.region === 'central' || ['Madhya Pradesh', 'Uttar Pradesh', 'Chhattisgarh', 'Bihar', 'Jharkhand'].includes(dest.state);
+    } else if (currentFilter === 'east') {
+      matchesCategory = dest.region === 'east' || dest.region === 'northeast' || ['West Bengal', 'Odisha', 'Sikkim', 'Meghalaya', 'Assam', 'Arunachal Pradesh', 'Nagaland', 'Manipur'].includes(dest.state);
     } else if (currentFilter !== 'all') {
       matchesCategory = dest.region === currentFilter || dest.category === currentFilter;
     }
@@ -221,6 +245,9 @@ function renderRegionMapSelector() {
 
 function filterByRegionCard(regId, element) {
   currentFilter = regId;
+  searchQuery = '';
+  const searchInput = document.getElementById('mainSearchInput');
+  if (searchInput) searchInput.value = '';
   displayedCount = ITEMS_PER_PAGE;
   
   document.querySelectorAll('.region-card-btn').forEach(btn => btn.classList.remove('active'));
@@ -231,7 +258,12 @@ function filterByRegionCard(regId, element) {
   });
 
   renderDestinations();
-  document.getElementById('exploreSection').scrollIntoView({ behavior: 'smooth' });
+  updateRelatedSearches();
+  
+  const exploreSec = document.getElementById('exploreSection');
+  if (exploreSec) {
+    exploreSec.scrollIntoView({ behavior: 'smooth' });
+  }
 }
 
 /**
@@ -444,27 +476,114 @@ function updateRelatedSearches() {
   const q = searchQuery.toLowerCase();
   let suggestions = [];
 
-  if (q.includes('snow') || q.includes('ski') || q.includes('mountain')) {
+  if (q) {
+    if (q.includes('snow') || q.includes('ski') || q.includes('mountain')) {
+      suggestions = [
+        { label: "🏔️ Gulmarg Gondola", query: "Gulmarg" },
+        { label: "❄️ Spiti Valley", query: "Spiti" },
+        { label: "⛷️ Auli Ski Slopes", query: "Auli" },
+        { label: "🏔️ Leh Ladakh", query: "Ladakh" }
+      ];
+    } else if (q.includes('beach') || q.includes('sea') || q.includes('coast')) {
+      suggestions = [
+        { label: "🏖️ Goa Beach Shacks", query: "Goa" },
+        { label: "🌊 Varkala Red Cliff", query: "Varkala" },
+        { label: "🐠 Andaman Scuba", query: "Andaman" },
+        { label: "🌴 Alleppey Backwaters", query: "Alleppey" }
+      ];
+    } else if (q.includes('temple') || q.includes('aarti') || q.includes('sacred') || q.includes('shiva')) {
+      suggestions = [
+        { label: "🕉️ Kedarnath Dham", query: "Kedarnath" },
+        { label: "🔥 Varanasi Maha Aarti", query: "Varanasi" },
+        { label: "🛕 Ayodhya Ram Mandir", query: "Ayodhya" },
+        { label: "🔱 Ujjain Mahakal", query: "Ujjain" },
+        { label: "✨ Amritsar Golden Temple", query: "Amritsar" }
+      ];
+    } else {
+      suggestions = [
+        { label: "🏔️ Leh Ladakh", query: "Ladakh" },
+        { label: "🕉️ Kedarnath", query: "Kedarnath" },
+        { label: "❄️ Spiti Valley", query: "Spiti" },
+        { label: "🛕 Ayodhya", query: "Ayodhya" },
+        { label: "🏖️ Goa", query: "Goa" },
+        { label: "🌿 Munnar Tea", query: "Munnar" }
+      ];
+    }
+  } else if (currentFilter === 'north') {
     suggestions = [
-      { label: "🏔️ Gulmarg Gondola", query: "Gulmarg" },
+      { label: "🏔️ Leh Ladakh", query: "Ladakh" },
+      { label: "🕉️ Kedarnath Dham", query: "Kedarnath" },
       { label: "❄️ Spiti Valley", query: "Spiti" },
       { label: "⛷️ Auli Ski Slopes", query: "Auli" },
-      { label: "🏔️ Leh Ladakh", query: "Ladakh" }
+      { label: "🚡 Gulmarg Gondola", query: "Gulmarg" },
+      { label: "🌲 Manali & Sissu", query: "Manali" },
+      { label: "🌿 Rishikesh Rafting", query: "Rishikesh" },
+      { label: "✨ Amritsar Golden Temple", query: "Amritsar" }
     ];
-  } else if (q.includes('beach') || q.includes('sea') || q.includes('coast')) {
+  } else if (currentFilter === 'west') {
     suggestions = [
-      { label: "🏖️ Goa Beach Shacks", query: "Goa" },
-      { label: "🌊 Varkala Red Cliff", query: "Varkala" },
-      { label: "🐠 Andaman Scuba", query: "Andaman" },
-      { label: "🌴 Alleppey Backwaters", query: "Alleppey" }
+      { label: "🏰 Jaipur Forts", query: "Jaipur" },
+      { label: "🏖️ Goa Beaches", query: "Goa" },
+      { label: "🌅 Udaipur City Palace", query: "Udaipur" },
+      { label: "🐪 Jaisalmer Thar Dunes", query: "Jaisalmer" },
+      { label: "🦁 Gir Forest Safari", query: "Gir" },
+      { label: "🤍 Rann of Kutch Salt Desert", query: "Kutch" },
+      { label: "⛰️ Mount Abu Dilwara", query: "Mount Abu" }
     ];
-  } else if (q.includes('temple') || q.includes('aarti') || q.includes('sacred') || q.includes('shiva')) {
+  } else if (currentFilter === 'south') {
+    suggestions = [
+      { label: "🌴 Munnar Tea Hills", query: "Munnar" },
+      { label: "⛵ Alleppey Houseboats", query: "Alleppey" },
+      { label: "🌊 Varkala Red Cliffs", query: "Varkala" },
+      { label: "🏛️ Hampi Vijayanagara", query: "Hampi" },
+      { label: "☕ Coorg Coffee Estates", query: "Coorg" },
+      { label: "🛕 Rameswaram Bridge", query: "Rameswaram" },
+      { label: "🐠 Andaman Radhanagar", query: "Andaman" }
+    ];
+  } else if (currentFilter === 'central') {
+    suggestions = [
+      { label: "🔥 Varanasi Ganga Aarti", query: "Varanasi" },
+      { label: "🛕 Ayodhya Ram Janmabhoomi", query: "Ayodhya" },
+      { label: "🔱 Ujjain Mahakaleshwar", query: "Ujjain" },
+      { label: "🏛️ Khajuraho UNESCO", query: "Khajuraho" },
+      { label: "🐅 Bandhavgarh National Park", query: "Bandhavgarh" },
+      { label: "🌊 Chitrakote Waterfalls", query: "Chitrakote" }
+    ];
+  } else if (currentFilter === 'east') {
+    suggestions = [
+      { label: "☕ Darjeeling Toy Train", query: "Darjeeling" },
+      { label: "🌁 Shillong Living Root Bridges", query: "Shillong" },
+      { label: "🦏 Kaziranga 1-Horn Rhinos", query: "Kaziranga" },
+      { label: "🛶 Dawki Umngot Crystal River", query: "Dawki" },
+      { label: "🌸 Ziro Valley Pine Hills", query: "Ziro" },
+      { label: "🌊 Puri Jagannath Temple", query: "Puri" }
+    ];
+  } else if (currentFilter === 'mountains') {
+    suggestions = [
+      { label: "🏔️ Leh Ladakh", query: "Ladakh" },
+      { label: "❄️ Spiti Valley", query: "Spiti" },
+      { label: "⛷️ Auli Snow Slopes", query: "Auli" },
+      { label: "🚡 Gulmarg", query: "Gulmarg" },
+      { label: "🌲 Manali", query: "Manali" },
+      { label: "🌿 Chopta Tungnath", query: "Chopta" }
+    ];
+  } else if (currentFilter === 'beach') {
+    suggestions = [
+      { label: "🏖️ North Goa", query: "Goa" },
+      { label: "🌊 Varkala", query: "Varkala" },
+      { label: "🌴 Alleppey", query: "Alleppey" },
+      { label: "🐠 Andaman Islands", query: "Andaman" },
+      { label: "🏝️ Lakshadweep Coral", query: "Lakshadweep" },
+      { label: "🌊 Gokarna Om Beach", query: "Gokarna" }
+    ];
+  } else if (currentFilter === 'spiritual') {
     suggestions = [
       { label: "🕉️ Kedarnath Dham", query: "Kedarnath" },
-      { label: "🔥 Varanasi Maha Aarti", query: "Varanasi" },
-      { label: "🛕 Ayodhya Ram Mandir", query: "Ayodhya" },
-      { label: "🔱 Ujjain Mahakal", query: "Ujjain" },
-      { label: "✨ Amritsar Golden Temple", query: "Amritsar" }
+      { label: "🔥 Varanasi", query: "Varanasi" },
+      { label: "🛕 Ayodhya", query: "Ayodhya" },
+      { label: "🔱 Ujjain", query: "Ujjain" },
+      { label: "✨ Amritsar", query: "Amritsar" },
+      { label: "🛕 Badrinath", query: "Badrinath" }
     ];
   } else {
     suggestions = [
@@ -694,14 +813,14 @@ function renderCollections() {
   container.innerHTML = CURATED_COLLECTIONS.map(col => `
     <div class="dest-card" style="cursor: pointer;" onclick="filterByCollection('${col.id}')">
       <div class="dest-card-media" style="aspect-ratio: 16 / 9;">
-        <img src="${col.image}" alt="${col.name || col.title}" loading="lazy" />
+        <img src="${col.heroImage || col.image}" alt="${col.title || col.name}" loading="lazy" />
         <div class="dest-card-badges">
-          <span class="card-badge" style="background: rgba(15, 23, 42, 0.85);">${col.count || 'Circuits'}</span>
+          <span class="card-badge" style="background: rgba(15, 23, 42, 0.85);">${col.count || '5 Stops'}</span>
         </div>
       </div>
       <div class="dest-card-body">
-        <h3 style="font-size: 1.2rem; font-weight: 800; color: #0f172a; margin-bottom: 0.35rem;">${col.name || col.title}</h3>
-        <p style="font-size: 0.88rem; color: #64748b; line-height: 1.5; margin: 0;">${col.tagline || col.description || col.subtitle}</p>
+        <h3 style="font-size: 1.2rem; font-weight: 800; color: #0f172a; margin-bottom: 0.35rem;">${col.title || col.name}</h3>
+        <p style="font-size: 0.88rem; color: #64748b; line-height: 1.5; margin: 0;">${col.description || col.tagline || col.subtitle}</p>
       </div>
     </div>
   `).join('');
@@ -788,4 +907,47 @@ function initSearchAndFilters() {
       renderDestinations();
     });
   });
+}
+
+/**
+ * 14. Clean Mountain Pledge & Privacy/Terms Modals
+ */
+function openPledgeModal() {
+  const modal = document.getElementById('pledgeModalBackdrop');
+  if (modal) modal.classList.add('active');
+}
+
+function closePledgeModal() {
+  const modal = document.getElementById('pledgeModalBackdrop');
+  if (modal) modal.classList.remove('active');
+}
+
+function takeMountainPledge() {
+  const btn = document.getElementById('takePledgeBtn');
+  const msg = document.getElementById('pledgeSuccessMsg');
+  if (btn && msg) {
+    btn.style.display = 'none';
+    msg.style.display = 'block';
+    try {
+      localStorage.setItem('raahiyoo_clean_mountain_pledged', 'true');
+    } catch(e) {}
+  }
+}
+
+function openTermsModal() {
+  const modal = document.getElementById('termsModalBackdrop');
+  if (modal) modal.classList.add('active');
+}
+
+function closeTermsModal() {
+  const modal = document.getElementById('termsModalBackdrop');
+  if (modal) modal.classList.remove('active');
+}
+
+if (typeof window !== 'undefined') {
+  window.openPledgeModal = openPledgeModal;
+  window.closePledgeModal = closePledgeModal;
+  window.takeMountainPledge = takeMountainPledge;
+  window.openTermsModal = openTermsModal;
+  window.closeTermsModal = closeTermsModal;
 }

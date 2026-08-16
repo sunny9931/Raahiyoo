@@ -13,7 +13,11 @@ with open(os.path.join(base_dir, "js/data.js"), "r") as f:
     data_text = f.read()
 
 json_start = data_text.find("const DESTINATIONS = ") + len("const DESTINATIONS = ")
-json_end = data_text.find(";\n\n// Export to window", json_start)
+json_end = data_text.find(";\n\n// ==================== REAL-TIME MOUNTAIN PASSES", json_start)
+if json_end == -1:
+    json_end = data_text.find(";\n\nconst MOUNTAIN_PASSES_STATUS", json_start)
+if json_end == -1:
+    json_end = data_text.find(";\n\n// Export to window", json_start)
 if json_end == -1:
     json_end = data_text.find(";\n\nif (typeof window", json_start)
 

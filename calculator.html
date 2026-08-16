@@ -2,9 +2,9 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Trip Budget Calculator | RAAHIYOO</title>
-  <meta name="description" content="Calculate the exact cost of your trip across 50+ Indian destinations. Real-time breakdown for stay, food, local travel, and activities." />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Trip Budget Calculator Studio | RAAHIYOO</title>
+  <meta name="description" content="Calculate the authentic itemized cost of your journey across 106 Indian destinations. Real-time breakdown for stays, food, taxi tariffs, and activity passes." />
 
   <!-- Stylesheets -->
   <link rel="stylesheet" href="css/style.css" />
@@ -47,75 +47,155 @@
           <option value="AED">د.إ AED</option>
         </select>
         <a href="index.html" class="btn btn-secondary btn-sm">&larr; Home</a>
+        <button class="mobile-nav-toggle" id="mobileMenuOpenBtn" aria-label="Open Navigation Menu">
+          ☰
+        </button>
       </div>
     </div>
   </header>
 
-  <!-- MAIN CALCULATOR PAGE -->
+  <!-- MOBILE SLIDE-IN NAVIGATION MENU -->
+  <div class="drawer-backdrop" id="mobileNavBackdrop"></div>
+  <aside class="mobile-menu-drawer" id="mobileNavDrawer" aria-label="Mobile Navigation">
+    <div style="display: flex; justify-content: space-between; align-items: center; padding-bottom: 1rem; border-bottom: 1px solid var(--border-light);">
+      <div class="brand">
+        <svg class="brand-icon" style="width: 24px; height: 24px;" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M14 6l-3.75 5 2.85 3.8-1.6 1.2L7 10l-6 8h22L14 6z"/>
+        </svg>
+        <div class="brand-text-wrap">
+          <span class="brand-title" style="font-size: 1.2rem;">RAAHIYOO</span>
+          <span class="brand-byline">by sunnio</span>
+        </div>
+      </div>
+      <button class="drawer-close-btn" id="mobileMenuCloseBtn" style="position: static; width: 34px; height: 34px; font-size: 1.2rem;">&times;</button>
+    </div>
+
+    <nav style="display: flex; flex-direction: column; gap: 0.5rem; margin-top: 1rem;">
+      <a href="index.html#exploreSection" class="mobile-menu-link">
+        <span>📍 All Destinations</span>
+        <span>&rarr;</span>
+      </a>
+      <a href="calculator.html" class="mobile-menu-link active" style="color: var(--primary);">
+        <span>💰 Trip Budget Calculator</span>
+        <span>&rarr;</span>
+      </a>
+      <a href="how-to-reach.html" class="mobile-menu-link">
+        <span>🚆 How to Reach Planner</span>
+        <span>&rarr;</span>
+      </a>
+      <a href="index.html#passSection" class="mobile-menu-link">
+        <span>⛰️ Mountain Pass Live Status</span>
+        <span>&rarr;</span>
+      </a>
+      <a href="index.html#reviewsSection" class="mobile-menu-link">
+        <span>⭐ Verified Reviews</span>
+        <span>&rarr;</span>
+      </a>
+    </nav>
+  </aside>
+
+  <!-- MAIN CALCULATOR STUDIO PAGE -->
   <main class="container section-spacing">
     
     <div class="section-header text-center">
-      <div class="section-eyebrow">💰 Real Travel Estimator</div>
+      <div class="section-eyebrow">💰 Real Travel Cost Estimator</div>
       <h1 style="font-size: clamp(2.2rem, 4.5vw, 3.5rem); margin-bottom: 0.75rem; color: #0f172a;">
-        India Trip Budget Calculator
+        India Trip Budget Studio
       </h1>
       <p class="section-subtitle" style="max-width: 680px; margin: 0 auto 2.5rem;">
-        Get an authentic, itemized real-time cost estimate for any destination in India based on days and travel style.
+        Get an authentic, itemized real-time cost blueprint across <strong>106 Indian destinations</strong> based on days, group size, and travel comfort tier.
       </p>
     </div>
 
-    <!-- CALCULATOR ENGINE BOX -->
-    <div class="calc-box">
-      <div class="calc-grid">
+    <!-- CALCULATOR STUDIO CONTAINER -->
+    <div class="calc-studio-card">
+      <div class="calc-studio-grid">
         
-        <!-- Controls Column -->
-        <div style="display: flex; flex-direction: column; gap: 1.75rem;">
+        <!-- Controls Column (Left) -->
+        <div class="calc-controls-col">
           
-          <!-- Destination Select -->
+          <!-- Step 1: Destination Picker -->
           <div>
-            <label for="calcDestSelect" style="display: block; font-weight: 800; color: #0f172a; margin-bottom: 0.5rem; font-size: 1.05rem;">
-              1. Choose Your Destination (50+ Locations):
-            </label>
-            <select id="calcDestSelect" style="width: 100%; padding: 0.95rem 1.25rem; border-radius: 12px; border: 1px solid #cbd5e1; background: #fff; color: #0f172a; font-weight: 700; font-size: 1.05rem; box-shadow: var(--shadow-sm);">
-              <!-- Populated via js/calculator.js -->
-            </select>
-          </div>
-
-          <!-- Stepper Days -->
-          <div>
-            <label style="display: block; font-weight: 800; color: #0f172a; margin-bottom: 0.5rem; font-size: 1.05rem;">
-              2. Number of Travel Days:
-            </label>
-            <div class="calc-stepper-wrap">
-              <button class="calc-stepper-btn" id="calcDaysMinus" type="button" aria-label="Decrease Days">&minus;</button>
-              <div class="calc-stepper-val" id="calcDaysVal">3 Days</div>
-              <button class="calc-stepper-btn" id="calcDaysPlus" type="button" aria-label="Increase Days">&plus;</button>
+            <div class="calc-group-header">
+              <label class="calc-group-label" for="calcDestSearchInput">
+                <span>📍</span> 1. Select Destination:
+              </label>
+              <span class="calc-group-tag">106 Verified Places</span>
+            </div>
+            <div class="calc-dest-select-wrapper">
+              <input type="text" id="calcDestSearchInput" class="calc-dest-input" placeholder="Search destination (e.g. Leh Ladakh, Kedarnath, Munnar)..." autocomplete="off" />
+              <div class="calc-dest-dropdown" id="calcDestDropdown">
+                <!-- Injected dynamically via js/calculator.js -->
+              </div>
             </div>
           </div>
 
-          <!-- Selectable Style Cards -->
+          <!-- Step 2: Days & Duration -->
           <div>
-            <label style="display: block; font-weight: 800; color: #0f172a; margin-bottom: 0.5rem; font-size: 1.05rem;">
-              3. Travel Comfort Style:
-            </label>
-            <div class="calc-styles-grid">
+            <div class="calc-group-header">
+              <label class="calc-group-label">
+                <span>🗓️</span> 2. Trip Duration:
+              </label>
+              <div class="calc-presets-row">
+                <button type="button" class="calc-preset-pill active" data-days="3">Weekend (3D)</button>
+                <button type="button" class="calc-preset-pill" data-days="5">5 Days</button>
+                <button type="button" class="calc-preset-pill" data-days="7">Weeklong (7D)</button>
+                <button type="button" class="calc-preset-pill" data-days="10">10 Days</button>
+              </div>
+            </div>
+            <div class="calc-stepper-container">
+              <div class="calc-stepper-box">
+                <button class="calc-step-btn" id="calcDaysMinus" type="button" aria-label="Decrease Days">&minus;</button>
+                <div class="calc-step-val" id="calcDaysVal">3 Days</div>
+                <button class="calc-step-btn" id="calcDaysPlus" type="button" aria-label="Increase Days">&plus;</button>
+              </div>
+              <span style="font-size: 0.85rem; color: #64748b; font-weight: 600;">Customizable from 1 to 20 days</span>
+            </div>
+          </div>
+
+          <!-- Step 3: Travelers Count -->
+          <div>
+            <div class="calc-group-header">
+              <label class="calc-group-label">
+                <span>👥</span> 3. Number of Travelers:
+              </label>
+              <span style="font-size: 0.8rem; color: #64748b; font-weight: 700;">Twin Room Sharing Applied</span>
+            </div>
+            <div class="calc-stepper-container">
+              <div class="calc-stepper-box">
+                <button class="calc-step-btn" id="calcPaxMinus" type="button" aria-label="Decrease Travelers">&minus;</button>
+                <div class="calc-step-val" id="calcPaxVal">2 Persons</div>
+                <button class="calc-step-btn" id="calcPaxPlus" type="button" aria-label="Increase Travelers">&plus;</button>
+              </div>
+              <span style="font-size: 0.85rem; color: #64748b; font-weight: 600;">Solo, Duo, or Family/Group</span>
+            </div>
+          </div>
+
+          <!-- Step 4: Travel Comfort Style Tier -->
+          <div>
+            <div class="calc-group-header">
+              <label class="calc-group-label">
+                <span>✨</span> 4. Travel Comfort Tier:
+              </label>
+            </div>
+            <div class="calc-tier-cards-grid">
               
-              <div class="calc-style-card" data-style="budget">
-                <div class="style-icon">🎒</div>
-                <div class="style-title">Backpacker</div>
-                <div class="style-desc">Hostels &amp; Buses</div>
+              <div class="calc-tier-card" data-tier="budget">
+                <div class="calc-tier-icon">🎒</div>
+                <div class="calc-tier-title">Backpacker</div>
+                <div class="calc-tier-desc">Hostels / Zostel, State Buses &amp; Dhabas</div>
               </div>
 
-              <div class="calc-style-card active" data-style="moderate">
-                <div class="style-icon">🏨</div>
-                <div class="style-title">Comfort</div>
-                <div class="style-desc">Boutique Stays</div>
+              <div class="calc-tier-card active" data-tier="moderate">
+                <div class="calc-tier-icon">🏨</div>
+                <div class="calc-tier-title">Comfort (Popular)</div>
+                <div class="calc-tier-desc">3-Star Boutique Homestays &amp; Taxis</div>
               </div>
 
-              <div class="calc-style-card" data-style="luxury">
-                <div class="style-icon">👑</div>
-                <div class="style-title">Luxury</div>
-                <div class="style-desc">Heritage Resorts</div>
+              <div class="calc-tier-card" data-tier="luxury">
+                <div class="calc-tier-icon">👑</div>
+                <div class="calc-tier-title">Luxury VIP</div>
+                <div class="calc-tier-desc">Heritage Resorts, Innova &amp; Fine Dining</div>
               </div>
 
             </div>
@@ -123,54 +203,111 @@
 
         </div>
 
-        <!-- Output Card -->
-        <div class="calc-result-card">
-          <div style="font-family: monospace; font-size: 0.85rem; text-transform: uppercase; color: #94a3b8; font-weight: 700; letter-spacing: 0.05em;">Estimated Total Trip Cost</div>
-          <div class="calc-total-num" id="calcTotalCost">₹0</div>
+        <!-- Output Column (Right Blueprint) -->
+        <div class="calc-blueprint-col">
+          
+          <div>
+            <div class="calc-blueprint-header">
+              <div class="calc-dest-preview-pill">
+                <img src="images/leh-ladakh.jpg" id="calcBlueprintImg" alt="Preview" style="width: 24px; height: 24px; border-radius: 50%; object-fit: cover;" />
+                <span id="calcBlueprintDestName">Leh Ladakh</span>
+                <span style="color: #94a3b8; font-size: 0.75rem;">&bull;</span>
+                <span id="calcBlueprintDestState" style="color: #cbd5e1; font-size: 0.8rem;">Ladakh</span>
+              </div>
+              <span style="font-family: var(--font-mono); font-size: 0.75rem; color: #10b981; font-weight: 800;">LIVE ESTIMATE</span>
+            </div>
 
-          <div class="calc-breakdown-row">
-            <span>🏨 Stay &amp; Accommodation</span>
-            <strong id="calcStayCost">₹0</strong>
-          </div>
-          <div class="calc-breakdown-row">
-            <span>🍲 Food &amp; Dining</span>
-            <strong id="calcFoodCost">₹0</strong>
-          </div>
-          <div class="calc-breakdown-row">
-            <span>🚆 Local Travel &amp; Cabs</span>
-            <strong id="calcTransitCost">₹0</strong>
-          </div>
-          <div class="calc-breakdown-row" style="border: none;">
-            <span>🎟️ Activities, Rafting &amp; Passes</span>
-            <strong id="calcActivityCost">₹0</strong>
+            <div class="calc-total-box">
+              <div class="calc-total-label">Estimated Total Trip Cost</div>
+              <div class="calc-total-amount">
+                <span id="calcTotalCost">₹0</span>
+              </div>
+              <div class="calc-per-person-badge" id="calcPerPersonCost">₹0 / person</div>
+            </div>
+
+            <!-- Multi-Color Breakdown Bar -->
+            <div class="calc-breakdown-bar">
+              <div class="calc-bar-stay" id="calcBarStay" style="width: 40%;" title="Stay & Accommodation"></div>
+              <div class="calc-bar-food" id="calcBarFood" style="width: 25%;" title="Food & Dining"></div>
+              <div class="calc-bar-transit" id="calcBarTransit" style="width: 20%;" title="Local Transit & Taxis"></div>
+              <div class="calc-bar-activity" id="calcBarActivity" style="width: 15%;" title="Activities & Passes"></div>
+            </div>
+
+            <!-- Itemized Rows -->
+            <div class="calc-items-list">
+              <div class="calc-item-row">
+                <div class="calc-item-title">
+                  <span style="color: #38bdf8;">🏨</span> Stay &amp; Accommodation
+                </div>
+                <div class="calc-item-price" id="calcStayCost">₹0</div>
+              </div>
+
+              <div class="calc-item-row">
+                <div class="calc-item-title">
+                  <span style="color: #10b981;">🍲</span> Food &amp; Regional Dining
+                </div>
+                <div class="calc-item-price" id="calcFoodCost">₹0</div>
+              </div>
+
+              <div class="calc-item-row">
+                <div class="calc-item-title">
+                  <span style="color: #f59e0b;">🚗</span> Local Taxis &amp; Transit Tariffs
+                </div>
+                <div class="calc-item-price" id="calcTransitCost">₹0</div>
+              </div>
+
+              <div class="calc-item-row">
+                <div class="calc-item-title">
+                  <span style="color: #ec4899;">🎟️</span> Entry Passes, Rafting &amp; Guides
+                </div>
+                <div class="calc-item-price" id="calcActivityCost">₹0</div>
+              </div>
+            </div>
+
+            <!-- Insider Tip -->
+            <div class="calc-insider-tip" id="calcInsiderTipText">
+              <strong>💡 Ground Truth:</strong> Local union cabs charge fixed chart rates during early mornings without peak surge pricing.
+            </div>
           </div>
 
-          <button class="btn btn-primary btn-lg" style="width: 100%; margin-top: 1.75rem;" onclick="openLeadModal('Calculated Budget Trip')">
-            Get Complete Quotation on WhatsApp &rarr;
-          </button>
+          <div>
+            <button class="btn btn-primary btn-lg" style="width: 100%; box-shadow: 0 8px 25px rgba(255, 107, 53, 0.4);" onclick="openLeadModal('Calculated Budget Studio Plan')">
+              Get Complete Quotation on WhatsApp &rarr;
+            </button>
+            <div style="text-align: center; font-size: 0.78rem; color: #94a3b8; margin-top: 0.65rem;">
+              🔒 100% Free Consultation &bull; Zero Spam &bull; Verified Local Rates
+            </div>
+          </div>
+
         </div>
 
       </div>
     </div>
 
-    <!-- BENEFIT CARDS -->
-    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-top: 3rem;">
-      <div style="background: #ffffff; border: 1px solid var(--border-light); padding: 1.75rem; border-radius: 16px; box-shadow: var(--shadow-sm);">
+    <!-- 3 TRANSPARENCY PILLARS -->
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-top: 1rem;">
+      <div style="background: #ffffff; border: 1px solid var(--border-light); padding: 1.75rem; border-radius: 18px; box-shadow: var(--shadow-sm);">
         <div style="font-size: 2rem; margin-bottom: 0.5rem;">⚡</div>
-        <h4 style="margin-bottom: 0.35rem; color: #0f172a;">Real-Time Transparency</h4>
-        <p style="color: #64748b; font-size: 0.92rem; line-height: 1.5; margin: 0;">Our estimates are verified with actual ground taxi unions, homestays, and activity operators.</p>
+        <h4 style="margin-bottom: 0.35rem; color: #0f172a;">Real Ground Truth Tariffs</h4>
+        <p style="color: #64748b; font-size: 0.92rem; margin: 0; line-height: 1.6;">
+          Rates are compiled from actual local taxi union rate charts, verified homestays, and regional food costs across North, South, West, Central and East India.
+        </p>
       </div>
 
-      <div style="background: #ffffff; border: 1px solid var(--border-light); padding: 1.75rem; border-radius: 16px; box-shadow: var(--shadow-sm);">
-        <div style="font-size: 2rem; margin-bottom: 0.5rem;">💳</div>
-        <h4 style="margin-bottom: 0.35rem; color: #0f172a;">Multi-Currency Support</h4>
-        <p style="color: #64748b; font-size: 0.92rem; line-height: 1.5; margin: 0;">Easily switch between INR, USD, EUR, and AED for international travel planning.</p>
-      </div>
-
-      <div style="background: #ffffff; border: 1px solid var(--border-light); padding: 1.75rem; border-radius: 16px; box-shadow: var(--shadow-sm);">
+      <div style="background: #ffffff; border: 1px solid var(--border-light); padding: 1.75rem; border-radius: 18px; box-shadow: var(--shadow-sm);">
         <div style="font-size: 2rem; margin-bottom: 0.5rem;">🛡️</div>
-        <h4 style="margin-bottom: 0.35rem; color: #0f172a;">Zero Hidden Charges</h4>
-        <p style="color: #64748b; font-size: 0.92rem; line-height: 1.5; margin: 0;">Includes permit fees, national park tickets, and buffer for fuel and toll taxes.</p>
+        <h4 style="margin-bottom: 0.35rem; color: #0f172a;">Zero Hidden Markups</h4>
+        <p style="color: #64748b; font-size: 0.92rem; margin: 0; line-height: 1.6;">
+          Direct transparency with no agent commissions or fake surge prices. You pay exactly what it costs on the ground.
+        </p>
+      </div>
+
+      <div style="background: #ffffff; border: 1px solid var(--border-light); padding: 1.75rem; border-radius: 18px; box-shadow: var(--shadow-sm);">
+        <div style="font-size: 2rem; margin-bottom: 0.5rem;">💬</div>
+        <h4 style="margin-bottom: 0.35rem; color: #0f172a;">Direct WhatsApp Blueprint</h4>
+        <p style="color: #64748b; font-size: 0.92rem; margin: 0; line-height: 1.6;">
+          Receive itemized day-by-day travel plans, reliable driver contact numbers, and homestay recommendations straight to your phone.
+        </p>
       </div>
     </div>
 
@@ -180,53 +317,47 @@
   <div class="modal-backdrop" id="leadModalBackdrop">
     <div class="inquiry-modal">
       <button class="modal-close-btn" id="leadModalCloseBtn">&times;</button>
-      
-      <div style="text-align: center; margin-bottom: 1.5rem;">
-        <span style="font-family: monospace; font-size: 0.8rem; font-weight: 700; color: var(--primary); text-transform: uppercase;">Custom Trip Quotation</span>
-        <h3 style="font-size: 1.6rem; color: #0f172a; margin: 0.25rem 0 0.5rem;">Get Your Verified Travel Blueprint</h3>
-        <p style="color: #64748b; font-size: 0.92rem;">Direct day-by-day plan, hotel recommendations &amp; cost estimate.</p>
+      <div style="text-align: center; margin-bottom: 1.25rem;">
+        <span style="font-family: monospace; font-size: 0.8rem; font-weight: 700; color: var(--primary); text-transform: uppercase;">Custom Trip Consultation</span>
+        <h3 style="font-size: 1.5rem; color: #0f172a; margin: 0.25rem 0 0.4rem;">Get Itemized Cost Blueprint</h3>
+        <p style="color: #64748b; font-size: 0.9rem;">Receive verified itinerary, trusted drivers &amp; stay rates via WhatsApp.</p>
       </div>
 
       <form id="leadCaptureForm">
-        <input type="hidden" id="leadDestField" value="" />
-
+        <input type="hidden" id="leadDestField" value="Calculated Budget Trip" />
         <div class="form-group">
           <label class="form-label" for="leadName">Your Full Name</label>
           <input type="text" id="leadName" class="form-input" placeholder="e.g. Rahul Sharma" required />
         </div>
-
         <div class="form-group">
-          <label class="form-label" for="leadPhone">WhatsApp Phone Number</label>
+          <label class="form-label" for="leadPhone">WhatsApp Number</label>
           <input type="tel" id="leadPhone" class="form-input" placeholder="e.g. +91 98765 43210" required />
         </div>
-
         <div class="form-group">
-          <label class="form-label" for="leadTravelDate">Estimated Travel Month / Dates</label>
-          <input type="text" id="leadTravelDate" class="form-input" placeholder="e.g. Next Month / Diwali Holidays" />
+          <label class="form-label" for="leadTravelDate">Estimated Month / Dates</label>
+          <input type="text" id="leadTravelDate" class="form-input" placeholder="e.g. Next Month / Long Weekend" />
         </div>
-
         <button type="submit" class="btn btn-primary btn-lg" style="width: 100%; margin-top: 0.5rem;">
-          Send Me Plan on WhatsApp &rarr;
+          Send Complete Plan on WhatsApp &rarr;
         </button>
       </form>
     </div>
   </div>
 
-  <!-- SITE FOOTER -->
+  <!-- CLEAN STRUCTURED FOOTER -->
   <footer class="site-footer">
     <div class="container">
       <div class="footer-grid">
-        <!-- Col 1 -->
         <div>
           <a href="index.html" class="brand" style="margin-bottom: 0.75rem;">
-        <svg class="brand-icon" fill="currentColor" viewBox="0 0 24 24">
-          <path d="M14 6l-3.75 5 2.85 3.8-1.6 1.2L7 10l-6 8h22L14 6z"/>
-        </svg>
-        <div class="brand-text-wrap">
-          <span class="brand-title">RAAHIYOO</span>
-          <span class="brand-byline">by sunnio</span>
-        </div>
-      </a>
+            <svg class="brand-icon" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M14 6l-3.75 5 2.85 3.8-1.6 1.2L7 10l-6 8h22L14 6z"/>
+            </svg>
+            <div class="brand-text-wrap">
+              <span class="brand-title">RAAHIYOO</span>
+              <span class="brand-byline">by sunnio</span>
+            </div>
+          </a>
           <p style="color: #64748b; font-size: 0.95rem; max-width: 320px; line-height: 1.6; margin-bottom: 1rem;">
             Discover authentic destinations, calculate exact trip budgets, and travel India with confidence. Handcrafted with ❤️ by <strong>Sunnio</strong>.
           </p>
@@ -242,34 +373,34 @@
         </div>
 
         <div>
-          <div class="footer-col-title">Himalayan &amp; Sacred Trips</div>
+          <div class="footer-col-title">Popular Trips</div>
           <div class="footer-list">
-            <a href="destination.html?id=leh-ladakh">Leh Ladakh &amp; Pangong</a>
-            <a href="destination.html?id=spiti-valley">Spiti Valley</a>
-            <a href="destination.html?id=kedarnath">Kedarnath Dham</a>
             <a href="destination.html?id=rishikesh">Rishikesh Rafting</a>
-            <a href="destination.html?id=varanasi">Varanasi Maha Aarti</a>
+            <a href="destination.html?id=manali">Manali &amp; Sissu</a>
+            <a href="destination.html?id=leh-ladakh">Leh Ladakh</a>
+            <a href="destination.html?id=spiti-valley">Spiti Valley</a>
+            <a href="destination.html?id=varanasi">Varanasi Aarti</a>
           </div>
         </div>
 
         <div>
-          <div class="footer-col-title">Heritage &amp; Coast</div>
+          <div class="footer-col-title">Explore Regions</div>
           <div class="footer-list">
+            <a href="destination.html?id=kedarnath">Kedarnath Dham</a>
             <a href="destination.html?id=jaipur">Jaipur Forts</a>
-            <a href="destination.html?id=udaipur">Udaipur City of Lakes</a>
-            <a href="destination.html?id=jaisalmer">Jaisalmer Dunes</a>
             <a href="destination.html?id=goa">Goa Beaches</a>
             <a href="destination.html?id=munnar">Munnar Tea Hills</a>
+            <a href="destination.html?id=darjeeling">Darjeeling Kanchenjunga</a>
           </div>
         </div>
 
         <div>
-          <div class="footer-col-title">Travel Tools</div>
+          <div class="footer-col-title">Trust &amp; Tools</div>
           <div class="footer-list">
             <a href="calculator.html">Budget Calculator</a>
-            <a href="how-to-reach.html">Transit Route Planner</a>
-            <a href="index.html#exploreSection">All Destinations</a>
-            <a href="javascript:void(0)">Privacy &amp; Terms</a>
+            <a href="how-to-reach.html">Transit Planner</a>
+            <a href="javascript:void(0)" onclick="openPledgeModal()">Clean Mountain Pledge</a>
+            <a href="javascript:void(0)" onclick="openTermsModal()">Privacy &amp; Terms</a>
           </div>
         </div>
       </div>
@@ -281,15 +412,105 @@
     </div>
   </footer>
 
+  <!-- CLEAN MOUNTAIN PLEDGE MODAL -->
+  <div class="modal-backdrop" id="pledgeModalBackdrop">
+    <div class="inquiry-modal" style="max-width: 580px;">
+      <button class="modal-close-btn" onclick="closePledgeModal()">&times;</button>
+      <div style="text-align: center; margin-bottom: 1.25rem;">
+        <span style="font-family: var(--font-mono); font-size: 0.8rem; font-weight: 800; color: #059669; text-transform: uppercase; background: rgba(5, 150, 105, 0.12); padding: 0.25rem 0.75rem; border-radius: 9999px;">
+          🌿 Responsible Travel Movement
+        </span>
+        <h3 style="font-size: 1.6rem; color: #0f172a; margin: 0.5rem 0 0.35rem;">Clean Mountain &amp; Coast Pledge</h3>
+        <p style="color: #64748b; font-size: 0.9rem; line-height: 1.5;">
+          Leave only footprints, take only memories. Protect India's sacred mountains and heritage trails.
+        </p>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 0.85rem; margin-bottom: 1.5rem;">
+        <div style="display: flex; gap: 0.75rem; background: #f8fafc; padding: 0.75rem 1rem; border-radius: 12px; border: 1px solid #e2e8f0;">
+          <span style="font-size: 1.3rem;">🚫</span>
+          <div style="font-size: 0.9rem; color: #334155; line-height: 1.45;">
+            <strong>Zero Single-Use Plastic:</strong> Refill your steel water bottles at verified mountain spring taps. Never dump plastic wrappers on high passes.
+          </div>
+        </div>
+        <div style="display: flex; gap: 0.75rem; background: #f8fafc; padding: 0.75rem 1rem; border-radius: 12px; border: 1px solid #e2e8f0;">
+          <span style="font-size: 1.3rem;">🎒</span>
+          <div style="font-size: 0.9rem; color: #334155; line-height: 1.45;">
+            <strong>Pack It In, Pack It Out:</strong> Bring all non-biodegradable trash back to base towns with authorized municipal waste management.
+          </div>
+        </div>
+        <div style="display: flex; gap: 0.75rem; background: #f8fafc; padding: 0.75rem 1rem; border-radius: 12px; border: 1px solid #e2e8f0;">
+          <span style="font-size: 1.3rem;">🏡</span>
+          <div style="font-size: 0.9rem; color: #334155; line-height: 1.45;">
+            <strong>Support Local Communities:</strong> Stay at family-run homestays, hire licensed union drivers, and taste authentic regional foods.
+          </div>
+        </div>
+        <div style="display: flex; gap: 0.75rem; background: #f8fafc; padding: 0.75rem 1rem; border-radius: 12px; border: 1px solid #e2e8f0;">
+          <span style="font-size: 1.3rem;">🕉️</span>
+          <div style="font-size: 0.9rem; color: #334155; line-height: 1.45;">
+            <strong>Respect Sacred Traditions:</strong> Maintain solemn peace around ancient temples, gompas, and serene lake sanctuaries.
+          </div>
+        </div>
+      </div>
+
+      <div style="text-align: center;">
+        <button class="btn btn-primary btn-lg" id="takePledgeBtn" style="width: 100%; background: #059669;" onclick="takeMountainPledge()">
+          🌿 I Take The Clean Mountain Pledge
+        </button>
+        <div id="pledgeSuccessMsg" style="display: none; padding: 1rem; background: #ecfdf5; border: 1.5px solid #a7f3d0; border-radius: 12px; color: #065f46; font-weight: 700;">
+          🎉 Thank you, Eco-Explorer! You are traveler #14,820 to take the Clean Mountain Pledge!
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PRIVACY & TERMS MODAL -->
+  <div class="modal-backdrop" id="termsModalBackdrop">
+    <div class="inquiry-modal" style="max-width: 620px;">
+      <button class="modal-close-btn" onclick="closeTermsModal()">&times;</button>
+      <div style="margin-bottom: 1.25rem;">
+        <span style="font-family: var(--font-mono); font-size: 0.8rem; font-weight: 800; color: var(--primary); text-transform: uppercase; background: rgba(255, 107, 53, 0.12); padding: 0.25rem 0.75rem; border-radius: 9999px;">
+          🛡️ Trust &amp; Transparency
+        </span>
+        <h3 style="font-size: 1.5rem; color: #0f172a; margin: 0.5rem 0 0.35rem;">Privacy Policy &amp; Terms of Service</h3>
+        <p style="color: #64748b; font-size: 0.88rem;">Last updated: August 2026 &bull; RAAHIYOO by Sunnio</p>
+      </div>
+
+      <div style="max-height: 360px; overflow-y: auto; padding-right: 0.5rem; font-size: 0.9rem; color: #475569; line-height: 1.6; display: flex; flex-direction: column; gap: 1rem;">
+        <div>
+          <h4 style="color: #0f172a; font-size: 1rem; margin-bottom: 0.25rem;">1. Zero-Spam Data Privacy</h4>
+          <p style="margin: 0;">When you request a WhatsApp itinerary blueprint or calculate your budget, your phone number and name are solely used to send your personalized travel details. We never sell, rent, or spam your contacts.</p>
+        </div>
+        <div>
+          <h4 style="color: #0f172a; font-size: 1rem; margin-bottom: 0.25rem;">2. Ground Truth Tariffs &amp; Schedules</h4>
+          <p style="margin: 0;">All transit routes, train timings, and taxi tariffs are curated from official Indian Railways (IRCTC), state transport corporations, and local taxi operator unions. Actual ground tariffs may vary slightly during extreme monsoon landslides, winter snowfall, or peak holiday surges.</p>
+        </div>
+        <div>
+          <h4 style="color: #0f172a; font-size: 1rem; margin-bottom: 0.25rem;">3. High-Altitude Safety Advisory</h4>
+          <p style="margin: 0;">Travelers visiting high Himalayan passes (above 10,000 ft) are strongly advised to acclimatize properly for 48 hours and check real-time BRO (Border Roads Organisation) advisories before embarking.</p>
+        </div>
+        <div>
+          <h4 style="color: #0f172a; font-size: 1rem; margin-bottom: 0.25rem;">4. Intellectual Property &amp; Community</h4>
+          <p style="margin: 0;">All curated itineraries, photos, calculators, and brand elements are handcrafted with ❤️ by Sunnio for RAAHIYOO. Free for personal travel discovery.</p>
+        </div>
+      </div>
+
+      <div style="margin-top: 1.25rem; text-align: right;">
+        <button class="btn btn-secondary" onclick="closeTermsModal()">Close Window</button>
+      </div>
+    </div>
+  </div>
+
   <!-- Scripts -->
   <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
   <script src="js/calculator.js"></script>
   <script>
-    function openLeadModal(destName = 'Custom Trip') {
+    function openLeadModal(destName) {
       const modal = document.getElementById('leadModalBackdrop');
-      const destField = document.getElementById('leadDestField');
+      const field = document.getElementById('leadDestField');
       if (modal) {
-        if (destField) destField.value = destName;
+        if (field) field.value = destName;
         modal.classList.add('active');
       }
     }
@@ -305,14 +526,40 @@
       document.getElementById('leadCaptureForm').innerHTML = `
         <div style="text-align: center; padding: 2rem 1rem;">
           <div style="font-size: 3rem; color: #10b981; margin-bottom: 1rem;">✓</div>
-          <h3 style="color: #0f172a; margin-bottom: 0.5rem;">Inquiry Sent, ${name}!</h3>
+          <h3 style="color: #0f172a; margin-bottom: 0.5rem;">Quotation Sent, ${name}!</h3>
           <p style="color: #475569; font-size: 0.95rem; margin-bottom: 1.5rem;">
-            Our travel expert will send the complete verified itinerary and cost breakdown to <strong>${phone}</strong> via WhatsApp within 15 minutes.
+            Our travel team will send the full itemized budget breakdown &amp; stay options to <strong>${phone}</strong> via WhatsApp within 15 minutes.
           </p>
           <button class="btn btn-primary" onclick="closeLeadModal()">Done</button>
         </div>
       `;
     };
+
+    // Mobile Navigation Drawer Handlers
+    function openMobileMenu() {
+      const drawer = document.getElementById('mobileNavDrawer');
+      const backdrop = document.getElementById('mobileNavBackdrop');
+      if (drawer && backdrop) {
+        drawer.classList.add('active');
+        backdrop.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      }
+    }
+    function closeMobileMenu() {
+      const drawer = document.getElementById('mobileNavDrawer');
+      const backdrop = document.getElementById('mobileNavBackdrop');
+      if (drawer && backdrop) {
+        drawer.classList.remove('active');
+        backdrop.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+    }
+    const openBtn = document.getElementById('mobileMenuOpenBtn');
+    const closeBtn = document.getElementById('mobileMenuCloseBtn');
+    const navBackdrop = document.getElementById('mobileNavBackdrop');
+    if (openBtn) openBtn.onclick = openMobileMenu;
+    if (closeBtn) closeBtn.onclick = closeMobileMenu;
+    if (navBackdrop) navBackdrop.onclick = closeMobileMenu;
   </script>
 </body>
 </html>

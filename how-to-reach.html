@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>How to Reach Transit Planner | RAAHIYOO</title>
   <meta name="description" content="Search from any Indian city or village to any destination with live English Real India GPS Map, flights, Vande Bharat trains, highway blueprints, and taxi union fares." />
 
@@ -387,12 +387,12 @@
         </div>
 
         <div>
-          <div class="footer-col-title">Travel Tools</div>
+          <div class="footer-col-title">Trust &amp; Tools</div>
           <div class="footer-list">
             <a href="calculator.html">Budget Calculator</a>
-            <a href="how-to-reach.html">Transit Route Planner</a>
-            <a href="index.html#exploreSection">All Destinations</a>
-            <a href="javascript:void(0)">Privacy &amp; Terms</a>
+            <a href="how-to-reach.html">Transit Planner</a>
+            <a href="javascript:void(0)" onclick="openPledgeModal()">Clean Mountain Pledge</a>
+            <a href="javascript:void(0)" onclick="openTermsModal()">Privacy &amp; Terms</a>
           </div>
         </div>
       </div>
@@ -403,6 +403,95 @@
       </div>
     </div>
   </footer>
+
+  <!-- CLEAN MOUNTAIN PLEDGE MODAL -->
+  <div class="modal-backdrop" id="pledgeModalBackdrop">
+    <div class="inquiry-modal" style="max-width: 580px;">
+      <button class="modal-close-btn" onclick="closePledgeModal()">&times;</button>
+      <div style="text-align: center; margin-bottom: 1.25rem;">
+        <span style="font-family: var(--font-mono); font-size: 0.8rem; font-weight: 800; color: #059669; text-transform: uppercase; background: rgba(5, 150, 105, 0.12); padding: 0.25rem 0.75rem; border-radius: 9999px;">
+          🌿 Responsible Travel Movement
+        </span>
+        <h3 style="font-size: 1.6rem; color: #0f172a; margin: 0.5rem 0 0.35rem;">Clean Mountain &amp; Coast Pledge</h3>
+        <p style="color: #64748b; font-size: 0.9rem; line-height: 1.5;">
+          Leave only footprints, take only memories. Protect India's sacred mountains and heritage trails.
+        </p>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 0.85rem; margin-bottom: 1.5rem;">
+        <div style="display: flex; gap: 0.75rem; background: #f8fafc; padding: 0.75rem 1rem; border-radius: 12px; border: 1px solid #e2e8f0;">
+          <span style="font-size: 1.3rem;">🚫</span>
+          <div style="font-size: 0.9rem; color: #334155; line-height: 1.45;">
+            <strong>Zero Single-Use Plastic:</strong> Refill your steel water bottles at verified mountain spring taps. Never dump plastic wrappers on high passes.
+          </div>
+        </div>
+        <div style="display: flex; gap: 0.75rem; background: #f8fafc; padding: 0.75rem 1rem; border-radius: 12px; border: 1px solid #e2e8f0;">
+          <span style="font-size: 1.3rem;">🎒</span>
+          <div style="font-size: 0.9rem; color: #334155; line-height: 1.45;">
+            <strong>Pack It In, Pack It Out:</strong> Bring all non-biodegradable trash back to base towns with authorized municipal waste management.
+          </div>
+        </div>
+        <div style="display: flex; gap: 0.75rem; background: #f8fafc; padding: 0.75rem 1rem; border-radius: 12px; border: 1px solid #e2e8f0;">
+          <span style="font-size: 1.3rem;">🏡</span>
+          <div style="font-size: 0.9rem; color: #334155; line-height: 1.45;">
+            <strong>Support Local Communities:</strong> Stay at family-run homestays, hire licensed union drivers, and taste authentic regional foods.
+          </div>
+        </div>
+        <div style="display: flex; gap: 0.75rem; background: #f8fafc; padding: 0.75rem 1rem; border-radius: 12px; border: 1px solid #e2e8f0;">
+          <span style="font-size: 1.3rem;">🕉️</span>
+          <div style="font-size: 0.9rem; color: #334155; line-height: 1.45;">
+            <strong>Respect Sacred Traditions:</strong> Maintain solemn peace around ancient temples, gompas, and serene lake sanctuaries.
+          </div>
+        </div>
+      </div>
+
+      <div style="text-align: center;">
+        <button class="btn btn-primary btn-lg" id="takePledgeBtn" style="width: 100%; background: #059669;" onclick="takeMountainPledge()">
+          🌿 I Take The Clean Mountain Pledge
+        </button>
+        <div id="pledgeSuccessMsg" style="display: none; padding: 1rem; background: #ecfdf5; border: 1.5px solid #a7f3d0; border-radius: 12px; color: #065f46; font-weight: 700;">
+          🎉 Thank you, Eco-Explorer! You are traveler #14,820 to take the Clean Mountain Pledge!
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PRIVACY & TERMS MODAL -->
+  <div class="modal-backdrop" id="termsModalBackdrop">
+    <div class="inquiry-modal" style="max-width: 620px;">
+      <button class="modal-close-btn" onclick="closeTermsModal()">&times;</button>
+      <div style="margin-bottom: 1.25rem;">
+        <span style="font-family: var(--font-mono); font-size: 0.8rem; font-weight: 800; color: var(--primary); text-transform: uppercase; background: rgba(255, 107, 53, 0.12); padding: 0.25rem 0.75rem; border-radius: 9999px;">
+          🛡️ Trust &amp; Transparency
+        </span>
+        <h3 style="font-size: 1.5rem; color: #0f172a; margin: 0.5rem 0 0.35rem;">Privacy Policy &amp; Terms of Service</h3>
+        <p style="color: #64748b; font-size: 0.88rem;">Last updated: August 2026 &bull; RAAHIYOO by Sunnio</p>
+      </div>
+
+      <div style="max-height: 360px; overflow-y: auto; padding-right: 0.5rem; font-size: 0.9rem; color: #475569; line-height: 1.6; display: flex; flex-direction: column; gap: 1rem;">
+        <div>
+          <h4 style="color: #0f172a; font-size: 1rem; margin-bottom: 0.25rem;">1. Zero-Spam Data Privacy</h4>
+          <p style="margin: 0;">When you request a WhatsApp itinerary blueprint or calculate your budget, your phone number and name are solely used to send your personalized travel details. We never sell, rent, or spam your contacts.</p>
+        </div>
+        <div>
+          <h4 style="color: #0f172a; font-size: 1rem; margin-bottom: 0.25rem;">2. Ground Truth Tariffs &amp; Schedules</h4>
+          <p style="margin: 0;">All transit routes, train timings, and taxi tariffs are curated from official Indian Railways (IRCTC), state transport corporations, and local taxi operator unions. Actual ground tariffs may vary slightly during extreme monsoon landslides, winter snowfall, or peak holiday surges.</p>
+        </div>
+        <div>
+          <h4 style="color: #0f172a; font-size: 1rem; margin-bottom: 0.25rem;">3. High-Altitude Safety Advisory</h4>
+          <p style="margin: 0;">Travelers visiting high Himalayan passes (above 10,000 ft) are strongly advised to acclimatize properly for 48 hours and check real-time BRO (Border Roads Organisation) advisories before embarking.</p>
+        </div>
+        <div>
+          <h4 style="color: #0f172a; font-size: 1rem; margin-bottom: 0.25rem;">4. Intellectual Property &amp; Community</h4>
+          <p style="margin: 0;">All curated itineraries, photos, calculators, and brand elements are handcrafted with ❤️ by Sunnio for RAAHIYOO. Free for personal travel discovery.</p>
+        </div>
+      </div>
+
+      <div style="margin-top: 1.25rem; text-align: right;">
+        <button class="btn btn-secondary" onclick="closeTermsModal()">Close Window</button>
+      </div>
+    </div>
+  </div>
 
   <!-- Scripts -->
   <script src="js/data.js"></script>

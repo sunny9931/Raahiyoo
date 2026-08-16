@@ -1,1037 +1,663 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
-    <title>RAAHIYOO — India's Premier Travel Discovery Platform</title>
-    <meta
-      name="description"
-      content="Discover 120+ famous Indian destinations with exact train routes, live trip budget calculator, verified itineraries, and interactive packing lists." />
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>RAAHIYOO — India's Premier Travel Discovery Platform</title>
+  <meta name="description" content="Discover 120+ famous Indian destinations with exact train routes, live trip budget calculator, verified itineraries, and interactive packing lists." />
 
-    <!-- Open Graph -->
-    <meta property="og:type" content="website" />
-    <meta
-      property="og:title"
-      content="RAAHIYOO — India's Premier Travel Discovery Platform" />
-    <meta
-      property="og:description"
-      content="Discover destinations, understand multi-modal transit, and plan your journey with confidence." />
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="RAAHIYOO — India's Premier Travel Discovery Platform" />
+  <meta property="og:description" content="Discover destinations, understand multi-modal transit, and plan your journey with confidence." />
 
-    <!-- Stylesheets -->
-    <link rel="stylesheet" href="css/style.css" />
-    <link rel="stylesheet" href="css/components.css" />
-  </head>
-  <body>
-    <!-- 1. STICKY HEADER WITH MOBILE HAMBURGER -->
-    <header class="site-header">
-      <div class="container nav-wrap">
-        <!-- Brand -->
-        <a href="index.html" class="brand">
-          <svg class="brand-icon" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M14 6l-3.75 5 2.85 3.8-1.6 1.2L7 10l-6 8h22L14 6z" />
-          </svg>
-          <div class="brand-text-wrap">
-            <span class="brand-title">RAAHIYOO</span>
-            <span class="brand-byline">by sunnio</span>
-          </div>
-        </a>
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/components.css" />
+</head>
+<body>
 
-        <!-- Desktop Nav -->
-        <nav class="nav-menu">
-          <a href="#exploreSection" class="nav-item">All Destinations</a>
-          <a href="calculator.html" class="nav-item">Budget Calculator</a>
-          <a href="how-to-reach.html" class="nav-item">How to Reach</a>
-          <a href="#passSection" class="nav-item">Pass Advisory</a>
-          <a href="#taxiSection" class="nav-item">Taxi Guide</a>
-          <a href="#reviewsSection" class="nav-item">Reviews</a>
-        </nav>
-
-        <!-- Nav Actions (Instagram + Plan Trip CTA + Mobile Menu Toggle) -->
-        <div class="nav-actions">
-          <!-- Instagram Profile Link -->
-          <a
-            href="https://www.instagram.com/sunnio.3/"
-            target="_blank"
-            rel="noopener"
-            class="insta-header-btn"
-            title="Follow @sunnio.3 on Instagram">
-            <svg
-              class="insta-svg-icon"
-              viewBox="0 0 24 24"
-              width="16"
-              height="16"
-              fill="currentColor">
-              <path
-                d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
-            </svg>
-            <span>@sunnio.3</span>
-          </a>
-
-          <!-- Lead CTA -->
-          <button
-            class="btn btn-primary btn-sm"
-            onclick="openLeadModal('Custom Trip Consultation')">
-            Plan Trip
-          </button>
-
-          <!-- Mobile Hamburger Button -->
-          <button
-            class="mobile-nav-toggle"
-            id="mobileMenuOpenBtn"
-            aria-label="Open Navigation Menu">
-            ☰
-          </button>
+  <!-- 1. STICKY HEADER WITH MOBILE HAMBURGER -->
+  <header class="site-header">
+    <div class="container nav-wrap">
+      
+      <!-- Brand -->
+      <a href="index.html" class="brand">
+        <svg class="brand-icon" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M14 6l-3.75 5 2.85 3.8-1.6 1.2L7 10l-6 8h22L14 6z"/>
+        </svg>
+        <div class="brand-text-wrap">
+          <span class="brand-title">RAAHIYOO</span>
+          <span class="brand-byline">by sunnio</span>
         </div>
-      </div>
-    </header>
+      </a>
 
-    <!-- MOBILE SLIDE-IN NAVIGATION MENU -->
-    <div class="drawer-backdrop" id="mobileNavBackdrop"></div>
-    <aside
-      class="mobile-menu-drawer"
-      id="mobileNavDrawer"
-      aria-label="Mobile Navigation">
-      <div
-        style="
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          padding-bottom: 1rem;
-          border-bottom: 1px solid var(--border-light);
-        ">
-        <div class="brand">
-          <svg
-            class="brand-icon"
-            style="width: 24px; height: 24px"
-            fill="currentColor"
-            viewBox="0 0 24 24">
-            <path d="M14 6l-3.75 5 2.85 3.8-1.6 1.2L7 10l-6 8h22L14 6z" />
-          </svg>
-          <div class="brand-text-wrap">
-            <span class="brand-title" style="font-size: 1.2rem">RAAHIYOO</span>
-            <span class="brand-byline">by sunnio</span>
-          </div>
-        </div>
-        <button
-          class="drawer-close-btn"
-          id="mobileMenuCloseBtn"
-          style="
-            position: static;
-            width: 34px;
-            height: 34px;
-            font-size: 1.2rem;
-          ">
-          &times;
-        </button>
-      </div>
-
-      <nav
-        style="
-          display: flex;
-          flex-direction: column;
-          gap: 0.5rem;
-          margin-top: 1rem;
-        ">
-        <a
-          href="#exploreSection"
-          class="mobile-menu-link"
-          onclick="closeMobileMenu()">
-          <span>📍 All Destinations</span>
-          <span>&rarr;</span>
-        </a>
-        <a href="calculator.html" class="mobile-menu-link">
-          <span>💰 Trip Budget Calculator</span>
-          <span>&rarr;</span>
-        </a>
-        <a href="how-to-reach.html" class="mobile-menu-link">
-          <span>🚆 How to Reach Planner</span>
-          <span>&rarr;</span>
-        </a>
-        <a
-          href="#passSection"
-          class="mobile-menu-link"
-          onclick="closeMobileMenu()">
-          <span>⛰️ Mountain Pass Live Status</span>
-          <span>&rarr;</span>
-        </a>
-        <a
-          href="#taxiSection"
-          class="mobile-menu-link"
-          onclick="closeMobileMenu()">
-          <span>🚕 Verified Taxi Union Fares</span>
-          <span>&rarr;</span>
-        </a>
-        <a
-          href="https://www.instagram.com/sunnio.3/"
-          target="_blank"
-          rel="noopener"
-          class="mobile-menu-link"
-          style="color: #e1306c; font-weight: 700">
-          <span style="display: inline-flex; align-items: center; gap: 0.4rem"
-            ><svg
-              class="insta-svg-icon"
-              viewBox="0 0 24 24"
-              width="16"
-              height="16"
-              fill="currentColor">
-              <path
-                d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
-            </svg>
-            Follow @sunnio.3 on Instagram</span
-          >
-          <span>&rarr;</span>
-        </a>
+      <!-- Desktop Nav -->
+      <nav class="nav-menu">
+        <a href="#exploreSection" class="nav-item">All Destinations</a>
+        <a href="calculator.html" class="nav-item">Budget Calculator</a>
+        <a href="how-to-reach.html" class="nav-item">How to Reach</a>
+        <a href="#passSection" class="nav-item">Pass Advisory</a>
+        <a href="#taxiSection" class="nav-item">Taxi Guide</a>
+        <a href="#reviewsSection" class="nav-item">Reviews</a>
       </nav>
 
-      <div
-        style="
-          margin-top: auto;
-          padding-top: 1.5rem;
-          border-top: 1px solid var(--border-light);
-        ">
-        <button
-          class="btn btn-primary btn-lg"
-          style="width: 100%"
-          onclick="
-            closeMobileMenu();
-            openLeadModal('Mobile Custom Plan');
-          ">
-          Plan My Journey &rarr;
+      <!-- Nav Actions (Instagram + Plan Trip CTA + Mobile Menu Toggle) -->
+      <div class="nav-actions">
+        
+        <!-- Instagram Profile Link -->
+        <a href="https://www.instagram.com/sunnio.3/" target="_blank" rel="noopener" class="insta-header-btn" title="Follow @sunnio.3 on Instagram">
+          <svg class="insta-svg-icon" viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+          <span>@sunnio.3</span>
+        </a>
+
+        <!-- Lead CTA -->
+        <button class="btn btn-primary btn-sm" onclick="openLeadModal('Custom Trip Consultation')">
+          Plan Trip
+        </button>
+
+        <!-- Mobile Hamburger Button -->
+        <button class="mobile-nav-toggle" id="mobileMenuOpenBtn" aria-label="Open Navigation Menu">
+          ☰
         </button>
       </div>
-    </aside>
 
-    <!-- 2. REDESIGNED LUXURY HERO SECTION -->
-    <section class="hero-wrap">
-      <div class="container">
-        <div class="hero-stats-pill">
-          <span>🎒 Handcrafted by Sunnio</span>
-          <span>&bull;</span>
-          <span>106 Real Places Across India</span>
-          <span>&bull;</span>
-          <span>0 Sponsored Ads &bull; 100% Real Ground Truth</span>
+    </div>
+  </header>
+
+  <!-- MOBILE SLIDE-IN NAVIGATION MENU -->
+  <div class="drawer-backdrop" id="mobileNavBackdrop"></div>
+  <aside class="mobile-menu-drawer" id="mobileNavDrawer" aria-label="Mobile Navigation">
+    <div style="display: flex; justify-content: space-between; align-items: center; padding-bottom: 1rem; border-bottom: 1px solid var(--border-light);">
+      <div class="brand">
+        <svg class="brand-icon" style="width: 24px; height: 24px;" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M14 6l-3.75 5 2.85 3.8-1.6 1.2L7 10l-6 8h22L14 6z"/>
+        </svg>
+        <div class="brand-text-wrap">
+          <span class="brand-title" style="font-size: 1.2rem;">RAAHIYOO</span>
+          <span class="brand-byline">by sunnio</span>
+        </div>
+      </div>
+      <button class="drawer-close-btn" id="mobileMenuCloseBtn" style="position: static; width: 34px; height: 34px; font-size: 1.2rem;">&times;</button>
+    </div>
+
+    <nav style="display: flex; flex-direction: column; gap: 0.5rem; margin-top: 1rem;">
+      <a href="#exploreSection" class="mobile-menu-link" onclick="closeMobileMenu()">
+        <span>📍 All Destinations</span>
+        <span>&rarr;</span>
+      </a>
+      <a href="calculator.html" class="mobile-menu-link">
+        <span>💰 Trip Budget Calculator</span>
+        <span>&rarr;</span>
+      </a>
+      <a href="how-to-reach.html" class="mobile-menu-link">
+        <span>🚆 How to Reach Planner</span>
+        <span>&rarr;</span>
+      </a>
+      <a href="#passSection" class="mobile-menu-link" onclick="closeMobileMenu()">
+        <span>⛰️ Mountain Pass Live Status</span>
+        <span>&rarr;</span>
+      </a>
+      <a href="#taxiSection" class="mobile-menu-link" onclick="closeMobileMenu()">
+        <span>🚕 Verified Taxi Union Fares</span>
+        <span>&rarr;</span>
+      </a>
+      <a href="https://www.instagram.com/sunnio.3/" target="_blank" rel="noopener" class="mobile-menu-link" style="color: #e1306c; font-weight: 700;">
+        <span style="display: inline-flex; align-items: center; gap: 0.4rem;"><svg class="insta-svg-icon" viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg> Follow @sunnio.3 on Instagram</span>
+        <span>&rarr;</span>
+      </a>
+    </nav>
+
+    <div style="margin-top: auto; padding-top: 1.5rem; border-top: 1px solid var(--border-light);">
+      <button class="btn btn-primary btn-lg" style="width: 100%;" onclick="closeMobileMenu(); openLeadModal('Mobile Custom Plan')">
+        Plan My Journey &rarr;
+      </button>
+    </div>
+  </aside>
+
+  <!-- 2. REDESIGNED LUXURY HERO SECTION -->
+  <section class="hero-wrap">
+    <div class="container">
+      
+      <div class="hero-stats-pill">
+        <span>🎒 Handcrafted by Sunnio</span>
+        <span>&bull;</span>
+        <span>106 Real Places Across India</span>
+        <span>&bull;</span>
+        <span>0 Sponsored Ads &bull; 100% Real Ground Truth</span>
+      </div>
+
+      <h1 class="hero-title">
+        Plan Your Next Trip Across India.<br />
+        <span>Honest Routes. Real Budgets.</span>
+      </h1>
+      
+      <p class="hero-sub">
+        Explore 120+ authentic Indian destinations with exact bus &amp; train connections, local taxi union fares, verified homestays, and packing tips. Curated with ❤️ by real travelers.
+      </p>
+
+      <!-- Luxury Segmented Search Hub -->
+      <div class="luxury-search-card">
+        
+        <!-- Segment 1: Destination / Vibe -->
+        <div class="search-segment">
+          <div class="segment-header">
+            <span class="icon">📍</span>
+            <span>Where do you want to go?</span>
+          </div>
+          <input type="text" id="mainSearchInput" placeholder="e.g. Spiti, Ladakh, Munnar, Goa, Kedarnath..." autocomplete="off" />
+          <div class="suggest-dropdown" id="destSuggestDropdown"></div>
         </div>
 
-        <h1 class="hero-title">
-          Plan Your Next Trip Across India.<br />
-          <span>Honest Routes. Real Budgets.</span>
-        </h1>
+        <div class="search-divider"></div>
 
-        <p class="hero-sub">
-          Explore 120+ authentic Indian destinations with exact bus &amp; train
-          connections, local taxi union fares, verified homestays, and packing
-          tips. Curated with ❤️ by real travelers.
+        <!-- Segment 2: Starting City -->
+        <div class="search-segment">
+          <div class="segment-header">
+            <span class="icon">🛫</span>
+            <span>Your Starting City</span>
+          </div>
+          <input type="text" id="heroOriginInput" value="" placeholder="e.g. Delhi, Mumbai, Patna, Bengaluru..." autocomplete="off" />
+          <div class="suggest-dropdown" id="originSuggestDropdown"></div>
+        </div>
+
+        <div class="search-divider"></div>
+
+        <!-- Segment 3: Trip Length -->
+        <div class="search-segment">
+          <div class="segment-header">
+            <span class="icon">🗓️</span>
+            <span>How Many Days?</span>
+          </div>
+          <input type="text" id="heroDurationInput" value="" placeholder="Any, Weekend, 4-5 Days, 1 Week..." readonly style="cursor: pointer;" />
+          <div class="suggest-dropdown" id="durationSuggestDropdown"></div>
+        </div>
+
+        <!-- Submit Button -->
+        <div class="search-btn-wrap">
+          <button class="btn-search-glow" onclick="document.getElementById('exploreSection').scrollIntoView({behavior: 'smooth'})">
+            <span>Explore Places</span>
+            <span>&rarr;</span>
+          </button>
+        </div>
+
+      </div>
+
+      <!-- Dynamic Related Searches Strip -->
+      <div class="related-searches-box">
+        <span class="related-label">💡 Popular Right Now:</span>
+        <div style="display: flex; gap: 0.4rem; flex-wrap: wrap; justify-content: center;" id="relatedSearchesList">
+          <!-- Injected dynamically via js/app.js -->
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- MAIN CONTENT -->
+  <main>
+
+    <!-- 3. LIVE MOUNTAIN PASS & WEATHER ADVISORY TICKER -->
+    <section class="container" id="passSection" style="margin-top: 2rem; margin-bottom: 1rem;">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem; flex-wrap: wrap; gap: 0.5rem;">
+        <div style="font-family: var(--font-mono); font-size: 0.8rem; font-weight: 800; color: #059669; text-transform: uppercase; display: flex; align-items: center; gap: 0.4rem;">
+          <span style="width: 8px; height: 8px; border-radius: 50%; background: #10b981; display: inline-block;"></span>
+          Live Mountain Pass &amp; Road Status
+        </div>
+        <div style="font-size: 0.8rem; color: #64748b;">Daily Ground Updates by BRO &amp; Local Mountain Drivers</div>
+      </div>
+      <div class="pass-ticker-wrap" id="passTickerContainer">
+        <!-- Injected via js/app.js -->
+      </div>
+    </section>
+
+
+    <!-- 5. ALL DESTINATIONS DIRECTORY WITH SMART PAGINATION -->
+    <section class="container section-spacing" id="exploreSection">
+      <div class="section-header" style="display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 1rem;">
+        <div>
+          <div class="section-eyebrow">Handcrafted Travel Guides</div>
+          <h2 style="font-size: clamp(1.8rem, 4vw, 2.5rem);">106 Authentic Indian Destinations</h2>
+          <p class="section-subtitle">Click any card to view exact transit routes, day-by-day plans, budget breakdowns, and local packing lists.</p>
+        </div>
+      </div>
+
+      <!-- Category Filter Bar -->
+      <div class="category-bar">
+        <button class="cat-btn active" data-category="all">🌟 All Places</button>
+        <button class="cat-btn" data-category="mountains">🏔️ Snow &amp; High Mountains</button>
+        <button class="cat-btn" data-category="adventure">🧗 Treks &amp; Rafting</button>
+        <button class="cat-btn" data-category="spiritual">🕉️ Sacred Shrines &amp; Ghats</button>
+        <button class="cat-btn" data-category="heritage">🏛️ Forts &amp; Palaces</button>
+        <button class="cat-btn" data-category="beach">🏖️ Beaches &amp; Coast</button>
+      </div>
+
+      <!-- Reactive Destinations Grid -->
+      <div class="grid-3" id="destinationsGrid" style="margin-top: 1.5rem;">
+        <!-- Injected dynamically via js/app.js -->
+      </div>
+
+      <!-- Smart Pagination Controls -->
+      <div id="destinationsPagination"></div>
+    </section>
+
+    <!-- 6. A PERSONAL NOTE FROM SUNNIO -->
+    <section class="container section-spacing">
+      <div class="creator-note-card">
+        <div class="creator-note-header">
+          <div class="creator-note-avatar">
+            <span>🎒</span>
+          </div>
+          <div>
+            <div class="creator-note-badge">A Personal Note</div>
+            <h3 style="font-size: 1.35rem; color: #0f172a; margin: 0.2rem 0;">Why I Created RAAHIYOO</h3>
+          </div>
+        </div>
+        <p class="creator-note-quote">
+          "Traveling across India is pure magic, but planning it shouldn't mean drowning in sponsored ads, fake reviews, or getting overcharged by taxi touts. I started RAAHIYOO to share raw, honest, and practical travel knowledge — the exact shared Sumo to take from the stand, where the road gets bumpy, which dhabas serve authentic local meals, and how much you actually spend per day. Safe journeys and happy travels!"
         </p>
-
-        <!-- Luxury Segmented Search Hub -->
-        <div class="luxury-search-card">
-          <!-- Segment 1: Destination / Vibe -->
-          <div class="search-segment">
-            <div class="segment-header">
-              <span class="icon">📍</span>
-              <span>Where do you want to go?</span>
-            </div>
-            <input
-              type="text"
-              id="mainSearchInput"
-              placeholder="e.g. Spiti, Ladakh, Munnar, Goa, Kedarnath..."
-              autocomplete="off" />
-            <div class="suggest-dropdown" id="destSuggestDropdown"></div>
+        <div class="creator-note-footer">
+          <div>
+            <strong style="color: #0f172a; font-size: 1.05rem;">— Sunnio</strong>
+            <span style="color: #64748b; font-size: 0.88rem; margin-left: 0.5rem;">Backpacker &amp; Road Tripper</span>
           </div>
-
-          <div class="search-divider"></div>
-
-          <!-- Segment 2: Starting City -->
-          <div class="search-segment">
-            <div class="segment-header">
-              <span class="icon">🛫</span>
-              <span>Your Starting City</span>
-            </div>
-            <input
-              type="text"
-              id="heroOriginInput"
-              value=""
-              placeholder="e.g. Delhi, Mumbai, Patna, Bengaluru..."
-              autocomplete="off" />
-            <div class="suggest-dropdown" id="originSuggestDropdown"></div>
-          </div>
-
-          <div class="search-divider"></div>
-
-          <!-- Segment 3: Trip Length -->
-          <div class="search-segment">
-            <div class="segment-header">
-              <span class="icon">🗓️</span>
-              <span>How Many Days?</span>
-            </div>
-            <input
-              type="text"
-              id="heroDurationInput"
-              value=""
-              placeholder="Any, Weekend, 4-5 Days, 1 Week..."
-              readonly
-              style="cursor: pointer" />
-            <div class="suggest-dropdown" id="durationSuggestDropdown"></div>
-          </div>
-
-          <!-- Submit Button -->
-          <div class="search-btn-wrap">
-            <button
-              class="btn-search-glow"
-              onclick="
-                document
-                  .getElementById('exploreSection')
-                  .scrollIntoView({ behavior: 'smooth' })
-              ">
-              <span>Explore Places</span>
-              <span>&rarr;</span>
-            </button>
-          </div>
-        </div>
-
-        <!-- Dynamic Related Searches Strip -->
-        <div class="related-searches-box">
-          <span class="related-label">💡 Popular Right Now:</span>
-          <div
-            style="
-              display: flex;
-              gap: 0.4rem;
-              flex-wrap: wrap;
-              justify-content: center;
-            "
-            id="relatedSearchesList">
-            <!-- Injected dynamically via js/app.js -->
-          </div>
+          <a href="https://www.instagram.com/sunnio.3/" target="_blank" rel="noopener" class="insta-badge-link">
+            <svg class="insta-svg-icon" viewBox="0 0 24 24" width="15" height="15" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+            <span>Follow @sunnio.3 on Instagram</span>
+          </a>
         </div>
       </div>
     </section>
 
-    <!-- MAIN CONTENT -->
-    <main>
-      <!-- 3. LIVE MOUNTAIN PASS & WEATHER ADVISORY TICKER -->
-      <section
-        class="container"
-        id="passSection"
-        style="margin-top: 2rem; margin-bottom: 1rem">
-        <div
-          style="
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 0.75rem;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-          ">
-          <div
-            style="
-              font-family: var(--font-mono);
-              font-size: 0.8rem;
-              font-weight: 800;
-              color: #059669;
-              text-transform: uppercase;
-              display: flex;
-              align-items: center;
-              gap: 0.4rem;
-            ">
-            <span
-              style="
-                width: 8px;
-                height: 8px;
-                border-radius: 50%;
-                background: #10b981;
-                display: inline-block;
-              "></span>
-            Live Mountain Pass &amp; Road Status
-          </div>
-          <div style="font-size: 0.8rem; color: #64748b">
-            Daily Ground Updates by BRO &amp; Local Mountain Drivers
-          </div>
-        </div>
-        <div class="pass-ticker-wrap" id="passTickerContainer">
-          <!-- Injected via js/app.js -->
-        </div>
-      </section>
+    <!-- 7. VERIFIED TAXI UNION & STANDARD FARES GUIDE -->
+    <section class="container section-spacing" id="taxiSection" style="border-top: 1px solid var(--border-light);">
+      <div class="section-header">
+        <div class="section-eyebrow">🚕 Real Taxi Fares</div>
+        <h2 style="font-size: clamp(1.8rem, 4vw, 2.5rem);">Official Taxi Union Rate Cards</h2>
+        <p class="section-subtitle">Standard government and union fixed fares across popular tourist routes so you know what locals pay.</p>
+      </div>
 
-      <!-- 4. INTERACTIVE STATE & REGIONAL EXPLORER -->
-      <section class="container section-spacing" style="padding-bottom: 1rem">
-        <div class="section-header">
-          <div class="section-eyebrow">🗺️ Pick Your Region</div>
-          <h2 style="font-size: clamp(1.8rem, 4vw, 2.5rem)">
-            Explore India by Region
-          </h2>
-          <p class="section-subtitle">
-            Click any region to filter mountain circuits, desert dunes, sacred
-            shrines, or coastal getaways.
-          </p>
-        </div>
+      <div class="taxi-rates-grid" id="taxiRatesContainer">
+        <!-- Injected dynamically via js/app.js -->
+      </div>
+    </section>
 
-        <div class="region-selector-grid" id="regionMapContainer">
-          <!-- Injected dynamically via js/app.js -->
-        </div>
-      </section>
-
-      <!-- 5. ALL DESTINATIONS DIRECTORY WITH SMART PAGINATION -->
-      <section class="container section-spacing" id="exploreSection">
-        <div
-          class="section-header"
-          style="
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-end;
-            flex-wrap: wrap;
-            gap: 1rem;
-          ">
+    <!-- 7. DEDICATED TOOLS PREVIEW BANNERS -->
+    <section class="container section-spacing" style="border-top: 1px solid var(--border-light);">
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.75rem;">
+        
+        <!-- Budget Calculator Card -->
+        <div style="background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%); border: 1.5px solid var(--border-light); border-radius: 20px; padding: clamp(1.5rem, 4vw, 2.5rem); box-shadow: var(--shadow-md); display: flex; flex-direction: column; justify-content: space-between;">
           <div>
-            <div class="section-eyebrow">Handcrafted Travel Guides</div>
-            <h2 style="font-size: clamp(1.8rem, 4vw, 2.5rem)">
-              106 Authentic Indian Destinations
-            </h2>
-            <p class="section-subtitle">
-              Click any card to view exact transit routes, day-by-day plans,
-              budget breakdowns, and local packing lists.
+            <div style="font-size: 2.2rem; margin-bottom: 0.6rem;">💰</div>
+            <h3 style="font-size: 1.5rem; color: #0f172a; margin-bottom: 0.4rem;">Trip Budget Calculator</h3>
+            <p style="color: #64748b; font-size: 0.95rem; line-height: 1.6; margin-bottom: 1.5rem;">
+              Calculate exact costs for 106 destinations. Real-time breakdown of stay, dining, local travel, and activities across Backpacker, Comfort, and Luxury styles.
             </p>
           </div>
+          <a href="calculator.html" class="btn btn-primary">
+            Open Budget Calculator &rarr;
+          </a>
         </div>
 
-        <!-- Category Filter Bar -->
-        <div class="category-bar">
-          <button class="cat-btn active" data-category="all">
-            🌟 All Places
-          </button>
-          <button class="cat-btn" data-category="mountains">
-            🏔️ Snow &amp; High Mountains
-          </button>
-          <button class="cat-btn" data-category="adventure">
-            🧗 Treks &amp; Rafting
-          </button>
-          <button class="cat-btn" data-category="spiritual">
-            🕉️ Sacred Shrines &amp; Ghats
-          </button>
-          <button class="cat-btn" data-category="heritage">
-            🏛️ Forts &amp; Palaces
-          </button>
-          <button class="cat-btn" data-category="beach">
-            🏖️ Beaches &amp; Coast
-          </button>
-        </div>
-
-        <!-- Reactive Destinations Grid -->
-        <div class="grid-3" id="destinationsGrid" style="margin-top: 1.5rem">
-          <!-- Injected dynamically via js/app.js -->
-        </div>
-
-        <!-- Smart Pagination Controls -->
-        <div id="destinationsPagination"></div>
-      </section>
-
-      <!-- 6. A PERSONAL NOTE FROM SUNNIO -->
-      <section class="container section-spacing">
-        <div class="creator-note-card">
-          <div class="creator-note-header">
-            <div class="creator-note-avatar">
-              <span>🎒</span>
-            </div>
-            <div>
-              <div class="creator-note-badge">A Personal Note</div>
-              <h3 style="font-size: 1.35rem; color: #0f172a; margin: 0.2rem 0">
-                Why I Created RAAHIYOO
-              </h3>
-            </div>
+        <!-- How to Reach Card -->
+        <div style="background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%); border: 1.5px solid var(--border-light); border-radius: 20px; padding: clamp(1.5rem, 4vw, 2.5rem); box-shadow: var(--shadow-md); display: flex; flex-direction: column; justify-content: space-between;">
+          <div>
+            <div style="font-size: 2.2rem; margin-bottom: 0.6rem;">🚆</div>
+            <h3 style="font-size: 1.5rem; color: #0f172a; margin-bottom: 0.4rem;">How to Reach Planner</h3>
+            <p style="color: #64748b; font-size: 0.95rem; line-height: 1.6; margin-bottom: 1.5rem;">
+              Type your home city and get instant multi-modal route guidance: nearest flight airports, Vande Bharat train connections, and highway road blueprints.
+            </p>
           </div>
-          <p class="creator-note-quote">
-            "Traveling across India is pure magic, but planning it shouldn't
-            mean drowning in sponsored ads, fake reviews, or getting overcharged
-            by taxi touts. I started RAAHIYOO to share raw, honest, and
-            practical travel knowledge — the exact shared Sumo to take from the
-            stand, where the road gets bumpy, which dhabas serve authentic local
-            meals, and how much you actually spend per day. Safe journeys and
-            happy travels!"
+          <a href="how-to-reach.html" class="btn btn-secondary">
+            Open Transit Planner &rarr;
+          </a>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 8. CURATED CIRCUITS & COLLECTIONS -->
+    <section class="container section-spacing" id="collectionsSection" style="border-top: 1px solid var(--border-light);">
+      <div class="section-header">
+        <div class="section-eyebrow">🎒 Road Trips &amp; Circuits</div>
+        <h2 style="font-size: clamp(1.8rem, 4vw, 2.5rem);">Handpicked Thematic Circuits</h2>
+        <p class="section-subtitle">Road trips designed for distinct moods — from high mountain snow passes to temple trails and backwaters.</p>
+      </div>
+
+      <div class="grid-3" id="curatedCollectionsGrid">
+        <!-- Injected via js/app.js -->
+      </div>
+    </section>
+
+    <!-- 9. VERIFIED TRAVELER REVIEWS WITH SUBMISSION -->
+    <section class="container section-spacing" id="reviewsSection" style="border-top: 1px solid var(--border-light);">
+      <div class="section-header text-center">
+        <div class="section-eyebrow">❤️ Real Community Stories</div>
+        <h2 style="font-size: clamp(1.8rem, 4vw, 2.5rem);">Stories from Fellow Explorers</h2>
+        <p class="section-subtitle">Real experiences, acclimatization advice, and route tips from travelers exploring India.</p>
+        <button class="btn btn-secondary btn-sm" onclick="openReviewModal()" style="margin-top: 1rem;">
+          ✍️ Share Your Travel Story
+        </button>
+      </div>
+
+      <div class="reviews-grid" id="verifiedReviewsGrid">
+        <!-- Injected via js/app.js -->
+      </div>
+    </section>
+
+    <!-- 10. WHATSAPP ITINERARY CONSULTATION BANNER -->
+    <section class="container" style="margin-bottom: clamp(3rem, 6vw, 5rem);">
+      <div style="background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); color: #fff; border-radius: clamp(18px, 4vw, 28px); padding: clamp(2rem, 5vw, 3.5rem); display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; flex-wrap: wrap; box-shadow: var(--shadow-lg);">
+        <div style="max-width: 620px;">
+          <div style="background: rgba(16, 185, 129, 0.2); color: #34d399; font-family: monospace; font-size: 0.8rem; font-weight: 800; padding: 0.3rem 0.8rem; border-radius: 9999px; display: inline-block; margin-bottom: 0.75rem;">
+            ⚡ 100% Free Travel Advice
+          </div>
+          <h2 style="color: #fff; font-size: clamp(1.6rem, 3.5vw, 2.3rem); margin-bottom: 0.6rem;">
+            Need help planning your custom trip?
+          </h2>
+          <p style="color: #cbd5e1; font-size: 1rem; margin: 0; line-height: 1.6;">
+            Ask any questions regarding mountain road conditions, permit requirements, or stay recommendations. Get verified advice directly on WhatsApp.
           </p>
-          <div class="creator-note-footer">
-            <div>
-              <strong style="color: #0f172a; font-size: 1.05rem"
-                >— Sunnio</strong
-              >
-              <span
-                style="color: #64748b; font-size: 0.88rem; margin-left: 0.5rem"
-                >Backpacker &amp; Road Tripper</span
-              >
-            </div>
-            <a
-              href="https://www.instagram.com/sunnio.3/"
-              target="_blank"
-              rel="noopener"
-              class="insta-badge-link">
-              <svg
-                class="insta-svg-icon"
-                viewBox="0 0 24 24"
-                width="15"
-                height="15"
-                fill="currentColor">
-                <path
-                  d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
-              </svg>
+        </div>
+
+        <div>
+          <button class="btn btn-primary btn-lg" onclick="openLeadModal('Custom Journey Help')">
+            Get Trip Advice on WhatsApp &rarr;
+          </button>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+
+
+  <!-- 12. REVIEW SUBMISSION MODAL -->
+  <div class="modal-backdrop" id="reviewModalBackdrop">
+    <div class="inquiry-modal">
+      <button class="modal-close-btn" id="reviewModalCloseBtn">&times;</button>
+      
+      <div style="text-align: center; margin-bottom: 1.25rem;">
+        <span style="font-family: monospace; font-size: 0.78rem; font-weight: 700; color: var(--primary); text-transform: uppercase;">Community Travel Proof</span>
+        <h3 style="font-size: 1.5rem; color: #0f172a; margin: 0.25rem 0 0.4rem;">Write Your Review</h3>
+        <p style="color: #64748b; font-size: 0.9rem;">Share your real ground travel experience with other travelers.</p>
+      </div>
+
+      <form id="reviewSubmissionForm">
+        <div class="form-group">
+          <label class="form-label" for="revAuthor">Your Name</label>
+          <input type="text" id="revAuthor" class="form-input" placeholder="e.g. Rahul Sharma" required />
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="revCity">Your Home City</label>
+          <input type="text" id="revCity" class="form-input" placeholder="e.g. Delhi, Mumbai, Pune" required />
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="revDest">Destination Visited</label>
+          <input type="text" id="revDest" class="form-input" placeholder="e.g. Leh Ladakh, Spiti, Rishikesh" required />
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="revText">Your Review &amp; Experience</label>
+          <textarea id="revText" class="form-input" rows="3" placeholder="Tell us how the transit, itinerary, and tips helped you..." required style="resize: vertical;"></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-lg" style="width: 100%; margin-top: 0.5rem;">
+          Post Verified Review &rarr;
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- 13. LEAD CAPTURE / INQUIRY MODAL -->
+  <div class="modal-backdrop" id="leadModalBackdrop">
+    <div class="inquiry-modal">
+      <button class="modal-close-btn" id="leadModalCloseBtn">&times;</button>
+      
+      <div style="text-align: center; margin-bottom: 1.25rem;">
+        <span style="font-family: monospace; font-size: 0.78rem; font-weight: 700; color: var(--primary); text-transform: uppercase;">Custom Trip Inquiry</span>
+        <h3 style="font-size: 1.5rem; color: #0f172a; margin: 0.25rem 0 0.4rem;">Get Your Verified Travel Blueprint</h3>
+        <p style="color: #64748b; font-size: 0.9rem;">Direct day-by-day plan, hotel recommendations &amp; cost estimate.</p>
+      </div>
+
+      <form id="leadCaptureForm">
+        <input type="hidden" id="leadDestField" value="" />
+
+        <div class="form-group">
+          <label class="form-label" for="leadName">Your Full Name</label>
+          <input type="text" id="leadName" class="form-input" placeholder="e.g. Rahul Sharma" required />
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="leadPhone">WhatsApp Phone Number</label>
+          <input type="tel" id="leadPhone" class="form-input" placeholder="e.g. +91 98765 43210" required />
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="leadTravelDate">Estimated Travel Month / Dates</label>
+          <input type="text" id="leadTravelDate" class="form-input" placeholder="e.g. Next Month / Diwali Holidays" />
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-lg" style="width: 100%; margin-top: 0.5rem;">
+          Send Me Plan on WhatsApp &rarr;
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- 14. CLEAN STRUCTURED COMMERCIAL FOOTER -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        
+        <!-- Col 1: Brand & Philosophy -->
+        <div>
+          <a href="index.html" class="brand" style="margin-bottom: 0.75rem;">
+        <svg class="brand-icon" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M14 6l-3.75 5 2.85 3.8-1.6 1.2L7 10l-6 8h22L14 6z"/>
+        </svg>
+        <div class="brand-text-wrap">
+          <span class="brand-title">RAAHIYOO</span>
+          <span class="brand-byline">by sunnio</span>
+        </div>
+      </a>
+          <p style="color: #64748b; font-size: 0.95rem; max-width: 320px; line-height: 1.6; margin-bottom: 1rem;">
+            Discover authentic destinations, calculate exact trip budgets, and travel India with confidence. Handcrafted with ❤️ by <strong>Sunnio</strong>.
+          </p>
+          <div style="display: flex; flex-direction: column; gap: 0.65rem; align-items: flex-start;">
+            <a href="https://www.instagram.com/sunnio.3/" target="_blank" rel="noopener" class="insta-badge-link" title="Follow @sunnio.3 on Instagram">
+              <svg class="insta-svg-icon" viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
               <span>Follow @sunnio.3 on Instagram</span>
             </a>
-          </div>
-        </div>
-      </section>
-
-      <!-- 7. VERIFIED TAXI UNION & STANDARD FARES GUIDE -->
-      <section
-        class="container section-spacing"
-        id="taxiSection"
-        style="border-top: 1px solid var(--border-light)">
-        <div class="section-header">
-          <div class="section-eyebrow">🚕 Real Taxi Fares</div>
-          <h2 style="font-size: clamp(1.8rem, 4vw, 2.5rem)">
-            Official Taxi Union Rate Cards
-          </h2>
-          <p class="section-subtitle">
-            Standard government and union fixed fares across popular tourist
-            routes so you know what locals pay.
-          </p>
-        </div>
-
-        <div class="taxi-rates-grid" id="taxiRatesContainer">
-          <!-- Injected dynamically via js/app.js -->
-        </div>
-      </section>
-
-      <!-- 7. DEDICATED TOOLS PREVIEW BANNERS -->
-      <section
-        class="container section-spacing"
-        style="border-top: 1px solid var(--border-light)">
-        <div
-          style="
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 1.75rem;
-          ">
-          <!-- Budget Calculator Card -->
-          <div
-            style="
-              background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
-              border: 1.5px solid var(--border-light);
-              border-radius: 20px;
-              padding: clamp(1.5rem, 4vw, 2.5rem);
-              box-shadow: var(--shadow-md);
-              display: flex;
-              flex-direction: column;
-              justify-content: space-between;
-            ">
-            <div>
-              <div style="font-size: 2.2rem; margin-bottom: 0.6rem">💰</div>
-              <h3
-                style="
-                  font-size: 1.5rem;
-                  color: #0f172a;
-                  margin-bottom: 0.4rem;
-                ">
-                Trip Budget Calculator
-              </h3>
-              <p
-                style="
-                  color: #64748b;
-                  font-size: 0.95rem;
-                  line-height: 1.6;
-                  margin-bottom: 1.5rem;
-                ">
-                Calculate exact costs for 106 destinations. Real-time breakdown
-                of stay, dining, local travel, and activities across Backpacker,
-                Comfort, and Luxury styles.
-              </p>
+            <div style="display: inline-flex; align-items: center; gap: 0.5rem; background: #ecfdf5; border: 1px solid #a7f3d0; padding: 0.35rem 0.8rem; border-radius: 9999px; font-size: 0.8rem; color: #047857; font-weight: 700;">
+              🌿 100% Free Travel Advice &bull; 0 Fake Reviews
             </div>
-            <a href="calculator.html" class="btn btn-primary">
-              Open Budget Calculator &rarr;
-            </a>
-          </div>
-
-          <!-- How to Reach Card -->
-          <div
-            style="
-              background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
-              border: 1.5px solid var(--border-light);
-              border-radius: 20px;
-              padding: clamp(1.5rem, 4vw, 2.5rem);
-              box-shadow: var(--shadow-md);
-              display: flex;
-              flex-direction: column;
-              justify-content: space-between;
-            ">
-            <div>
-              <div style="font-size: 2.2rem; margin-bottom: 0.6rem">🚆</div>
-              <h3
-                style="
-                  font-size: 1.5rem;
-                  color: #0f172a;
-                  margin-bottom: 0.4rem;
-                ">
-                How to Reach Planner
-              </h3>
-              <p
-                style="
-                  color: #64748b;
-                  font-size: 0.95rem;
-                  line-height: 1.6;
-                  margin-bottom: 1.5rem;
-                ">
-                Type your home city and get instant multi-modal route guidance:
-                nearest flight airports, Vande Bharat train connections, and
-                highway road blueprints.
-              </p>
-            </div>
-            <a href="how-to-reach.html" class="btn btn-secondary">
-              Open Transit Planner &rarr;
-            </a>
           </div>
         </div>
-      </section>
 
-      <!-- 8. CURATED CIRCUITS & COLLECTIONS -->
-      <section
-        class="container section-spacing"
-        id="collectionsSection"
-        style="border-top: 1px solid var(--border-light)">
-        <div class="section-header">
-          <div class="section-eyebrow">🎒 Road Trips &amp; Circuits</div>
-          <h2 style="font-size: clamp(1.8rem, 4vw, 2.5rem)">
-            Handpicked Thematic Circuits
-          </h2>
-          <p class="section-subtitle">
-            Road trips designed for distinct moods — from high mountain snow
-            passes to temple trails and backwaters.
-          </p>
-        </div>
-
-        <div class="grid-3" id="curatedCollectionsGrid">
-          <!-- Injected via js/app.js -->
-        </div>
-      </section>
-
-      <!-- 9. VERIFIED TRAVELER REVIEWS WITH SUBMISSION -->
-      <section
-        class="container section-spacing"
-        id="reviewsSection"
-        style="border-top: 1px solid var(--border-light)">
-        <div class="section-header text-center">
-          <div class="section-eyebrow">❤️ Real Community Stories</div>
-          <h2 style="font-size: clamp(1.8rem, 4vw, 2.5rem)">
-            Stories from Fellow Explorers
-          </h2>
-          <p class="section-subtitle">
-            Real experiences, acclimatization advice, and route tips from
-            travelers exploring India.
-          </p>
-          <button
-            class="btn btn-secondary btn-sm"
-            onclick="openReviewModal()"
-            style="margin-top: 1rem">
-            ✍️ Share Your Travel Story
-          </button>
-        </div>
-
-        <div class="reviews-grid" id="verifiedReviewsGrid">
-          <!-- Injected via js/app.js -->
-        </div>
-      </section>
-
-      <!-- 10. WHATSAPP ITINERARY CONSULTATION BANNER -->
-      <section class="container" style="margin-bottom: clamp(3rem, 6vw, 5rem)">
-        <div
-          style="
-            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
-            color: #fff;
-            border-radius: clamp(18px, 4vw, 28px);
-            padding: clamp(2rem, 5vw, 3.5rem);
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 1.5rem;
-            flex-wrap: wrap;
-            box-shadow: var(--shadow-lg);
-          ">
-          <div style="max-width: 620px">
-            <div
-              style="
-                background: rgba(16, 185, 129, 0.2);
-                color: #34d399;
-                font-family: monospace;
-                font-size: 0.8rem;
-                font-weight: 800;
-                padding: 0.3rem 0.8rem;
-                border-radius: 9999px;
-                display: inline-block;
-                margin-bottom: 0.75rem;
-              ">
-              ⚡ 100% Free Travel Advice
-            </div>
-            <h2
-              style="
-                color: #fff;
-                font-size: clamp(1.6rem, 3.5vw, 2.3rem);
-                margin-bottom: 0.6rem;
-              ">
-              Need help planning your custom trip?
-            </h2>
-            <p
-              style="
-                color: #cbd5e1;
-                font-size: 1rem;
-                margin: 0;
-                line-height: 1.6;
-              ">
-              Ask any questions regarding mountain road conditions, permit
-              requirements, or stay recommendations. Get verified advice
-              directly on WhatsApp.
-            </p>
-          </div>
-
-          <div>
-            <button
-              class="btn btn-primary btn-lg"
-              onclick="openLeadModal('Custom Journey Help')">
-              Get Trip Advice on WhatsApp &rarr;
-            </button>
+        <!-- Col 2: High Himalayan & Sacred Trips -->
+        <div>
+          <div class="footer-col-title">Himalayan &amp; Sacred Trips</div>
+          <div class="footer-list">
+            <a href="destination.html?id=leh-ladakh">Leh Ladakh &amp; Pangong</a>
+            <a href="destination.html?id=spiti-valley">Spiti Valley &amp; Kaza</a>
+            <a href="destination.html?id=kedarnath">Kedarnath Dham</a>
+            <a href="destination.html?id=badrinath">Badrinath &amp; Mana</a>
+            <a href="destination.html?id=srinagar">Srinagar Dal Lake</a>
+            <a href="destination.html?id=gulmarg">Gulmarg Snow Gondola</a>
+            <a href="destination.html?id=rishikesh">Rishikesh Rafting</a>
+            <a href="destination.html?id=varanasi">Varanasi Maha Aarti</a>
           </div>
         </div>
-      </section>
-    </main>
 
-    <!-- 12. REVIEW SUBMISSION MODAL -->
-    <div class="modal-backdrop" id="reviewModalBackdrop">
-      <div class="inquiry-modal">
-        <button class="modal-close-btn" id="reviewModalCloseBtn">
-          &times;
+        <!-- Col 3: Heritage & Coastal Escapes -->
+        <div>
+          <div class="footer-col-title">Heritage, Coast &amp; Islands</div>
+          <div class="footer-list">
+            <a href="destination.html?id=jaipur">Jaipur Pink City</a>
+            <a href="destination.html?id=udaipur">Udaipur City of Lakes</a>
+            <a href="destination.html?id=jaisalmer">Jaisalmer Desert Dunes</a>
+            <a href="destination.html?id=rann-of-kutch">Rann of Kutch</a>
+            <a href="destination.html?id=goa">Goa Beaches</a>
+            <a href="destination.html?id=alleppey">Alleppey Houseboats</a>
+            <a href="destination.html?id=munnar">Munnar Tea Hills</a>
+            <a href="destination.html?id=andaman">Andaman Islands</a>
+          </div>
+        </div>
+
+        <!-- Col 4: Travel Tools & Business -->
+        <div>
+          <div class="footer-col-title">Trust &amp; Tools</div>
+          <div class="footer-list">
+            <a href="calculator.html">Budget Calculator</a>
+            <a href="how-to-reach.html">Transit Planner</a>
+            <a href="javascript:void(0)" onclick="openPledgeModal()">Clean Mountain Pledge</a>
+            <a href="javascript:void(0)" onclick="openTermsModal()">Privacy &amp; Terms</a>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Clean Copyright Bar -->
+      <div class="footer-bottom">
+        <div>&copy; 2026 RAAHIYOO &bull; Handcrafted with ❤️ by <a href="https://www.instagram.com/sunnio.3/" target="_blank" rel="noopener" style="color: #e1306c; font-weight: 700; text-decoration: none;">Sunnio (@sunnio.3)</a>. All rights reserved.</div>
+        <div style="font-weight: 700; color: #ff6b35;">Your Journey Begins Here.</div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- CLEAN MOUNTAIN PLEDGE MODAL -->
+  <div class="modal-backdrop" id="pledgeModalBackdrop">
+    <div class="inquiry-modal" style="max-width: 580px;">
+      <button class="modal-close-btn" onclick="closePledgeModal()">&times;</button>
+      <div style="text-align: center; margin-bottom: 1.25rem;">
+        <span style="font-family: var(--font-mono); font-size: 0.8rem; font-weight: 800; color: #059669; text-transform: uppercase; background: rgba(5, 150, 105, 0.12); padding: 0.25rem 0.75rem; border-radius: 9999px;">
+          🌿 Responsible Travel Movement
+        </span>
+        <h3 style="font-size: 1.6rem; color: #0f172a; margin: 0.5rem 0 0.35rem;">Clean Mountain &amp; Coast Pledge</h3>
+        <p style="color: #64748b; font-size: 0.9rem; line-height: 1.5;">
+          Leave only footprints, take only memories. Protect India's sacred mountains and heritage trails.
+        </p>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 0.85rem; margin-bottom: 1.5rem;">
+        <div style="display: flex; gap: 0.75rem; background: #f8fafc; padding: 0.75rem 1rem; border-radius: 12px; border: 1px solid #e2e8f0;">
+          <span style="font-size: 1.3rem;">🚫</span>
+          <div style="font-size: 0.9rem; color: #334155; line-height: 1.45;">
+            <strong>Zero Single-Use Plastic:</strong> Refill your steel water bottles at verified mountain spring taps. Never dump plastic wrappers on high passes.
+          </div>
+        </div>
+        <div style="display: flex; gap: 0.75rem; background: #f8fafc; padding: 0.75rem 1rem; border-radius: 12px; border: 1px solid #e2e8f0;">
+          <span style="font-size: 1.3rem;">🎒</span>
+          <div style="font-size: 0.9rem; color: #334155; line-height: 1.45;">
+            <strong>Pack It In, Pack It Out:</strong> Bring all non-biodegradable trash back to base towns with authorized municipal waste management.
+          </div>
+        </div>
+        <div style="display: flex; gap: 0.75rem; background: #f8fafc; padding: 0.75rem 1rem; border-radius: 12px; border: 1px solid #e2e8f0;">
+          <span style="font-size: 1.3rem;">🏡</span>
+          <div style="font-size: 0.9rem; color: #334155; line-height: 1.45;">
+            <strong>Support Local Communities:</strong> Stay at family-run homestays, hire licensed union drivers, and taste authentic regional foods.
+          </div>
+        </div>
+        <div style="display: flex; gap: 0.75rem; background: #f8fafc; padding: 0.75rem 1rem; border-radius: 12px; border: 1px solid #e2e8f0;">
+          <span style="font-size: 1.3rem;">🕉️</span>
+          <div style="font-size: 0.9rem; color: #334155; line-height: 1.45;">
+            <strong>Respect Sacred Traditions:</strong> Maintain solemn peace around ancient temples, gompas, and serene lake sanctuaries.
+          </div>
+        </div>
+      </div>
+
+      <div style="text-align: center;">
+        <button class="btn btn-primary btn-lg" id="takePledgeBtn" style="width: 100%; background: #059669;" onclick="takeMountainPledge()">
+          🌿 I Take The Clean Mountain Pledge
         </button>
-
-        <div style="text-align: center; margin-bottom: 1.25rem">
-          <span
-            style="
-              font-family: monospace;
-              font-size: 0.78rem;
-              font-weight: 700;
-              color: var(--primary);
-              text-transform: uppercase;
-            "
-            >Community Travel Proof</span
-          >
-          <h3
-            style="font-size: 1.5rem; color: #0f172a; margin: 0.25rem 0 0.4rem">
-            Write Your Review
-          </h3>
-          <p style="color: #64748b; font-size: 0.9rem">
-            Share your real ground travel experience with other travelers.
-          </p>
+        <div id="pledgeSuccessMsg" style="display: none; padding: 1rem; background: #ecfdf5; border: 1.5px solid #a7f3d0; border-radius: 12px; color: #065f46; font-weight: 700;">
+          🎉 Thank you, Eco-Explorer! You are traveler #14,820 to take the Clean Mountain Pledge!
         </div>
-
-        <form id="reviewSubmissionForm">
-          <div class="form-group">
-            <label class="form-label" for="revAuthor">Your Name</label>
-            <input
-              type="text"
-              id="revAuthor"
-              class="form-input"
-              placeholder="e.g. Rahul Sharma"
-              required />
-          </div>
-
-          <div class="form-group">
-            <label class="form-label" for="revCity">Your Home City</label>
-            <input
-              type="text"
-              id="revCity"
-              class="form-input"
-              placeholder="e.g. Delhi, Mumbai, Pune"
-              required />
-          </div>
-
-          <div class="form-group">
-            <label class="form-label" for="revDest">Destination Visited</label>
-            <input
-              type="text"
-              id="revDest"
-              class="form-input"
-              placeholder="e.g. Leh Ladakh, Spiti, Rishikesh"
-              required />
-          </div>
-
-          <div class="form-group">
-            <label class="form-label" for="revText"
-              >Your Review &amp; Experience</label
-            >
-            <textarea
-              id="revText"
-              class="form-input"
-              rows="3"
-              placeholder="Tell us how the transit, itinerary, and tips helped you..."
-              required
-              style="resize: vertical"></textarea>
-          </div>
-
-          <button
-            type="submit"
-            class="btn btn-primary btn-lg"
-            style="width: 100%; margin-top: 0.5rem">
-            Post Verified Review &rarr;
-          </button>
-        </form>
       </div>
     </div>
+  </div>
 
-    <!-- 13. LEAD CAPTURE / INQUIRY MODAL -->
-    <div class="modal-backdrop" id="leadModalBackdrop">
-      <div class="inquiry-modal">
-        <button class="modal-close-btn" id="leadModalCloseBtn">&times;</button>
+  <!-- PRIVACY & TERMS MODAL -->
+  <div class="modal-backdrop" id="termsModalBackdrop">
+    <div class="inquiry-modal" style="max-width: 620px;">
+      <button class="modal-close-btn" onclick="closeTermsModal()">&times;</button>
+      <div style="margin-bottom: 1.25rem;">
+        <span style="font-family: var(--font-mono); font-size: 0.8rem; font-weight: 800; color: var(--primary); text-transform: uppercase; background: rgba(255, 107, 53, 0.12); padding: 0.25rem 0.75rem; border-radius: 9999px;">
+          🛡️ Trust &amp; Transparency
+        </span>
+        <h3 style="font-size: 1.5rem; color: #0f172a; margin: 0.5rem 0 0.35rem;">Privacy Policy &amp; Terms of Service</h3>
+        <p style="color: #64748b; font-size: 0.88rem;">Last updated: August 2026 &bull; RAAHIYOO by Sunnio</p>
+      </div>
 
-        <div style="text-align: center; margin-bottom: 1.25rem">
-          <span
-            style="
-              font-family: monospace;
-              font-size: 0.78rem;
-              font-weight: 700;
-              color: var(--primary);
-              text-transform: uppercase;
-            "
-            >Custom Trip Inquiry</span
-          >
-          <h3
-            style="font-size: 1.5rem; color: #0f172a; margin: 0.25rem 0 0.4rem">
-            Get Your Verified Travel Blueprint
-          </h3>
-          <p style="color: #64748b; font-size: 0.9rem">
-            Direct day-by-day plan, hotel recommendations &amp; cost estimate.
-          </p>
+      <div style="max-height: 360px; overflow-y: auto; padding-right: 0.5rem; font-size: 0.9rem; color: #475569; line-height: 1.6; display: flex; flex-direction: column; gap: 1rem;">
+        <div>
+          <h4 style="color: #0f172a; font-size: 1rem; margin-bottom: 0.25rem;">1. Zero-Spam Data Privacy</h4>
+          <p style="margin: 0;">When you request a WhatsApp itinerary blueprint or calculate your budget, your phone number and name are solely used to send your personalized travel details. We never sell, rent, or spam your contacts.</p>
         </div>
+        <div>
+          <h4 style="color: #0f172a; font-size: 1rem; margin-bottom: 0.25rem;">2. Ground Truth Tariffs &amp; Schedules</h4>
+          <p style="margin: 0;">All transit routes, train timings, and taxi tariffs are curated from official Indian Railways (IRCTC), state transport corporations, and local taxi operator unions. Actual ground tariffs may vary slightly during extreme monsoon landslides, winter snowfall, or peak holiday surges.</p>
+        </div>
+        <div>
+          <h4 style="color: #0f172a; font-size: 1rem; margin-bottom: 0.25rem;">3. High-Altitude Safety Advisory</h4>
+          <p style="margin: 0;">Travelers visiting high Himalayan passes (above 10,000 ft) are strongly advised to acclimatize properly for 48 hours and check real-time BRO (Border Roads Organisation) advisories before embarking.</p>
+        </div>
+        <div>
+          <h4 style="color: #0f172a; font-size: 1rem; margin-bottom: 0.25rem;">4. Intellectual Property &amp; Community</h4>
+          <p style="margin: 0;">All curated itineraries, photos, calculators, and brand elements are handcrafted with ❤️ by Sunnio for RAAHIYOO. Free for personal travel discovery.</p>
+        </div>
+      </div>
 
-        <form id="leadCaptureForm">
-          <input type="hidden" id="leadDestField" value="" />
-
-          <div class="form-group">
-            <label class="form-label" for="leadName">Your Full Name</label>
-            <input
-              type="text"
-              id="leadName"
-              class="form-input"
-              placeholder="e.g. Rahul Sharma"
-              required />
-          </div>
-
-          <div class="form-group">
-            <label class="form-label" for="leadPhone"
-              >WhatsApp Phone Number</label
-            >
-            <input
-              type="tel"
-              id="leadPhone"
-              class="form-input"
-              placeholder="e.g. +91 98765 43210"
-              required />
-          </div>
-
-          <div class="form-group">
-            <label class="form-label" for="leadTravelDate"
-              >Estimated Travel Month / Dates</label
-            >
-            <input
-              type="text"
-              id="leadTravelDate"
-              class="form-input"
-              placeholder="e.g. Next Month / Diwali Holidays" />
-          </div>
-
-          <button
-            type="submit"
-            class="btn btn-primary btn-lg"
-            style="width: 100%; margin-top: 0.5rem">
-            Send Me Plan on WhatsApp &rarr;
-          </button>
-        </form>
+      <div style="margin-top: 1.25rem; text-align: right;">
+        <button class="btn btn-secondary" onclick="closeTermsModal()">Close Window</button>
       </div>
     </div>
+  </div>
 
-    <!-- 14. CLEAN STRUCTURED COMMERCIAL FOOTER -->
-    <footer class="site-footer">
-      <div class="container">
-        <div class="footer-grid">
-          <!-- Col 1: Brand & Philosophy -->
-          <div>
-            <a href="index.html" class="brand" style="margin-bottom: 0.75rem">
-              <svg class="brand-icon" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M14 6l-3.75 5 2.85 3.8-1.6 1.2L7 10l-6 8h22L14 6z" />
-              </svg>
-              <div class="brand-text-wrap">
-                <span class="brand-title">RAAHIYOO</span>
-                <span class="brand-byline">by sunnio</span>
-              </div>
-            </a>
-            <p
-              style="
-                color: #64748b;
-                font-size: 0.95rem;
-                max-width: 320px;
-                line-height: 1.6;
-                margin-bottom: 1rem;
-              ">
-              Discover authentic destinations, calculate exact trip budgets, and
-              travel India with confidence. Handcrafted with ❤️ by
-              <strong>Sunnio</strong>.
-            </p>
-            <div
-              style="
-                display: flex;
-                flex-direction: column;
-                gap: 0.65rem;
-                align-items: flex-start;
-              ">
-              <a
-                href="https://www.instagram.com/sunnio.3/"
-                target="_blank"
-                rel="noopener"
-                class="insta-badge-link"
-                title="Follow @sunnio.3 on Instagram">
-                <svg
-                  class="insta-svg-icon"
-                  viewBox="0 0 24 24"
-                  width="16"
-                  height="16"
-                  fill="currentColor">
-                  <path
-                    d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
-                </svg>
-                <span>Follow @sunnio.3 on Instagram</span>
-              </a>
-              <div
-                style="
-                  display: inline-flex;
-                  align-items: center;
-                  gap: 0.5rem;
-                  background: #ecfdf5;
-                  border: 1px solid #a7f3d0;
-                  padding: 0.35rem 0.8rem;
-                  border-radius: 9999px;
-                  font-size: 0.8rem;
-                  color: #047857;
-                  font-weight: 700;
-                ">
-                🌿 100% Free Travel Advice &bull; 0 Fake Reviews
-              </div>
-            </div>
-          </div>
-
-          <!-- Col 2: High Himalayan & Sacred Trips -->
-          <div>
-            <div class="footer-col-title">Himalayan &amp; Sacred Trips</div>
-            <div class="footer-list">
-              <a href="destination.html?id=leh-ladakh"
-                >Leh Ladakh &amp; Pangong</a
-              >
-              <a href="destination.html?id=spiti-valley"
-                >Spiti Valley &amp; Kaza</a
-              >
-              <a href="destination.html?id=kedarnath">Kedarnath Dham</a>
-              <a href="destination.html?id=badrinath">Badrinath &amp; Mana</a>
-              <a href="destination.html?id=srinagar">Srinagar Dal Lake</a>
-              <a href="destination.html?id=gulmarg">Gulmarg Snow Gondola</a>
-              <a href="destination.html?id=rishikesh">Rishikesh Rafting</a>
-              <a href="destination.html?id=varanasi">Varanasi Maha Aarti</a>
-            </div>
-          </div>
-
-          <!-- Col 3: Heritage & Coastal Escapes -->
-          <div>
-            <div class="footer-col-title">Heritage, Coast &amp; Islands</div>
-            <div class="footer-list">
-              <a href="destination.html?id=jaipur">Jaipur Pink City</a>
-              <a href="destination.html?id=udaipur">Udaipur City of Lakes</a>
-              <a href="destination.html?id=jaisalmer">Jaisalmer Desert Dunes</a>
-              <a href="destination.html?id=rann-of-kutch">Rann of Kutch</a>
-              <a href="destination.html?id=goa">Goa Beaches</a>
-              <a href="destination.html?id=alleppey">Alleppey Houseboats</a>
-              <a href="destination.html?id=munnar">Munnar Tea Hills</a>
-              <a href="destination.html?id=andaman">Andaman Islands</a>
-            </div>
-          </div>
-
-          <!-- Col 4: Travel Tools & Business -->
-          <div>
-            <div class="footer-col-title">Travel Tools &amp; Trust</div>
-            <div class="footer-list">
-              <a href="calculator.html">Budget Calculator</a>
-              <a href="how-to-reach.html">Transit Route Planner</a>
-              <a href="#exploreSection">All India Directory</a>
-              <a
-                href="javascript:void(0)"
-                onclick="openLeadModal('Partner Inquiry')"
-                >Partner With Us</a
-              >
-              <a href="javascript:void(0)">Clean Mountain Pledge</a>
-              <a href="javascript:void(0)">Privacy &amp; Terms</a>
-            </div>
-          </div>
-        </div>
-
-        <!-- Clean Copyright Bar -->
-        <div class="footer-bottom">
-          <div>
-            &copy; 2026 RAAHIYOO &bull; Handcrafted with ❤️ by
-            <a
-              href="https://www.instagram.com/sunnio.3/"
-              target="_blank"
-              rel="noopener"
-              style="color: #e1306c; font-weight: 700; text-decoration: none"
-              >Sunnio (@sunnio.3)</a
-            >. All rights reserved.
-          </div>
-          <div style="font-weight: 700; color: #ff6b35">
-            Your Journey Begins Here.
-          </div>
-        </div>
-      </div>
-    </footer>
-
-    <!-- Scripts -->
-    <script src="js/data.js"></script>
-    <script src="js/app.js"></script>
-    <script>
-      function openMobileMenu() {
-        const drawer = document.getElementById("mobileNavDrawer");
-        const backdrop = document.getElementById("mobileNavBackdrop");
-        if (drawer && backdrop) {
-          drawer.classList.add("active");
-          backdrop.classList.add("active");
-          document.body.style.overflow = "hidden";
-        }
+  <!-- Scripts -->
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+  <script>
+    function openMobileMenu() {
+      const drawer = document.getElementById('mobileNavDrawer');
+      const backdrop = document.getElementById('mobileNavBackdrop');
+      if (drawer && backdrop) {
+        drawer.classList.add('active');
+        backdrop.classList.add('active');
+        document.body.style.overflow = 'hidden';
       }
-      function closeMobileMenu() {
-        const drawer = document.getElementById("mobileNavDrawer");
-        const backdrop = document.getElementById("mobileNavBackdrop");
-        if (drawer && backdrop) {
-          drawer.classList.remove("active");
-          backdrop.classList.remove("active");
-          document.body.style.overflow = "";
-        }
+    }
+    function closeMobileMenu() {
+      const drawer = document.getElementById('mobileNavDrawer');
+      const backdrop = document.getElementById('mobileNavBackdrop');
+      if (drawer && backdrop) {
+        drawer.classList.remove('active');
+        backdrop.classList.remove('active');
+        document.body.style.overflow = '';
       }
-      const openBtn = document.getElementById("mobileMenuOpenBtn");
-      const closeBtn = document.getElementById("mobileMenuCloseBtn");
-      const navBackdrop = document.getElementById("mobileNavBackdrop");
-      if (openBtn) openBtn.onclick = openMobileMenu;
-      if (closeBtn) closeBtn.onclick = closeMobileMenu;
-      if (navBackdrop) navBackdrop.onclick = closeMobileMenu;
+    }
+    const openBtn = document.getElementById('mobileMenuOpenBtn');
+    const closeBtn = document.getElementById('mobileMenuCloseBtn');
+    const navBackdrop = document.getElementById('mobileNavBackdrop');
+    if (openBtn) openBtn.onclick = openMobileMenu;
+    if (closeBtn) closeBtn.onclick = closeMobileMenu;
+    if (navBackdrop) navBackdrop.onclick = closeMobileMenu;
 
-      // Review Modal Handlers
-      function openReviewModal() {
-        const modal = document.getElementById("reviewModalBackdrop");
-        if (modal) modal.classList.add("active");
-      }
-      function closeReviewModal() {
-        const modal = document.getElementById("reviewModalBackdrop");
-        if (modal) modal.classList.remove("active");
-      }
-      const revCloseBtn = document.getElementById("reviewModalCloseBtn");
-      if (revCloseBtn) revCloseBtn.onclick = closeReviewModal;
-    </script>
-  </body>
+    // Review Modal Handlers
+    function openReviewModal() {
+      const modal = document.getElementById('reviewModalBackdrop');
+      if (modal) modal.classList.add('active');
+    }
+    function closeReviewModal() {
+      const modal = document.getElementById('reviewModalBackdrop');
+      if (modal) modal.classList.remove('active');
+    }
+    const revCloseBtn = document.getElementById('reviewModalCloseBtn');
+    if (revCloseBtn) revCloseBtn.onclick = closeReviewModal;
+  </script>
+</body>
 </html>

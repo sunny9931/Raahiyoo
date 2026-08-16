@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>Destination Guide | RAAHIYOO</title>
   <meta name="description" content="Complete travel blueprint with exact train routes, itineraries, daily budgets, and packing lists." />
 
@@ -10,14 +10,20 @@
   <link rel="stylesheet" href="css/style.css" />
   <link rel="stylesheet" href="css/components.css" />
   <style>
+    html, body {
+      width: 100%;
+      max-width: 100vw;
+      overflow-x: hidden;
+    }
     .dest-page-hero {
       position: relative;
-      min-height: 60vh;
+      min-height: 55vh;
       display: flex;
       align-items: flex-end;
-      padding: clamp(5rem, 8vw, 7rem) 0 3.5rem;
+      padding: clamp(4.5rem, 8vw, 7rem) 0 3rem;
       color: #fff;
       overflow: hidden;
+      width: 100%;
     }
     .dest-hero-bg-img {
       position: absolute;
@@ -30,7 +36,7 @@
     .dest-hero-overlay {
       position: absolute;
       inset: 0;
-      background: linear-gradient(180deg, rgba(15, 23, 42, 0.3) 0%, rgba(15, 23, 42, 0.85) 100%);
+      background: linear-gradient(180deg, rgba(15, 23, 42, 0.3) 0%, rgba(15, 23, 42, 0.88) 100%);
       z-index: 2;
     }
     .dest-hero-content {
@@ -42,7 +48,7 @@
       background: #ffffff;
       border: 1px solid var(--border-light);
       border-radius: var(--radius-lg);
-      padding: 1.25rem;
+      padding: 1.15rem;
       box-shadow: var(--shadow-sm);
     }
     .fact-box-label {
@@ -62,19 +68,41 @@
       background: #ffffff;
       border: 1px solid var(--border-light);
       border-radius: var(--radius-xl);
-      padding: clamp(1.5rem, 4vw, 3rem);
+      padding: clamp(1.25rem, 4vw, 2.5rem);
       box-shadow: var(--shadow-sm);
-      margin-bottom: 3rem;
+      margin-bottom: 2rem;
+      width: 100%;
+      box-sizing: border-box;
     }
     .transit-highlight-box {
       background: #f8fafc;
       border-left: 4px solid var(--primary);
-      padding: 1.25rem;
+      padding: 1.15rem;
       border-radius: 8px;
       margin-bottom: 1.5rem;
-      font-size: 1.02rem;
+      font-size: 1rem;
       color: var(--text-body);
       line-height: 1.65;
+    }
+    @media (max-width: 768px) {
+      .dest-header-print-btn,
+      .insta-header-btn,
+      .dest-header-home-btn,
+      .nav-actions > a.btn-secondary {
+        display: none !important;
+      }
+      .nav-actions {
+        gap: 0.5rem;
+        flex-shrink: 0;
+      }
+      .dest-header-plan-btn {
+        padding: 0.45rem 1rem !important;
+        font-size: 0.88rem !important;
+        font-weight: 800 !important;
+        min-height: 38px !important;
+        white-space: nowrap !important;
+        display: inline-flex !important;
+      }
     }
   </style>
 </head>
@@ -105,12 +133,55 @@
           <svg class="insta-svg-icon" viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
           <span>@sunnio.3</span>
         </a>
-        <button class="btn btn-secondary btn-sm" onclick="window.print()">🖨️ Print / PDF</button>
-        <a href="index.html" class="btn btn-secondary btn-sm">&larr; Home</a>
-        <button class="btn btn-primary btn-sm" id="pageInquiryBtn">Plan Trip</button>
+        <button class="btn btn-secondary btn-sm dest-header-print-btn" onclick="window.print()">🖨️ Print / PDF</button>
+        <a href="index.html" class="btn btn-secondary btn-sm dest-header-home-btn">&larr; Home</a>
+        <button class="btn btn-primary btn-sm dest-header-plan-btn" id="pageInquiryBtn">Plan Trip</button>
+        <button class="mobile-nav-toggle" id="mobileMenuOpenBtn" aria-label="Open Navigation Menu">
+          ☰
+        </button>
       </div>
     </div>
   </header>
+
+  <!-- MOBILE SLIDE-IN NAVIGATION MENU -->
+  <div class="drawer-backdrop" id="mobileNavBackdrop"></div>
+  <aside class="mobile-menu-drawer" id="mobileNavDrawer" aria-label="Mobile Navigation">
+    <div style="display: flex; justify-content: space-between; align-items: center; padding-bottom: 1rem; border-bottom: 1px solid var(--border-light);">
+      <div class="brand">
+        <svg class="brand-icon" style="width: 24px; height: 24px;" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M14 6l-3.75 5 2.85 3.8-1.6 1.2L7 10l-6 8h22L14 6z"/>
+        </svg>
+        <div class="brand-text-wrap">
+          <span class="brand-title" style="font-size: 1.2rem;">RAAHIYOO</span>
+          <span class="brand-byline">by sunnio</span>
+        </div>
+      </div>
+      <button class="drawer-close-btn" id="mobileMenuCloseBtn" style="position: static; width: 34px; height: 34px; font-size: 1.2rem;">&times;</button>
+    </div>
+
+    <nav style="display: flex; flex-direction: column; gap: 0.5rem; margin-top: 1rem;">
+      <a href="index.html#exploreSection" class="mobile-menu-link">
+        <span>📍 All Destinations</span>
+        <span>&rarr;</span>
+      </a>
+      <a href="calculator.html" class="mobile-menu-link">
+        <span>💰 Trip Budget Calculator</span>
+        <span>&rarr;</span>
+      </a>
+      <a href="how-to-reach.html" class="mobile-menu-link">
+        <span>🚆 How to Reach Planner</span>
+        <span>&rarr;</span>
+      </a>
+      <a href="index.html#passSection" class="mobile-menu-link">
+        <span>⛰️ Mountain Pass Live Status</span>
+        <span>&rarr;</span>
+      </a>
+      <a href="index.html#reviewsSection" class="mobile-menu-link">
+        <span>⭐ Verified Reviews</span>
+        <span>&rarr;</span>
+      </a>
+    </nav>
+  </aside>
 
   <!-- DYNAMIC DESTINATION CONTENT -->
   <main id="destPageMain">
@@ -203,8 +274,8 @@
           <div class="footer-list">
             <a href="calculator.html">Budget Calculator</a>
             <a href="how-to-reach.html">Transit Planner</a>
-            <a href="javascript:void(0)">Clean Mountain Pledge</a>
-            <a href="javascript:void(0)">Privacy &amp; Terms</a>
+            <a href="javascript:void(0)" onclick="openPledgeModal()">Clean Mountain Pledge</a>
+            <a href="javascript:void(0)" onclick="openTermsModal()">Privacy &amp; Terms</a>
           </div>
         </div>
       </div>
@@ -215,6 +286,95 @@
       </div>
     </div>
   </footer>
+
+  <!-- CLEAN MOUNTAIN PLEDGE MODAL -->
+  <div class="modal-backdrop" id="pledgeModalBackdrop">
+    <div class="inquiry-modal" style="max-width: 580px;">
+      <button class="modal-close-btn" onclick="closePledgeModal()">&times;</button>
+      <div style="text-align: center; margin-bottom: 1.25rem;">
+        <span style="font-family: var(--font-mono); font-size: 0.8rem; font-weight: 800; color: #059669; text-transform: uppercase; background: rgba(5, 150, 105, 0.12); padding: 0.25rem 0.75rem; border-radius: 9999px;">
+          🌿 Responsible Travel Movement
+        </span>
+        <h3 style="font-size: 1.6rem; color: #0f172a; margin: 0.5rem 0 0.35rem;">Clean Mountain &amp; Coast Pledge</h3>
+        <p style="color: #64748b; font-size: 0.9rem; line-height: 1.5;">
+          Leave only footprints, take only memories. Protect India's sacred mountains and heritage trails.
+        </p>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 0.85rem; margin-bottom: 1.5rem;">
+        <div style="display: flex; gap: 0.75rem; background: #f8fafc; padding: 0.75rem 1rem; border-radius: 12px; border: 1px solid #e2e8f0;">
+          <span style="font-size: 1.3rem;">🚫</span>
+          <div style="font-size: 0.9rem; color: #334155; line-height: 1.45;">
+            <strong>Zero Single-Use Plastic:</strong> Refill your steel water bottles at verified mountain spring taps. Never dump plastic wrappers on high passes.
+          </div>
+        </div>
+        <div style="display: flex; gap: 0.75rem; background: #f8fafc; padding: 0.75rem 1rem; border-radius: 12px; border: 1px solid #e2e8f0;">
+          <span style="font-size: 1.3rem;">🎒</span>
+          <div style="font-size: 0.9rem; color: #334155; line-height: 1.45;">
+            <strong>Pack It In, Pack It Out:</strong> Bring all non-biodegradable trash back to base towns with authorized municipal waste management.
+          </div>
+        </div>
+        <div style="display: flex; gap: 0.75rem; background: #f8fafc; padding: 0.75rem 1rem; border-radius: 12px; border: 1px solid #e2e8f0;">
+          <span style="font-size: 1.3rem;">🏡</span>
+          <div style="font-size: 0.9rem; color: #334155; line-height: 1.45;">
+            <strong>Support Local Communities:</strong> Stay at family-run homestays, hire licensed union drivers, and taste authentic regional foods.
+          </div>
+        </div>
+        <div style="display: flex; gap: 0.75rem; background: #f8fafc; padding: 0.75rem 1rem; border-radius: 12px; border: 1px solid #e2e8f0;">
+          <span style="font-size: 1.3rem;">🕉️</span>
+          <div style="font-size: 0.9rem; color: #334155; line-height: 1.45;">
+            <strong>Respect Sacred Traditions:</strong> Maintain solemn peace around ancient temples, gompas, and serene lake sanctuaries.
+          </div>
+        </div>
+      </div>
+
+      <div style="text-align: center;">
+        <button class="btn btn-primary btn-lg" id="takePledgeBtn" style="width: 100%; background: #059669;" onclick="takeMountainPledge()">
+          🌿 I Take The Clean Mountain Pledge
+        </button>
+        <div id="pledgeSuccessMsg" style="display: none; padding: 1rem; background: #ecfdf5; border: 1.5px solid #a7f3d0; border-radius: 12px; color: #065f46; font-weight: 700;">
+          🎉 Thank you, Eco-Explorer! You are traveler #14,820 to take the Clean Mountain Pledge!
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PRIVACY & TERMS MODAL -->
+  <div class="modal-backdrop" id="termsModalBackdrop">
+    <div class="inquiry-modal" style="max-width: 620px;">
+      <button class="modal-close-btn" onclick="closeTermsModal()">&times;</button>
+      <div style="margin-bottom: 1.25rem;">
+        <span style="font-family: var(--font-mono); font-size: 0.8rem; font-weight: 800; color: var(--primary); text-transform: uppercase; background: rgba(255, 107, 53, 0.12); padding: 0.25rem 0.75rem; border-radius: 9999px;">
+          🛡️ Trust &amp; Transparency
+        </span>
+        <h3 style="font-size: 1.5rem; color: #0f172a; margin: 0.5rem 0 0.35rem;">Privacy Policy &amp; Terms of Service</h3>
+        <p style="color: #64748b; font-size: 0.88rem;">Last updated: August 2026 &bull; RAAHIYOO by Sunnio</p>
+      </div>
+
+      <div style="max-height: 360px; overflow-y: auto; padding-right: 0.5rem; font-size: 0.9rem; color: #475569; line-height: 1.6; display: flex; flex-direction: column; gap: 1rem;">
+        <div>
+          <h4 style="color: #0f172a; font-size: 1rem; margin-bottom: 0.25rem;">1. Zero-Spam Data Privacy</h4>
+          <p style="margin: 0;">When you request a WhatsApp itinerary blueprint or calculate your budget, your phone number and name are solely used to send your personalized travel details. We never sell, rent, or spam your contacts.</p>
+        </div>
+        <div>
+          <h4 style="color: #0f172a; font-size: 1rem; margin-bottom: 0.25rem;">2. Ground Truth Tariffs &amp; Schedules</h4>
+          <p style="margin: 0;">All transit routes, train timings, and taxi tariffs are curated from official Indian Railways (IRCTC), state transport corporations, and local taxi operator unions. Actual ground tariffs may vary slightly during extreme monsoon landslides, winter snowfall, or peak holiday surges.</p>
+        </div>
+        <div>
+          <h4 style="color: #0f172a; font-size: 1rem; margin-bottom: 0.25rem;">3. High-Altitude Safety Advisory</h4>
+          <p style="margin: 0;">Travelers visiting high Himalayan passes (above 10,000 ft) are strongly advised to acclimatize properly for 48 hours and check real-time BRO (Border Roads Organisation) advisories before embarking.</p>
+        </div>
+        <div>
+          <h4 style="color: #0f172a; font-size: 1rem; margin-bottom: 0.25rem;">4. Intellectual Property &amp; Community</h4>
+          <p style="margin: 0;">All curated itineraries, photos, calculators, and brand elements are handcrafted with ❤️ by Sunnio for RAAHIYOO. Free for personal travel discovery.</p>
+        </div>
+      </div>
+
+      <div style="margin-top: 1.25rem; text-align: right;">
+        <button class="btn btn-secondary" onclick="closeTermsModal()">Close Window</button>
+      </div>
+    </div>
+  </div>
 
   <!-- Scripts -->
   <script src="js/data.js"></script>
@@ -241,36 +401,36 @@
             <div style="font-family: monospace; font-size: 0.85rem; font-weight: 700; color: #ff6b35; margin-bottom: 0.5rem; text-transform: uppercase;">
               📍 ${dest.state} &bull; ${dest.elevation}
             </div>
-            <h1 style="font-size: clamp(2.3rem, 6vw, 4.2rem); color: #fff; margin-bottom: 0.5rem;">${dest.name}</h1>
-            <p style="font-size: clamp(1rem, 2vw, 1.25rem); color: #e2e8f0; max-width: 750px; margin-bottom: 1.5rem;">
+            <h1 style="font-size: clamp(2rem, 5.5vw, 4rem); color: #fff; margin-bottom: 0.5rem; word-break: break-word;">${dest.name}</h1>
+            <p style="font-size: clamp(0.95rem, 2vw, 1.2rem); color: #e2e8f0; max-width: 750px; margin-bottom: 1.5rem;">
               ${dest.tagline}
             </p>
-            <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
-              <button class="btn btn-primary btn-lg" onclick="openLeadModal('${dest.name}')">Plan Custom Itinerary &rarr;</button>
-              <button class="btn btn-secondary btn-lg" onclick="window.print()">📄 Save / Print PDF</button>
-              <a href="#howToReachSection" class="btn btn-secondary btn-lg">How to Reach &darr;</a>
+            <div style="display: flex; gap: 0.65rem; flex-wrap: wrap;">
+              <button class="btn btn-primary btn-md" onclick="openLeadModal('${dest.name}')">Plan Custom Itinerary &rarr;</button>
+              <button class="btn btn-secondary btn-md dest-header-print-btn" onclick="window.print()">📄 Print PDF</button>
+              <a href="#howToReachSection" class="btn btn-secondary btn-md">How to Reach &darr;</a>
             </div>
           </div>
         </section>
 
         <!-- FACTS MATRIX -->
         <div class="container" style="margin-top: -2rem; position: relative; z-index: 10;">
-          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 150px), 1fr)); gap: 0.75rem;">
             <div class="fact-box">
               <div class="fact-box-label">🗓️ Best Season</div>
-              <div class="fact-box-val">${dest.bestTime}</div>
+              <div class="fact-box-val" style="font-size: 1.05rem;">${dest.bestTime}</div>
             </div>
             <div class="fact-box">
               <div class="fact-box-label">⏱️ Trip Length</div>
-              <div class="fact-box-val">${dest.idealDays}</div>
+              <div class="fact-box-val" style="font-size: 1.05rem;">${dest.idealDays}</div>
             </div>
             <div class="fact-box">
               <div class="fact-box-label">💰 Daily Budget Avg</div>
-              <div class="fact-box-val">₹${dest.basePriceINR.toLocaleString('en-IN')}</div>
+              <div class="fact-box-val" style="font-size: 1.05rem;">₹${dest.basePriceINR.toLocaleString('en-IN')}</div>
             </div>
             <div class="fact-box">
               <div class="fact-box-label">⭐ Traveler Rating</div>
-              <div class="fact-box-val">${dest.rating} (${dest.reviewsCount} reviews)</div>
+              <div class="fact-box-val" style="font-size: 1.05rem;">${dest.rating} (${dest.reviewsCount})</div>
             </div>
           </div>
         </div>
@@ -280,16 +440,16 @@
           <!-- STORY & HIGHLIGHTS -->
           <div class="story-box">
             <div class="section-eyebrow">About The Journey</div>
-            <h2 style="margin-bottom: 1rem; color: #0f172a;">Why ${dest.name} is Unforgettable</h2>
-            <p style="font-size: 1.05rem; color: #334155; line-height: 1.7; margin-bottom: 2rem;">
+            <h2 style="margin-bottom: 1rem; color: #0f172a; font-size: clamp(1.4rem, 3vw, 1.8rem);">Why ${dest.name} is Unforgettable</h2>
+            <p style="font-size: 1.02rem; color: #334155; line-height: 1.7; margin-bottom: 1.75rem;">
               ${dest.description}
             </p>
 
-            <h3 style="margin-bottom: 1rem; font-size: 1.25rem;">Top Highlights You Can't Miss:</h3>
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem;">
+            <h3 style="margin-bottom: 1rem; font-size: 1.2rem;">Top Highlights You Can't Miss:</h3>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)); gap: 0.85rem;">
               ${dest.highlights.map(h => `
-                <div style="background: #f8fafc; border: 1px solid #e2e8f0; padding: 1.15rem; border-radius: 12px; display: flex; gap: 0.75rem; align-items: flex-start;">
-                  <span style="color: #ff6b35; font-size: 1.2rem; font-weight: 800;">✓</span>
+                <div style="background: #f8fafc; border: 1px solid #e2e8f0; padding: 1rem; border-radius: 12px; display: flex; gap: 0.75rem; align-items: flex-start;">
+                  <span style="color: #ff6b35; font-size: 1.15rem; font-weight: 800;">✓</span>
                   <span style="color: #1e293b; font-weight: 600; font-size: 0.95rem;">${h}</span>
                 </div>
               `).join('')}
@@ -299,24 +459,24 @@
           <!-- HOW TO REACH -->
           <section id="howToReachSection" class="story-box">
             <div class="section-eyebrow">Transit Blueprint</div>
-            <h2 style="margin-bottom: 1rem; color: #0f172a;">How to Reach ${dest.name}</h2>
+            <h2 style="margin-bottom: 1rem; color: #0f172a; font-size: clamp(1.4rem, 3vw, 1.8rem);">How to Reach ${dest.name}</h2>
             
             <div class="transit-highlight-box">
               ${dest.transitSummary}
             </div>
 
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.25rem; margin-top: 1.5rem;">
-              <div style="background: #f1f5f9; padding: 1.25rem; border-radius: 12px;">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr)); gap: 1rem; margin-top: 1.25rem;">
+              <div style="background: #f1f5f9; padding: 1.15rem; border-radius: 12px;">
                 <div style="font-family: monospace; font-size: 0.75rem; font-weight: 700; color: #64748b; text-transform: uppercase;">✈️ Nearest Airport</div>
-                <div style="font-size: 1.05rem; font-weight: 800; color: #0f172a; margin-top: 0.25rem;">${dest.nearestHubs.airport}</div>
+                <div style="font-size: 1rem; font-weight: 800; color: #0f172a; margin-top: 0.25rem; word-break: break-word;">${dest.nearestHubs.airport}</div>
               </div>
-              <div style="background: #f1f5f9; padding: 1.25rem; border-radius: 12px;">
+              <div style="background: #f1f5f9; padding: 1.15rem; border-radius: 12px;">
                 <div style="font-family: monospace; font-size: 0.75rem; font-weight: 700; color: #64748b; text-transform: uppercase;">🚆 Nearest Railway Station</div>
-                <div style="font-size: 1.05rem; font-weight: 800; color: #0f172a; margin-top: 0.25rem;">${dest.nearestHubs.railway}</div>
+                <div style="font-size: 1rem; font-weight: 800; color: #0f172a; margin-top: 0.25rem; word-break: break-word;">${dest.nearestHubs.railway}</div>
               </div>
-              <div style="background: #f1f5f9; padding: 1.25rem; border-radius: 12px;">
+              <div style="background: #f1f5f9; padding: 1.15rem; border-radius: 12px;">
                 <div style="font-family: monospace; font-size: 0.75rem; font-weight: 700; color: #64748b; text-transform: uppercase;">🚗 Highway / Road Route</div>
-                <div style="font-size: 1.05rem; font-weight: 800; color: #0f172a; margin-top: 0.25rem;">${dest.nearestHubs.road}</div>
+                <div style="font-size: 1rem; font-weight: 800; color: #0f172a; margin-top: 0.25rem; word-break: break-word;">${dest.nearestHubs.road}</div>
               </div>
             </div>
           </section>
@@ -324,17 +484,17 @@
           <!-- 3-DAY ITINERARY -->
           <div class="story-box">
             <div class="section-eyebrow">Day-by-Day Blueprint</div>
-            <h2 style="margin-bottom: 1.5rem; color: #0f172a;">Suggested ${dest.idealDays} Itinerary</h2>
+            <h2 style="margin-bottom: 1.25rem; color: #0f172a; font-size: clamp(1.4rem, 3vw, 1.8rem);">Suggested ${dest.idealDays} Itinerary</h2>
             
-            <div style="display: flex; flex-direction: column; gap: 1.25rem;">
+            <div style="display: flex; flex-direction: column; gap: 1rem;">
               ${dest.itinerary.map(item => `
-                <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 16px; padding: 1.25rem; display: flex; gap: 1.25rem; align-items: flex-start;">
-                  <div style="background: #ff6b35; color: #fff; width: 46px; height: 46px; border-radius: 12px; font-weight: 800; font-family: monospace; display: flex; align-items: center; justify-content: center; font-size: 1.15rem; flex-shrink: 0;">
+                <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 14px; padding: 1.15rem; display: flex; gap: 1rem; align-items: flex-start;">
+                  <div style="background: #ff6b35; color: #fff; width: 40px; height: 40px; border-radius: 10px; font-weight: 800; font-family: monospace; display: flex; align-items: center; justify-content: center; font-size: 1.05rem; flex-shrink: 0;">
                     0${item.day}
                   </div>
                   <div>
-                    <h4 style="font-size: 1.15rem; color: #0f172a; margin-bottom: 0.3rem;">${item.title}</h4>
-                    <p style="margin: 0; color: #475569; font-size: 0.95rem; line-height: 1.6;">${item.desc}</p>
+                    <h4 style="font-size: 1.08rem; color: #0f172a; margin-bottom: 0.3rem;">${item.title}</h4>
+                    <p style="margin: 0; color: #475569; font-size: 0.94rem; line-height: 1.6;">${item.desc}</p>
                   </div>
                 </div>
               `).join('')}
@@ -344,14 +504,14 @@
           <!-- INTERACTIVE CHECKLIST -->
           <div class="story-box">
             <div class="section-eyebrow">Smart Packing</div>
-            <h2 style="margin-bottom: 0.5rem; color: #0f172a;">Essential Packing Checklist</h2>
-            <p style="color: #64748b; margin-bottom: 1.5rem;">Check off items as you pack. Automatically saved in your browser!</p>
+            <h2 style="margin-bottom: 0.5rem; color: #0f172a; font-size: clamp(1.4rem, 3vw, 1.8rem);">Essential Packing Checklist</h2>
+            <p style="color: #64748b; margin-bottom: 1.25rem; font-size: 0.92rem;">Check off items as you pack. Automatically saved in your browser!</p>
 
-            <div style="display: flex; flex-direction: column; gap: 0.75rem;">
+            <div style="display: flex; flex-direction: column; gap: 0.65rem;">
               ${dest.packing.map((item, idx) => `
-                <label style="display: flex; align-items: center; gap: 0.85rem; background: #f8fafc; padding: 0.85rem 1.15rem; border-radius: 10px; border: 1px solid #e2e8f0; cursor: pointer;">
-                  <input type="checkbox" ${savedChecklist[idx] ? 'checked' : ''} onchange="toggleChecklistItem('${dest.id}', ${idx}, this.checked)" style="width: 20px; height: 20px; accent-color: #ff6b35;" />
-                  <span style="font-size: 0.98rem; font-weight: 600; color: #1e293b; ${savedChecklist[idx] ? 'text-decoration: line-through; color: #94a3b8;' : ''}">${item}</span>
+                <label style="display: flex; align-items: center; gap: 0.75rem; background: #f8fafc; padding: 0.75rem 1rem; border-radius: 10px; border: 1px solid #e2e8f0; cursor: pointer;">
+                  <input type="checkbox" ${savedChecklist[idx] ? 'checked' : ''} onchange="toggleChecklistItem('${dest.id}', ${idx}, this.checked)" style="width: 18px; height: 18px; accent-color: #ff6b35;" />
+                  <span style="font-size: 0.95rem; font-weight: 600; color: #1e293b; ${savedChecklist[idx] ? 'text-decoration: line-through; color: #94a3b8;' : ''}">${item}</span>
                 </label>
               `).join('')}
             </div>
@@ -360,10 +520,10 @@
           <!-- REAL GROUND TIPS -->
           <div class="story-box" style="background: #fffbeb; border-color: #fef3c7;">
             <div class="section-eyebrow" style="background: rgba(245, 158, 11, 0.2); color: #b45309;">💡 Insider Ground Truth</div>
-            <h2 style="margin-bottom: 1rem; color: #78350f;">Important Things to Know Before You Go</h2>
-            <ul style="display: flex; flex-direction: column; gap: 0.75rem;">
+            <h2 style="margin-bottom: 1rem; color: #78350f; font-size: clamp(1.4rem, 3vw, 1.8rem);">Important Things to Know Before You Go</h2>
+            <ul style="display: flex; flex-direction: column; gap: 0.75rem; padding-left: 0;">
               ${dest.tips.map(tip => `
-                <li style="display: flex; gap: 0.75rem; color: #92400e; font-size: 0.98rem; line-height: 1.6;">
+                <li style="display: flex; gap: 0.65rem; color: #92400e; font-size: 0.95rem; line-height: 1.6;">
                   <span>👉</span>
                   <span>${tip}</span>
                 </li>
@@ -419,6 +579,32 @@
         </div>
       `;
     };
+
+    // Mobile Navigation Drawer Handlers
+    function openMobileMenu() {
+      const drawer = document.getElementById('mobileNavDrawer');
+      const backdrop = document.getElementById('mobileNavBackdrop');
+      if (drawer && backdrop) {
+        drawer.classList.add('active');
+        backdrop.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      }
+    }
+    function closeMobileMenu() {
+      const drawer = document.getElementById('mobileNavDrawer');
+      const backdrop = document.getElementById('mobileNavBackdrop');
+      if (drawer && backdrop) {
+        drawer.classList.remove('active');
+        backdrop.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+    }
+    const openBtn = document.getElementById('mobileMenuOpenBtn');
+    const closeBtn = document.getElementById('mobileMenuCloseBtn');
+    const navBackdrop = document.getElementById('mobileNavBackdrop');
+    if (openBtn) openBtn.onclick = openMobileMenu;
+    if (closeBtn) closeBtn.onclick = closeMobileMenu;
+    if (navBackdrop) navBackdrop.onclick = closeMobileMenu;
   </script>
 </body>
 </html>
