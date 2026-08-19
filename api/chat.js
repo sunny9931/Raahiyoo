@@ -120,8 +120,8 @@ export default async function handler(req, res) {
       });
     }
 
-    // 5. Verify Gemini API Key exists in environment variables
-    const apiKey = process.env.GEMINI_API_KEY;
+    // 5. Verify Gemini API Key exists in environment variables or client header
+    const apiKey = (process.env.GEMINI_API_KEY || req.headers['x-gemini-key'] || body.apiKey || '').trim();
     if (!apiKey || apiKey === 'your_gemini_api_key_here') {
       console.error('ERROR: GEMINI_API_KEY is not configured in environment variables.');
       return res.status(500).json({

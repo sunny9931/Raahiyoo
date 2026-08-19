@@ -101,16 +101,21 @@ class RaahiyooAIChat {
     // 3. Try Backend /api/chat First
     let backendFailed = false;
     let backendError = '';
+    const clientKey = this.getApiKey();
+
+    const headers = { 'Content-Type': 'application/json' };
+    if (clientKey) {
+      headers['x-gemini-key'] = clientKey;
+    }
 
     try {
       const response = await fetch(this.apiUrl, {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
+        headers: headers,
         body: JSON.stringify({
           message: trimmed,
-          history: historyPayload
+          history: historyPayload,
+          apiKey: clientKey || undefined
         })
       });
 
@@ -138,7 +143,6 @@ class RaahiyooAIChat {
     }
 
     // 4. If backend failed or not configured, try Direct Client-Side Gemini Call
-    const clientKey = this.getApiKey();
     if (clientKey) {
       try {
         const directReply = await this.callGeminiDirect(trimmed, historyPayload, clientKey);
@@ -156,17 +160,18 @@ class RaahiyooAIChat {
         console.error('Client Gemini API Error:', clientErr);
         return {
           success: false,
+          needsKey: true,
           error: clientErr.message || 'Direct Gemini API error. Please verify your API key.'
         };
       }
     }
 
-    // 5. If no backend and no client key set
+    // 5. If no backend key and no client key set
     this.isLoading = false;
     return {
       success: false,
       needsKey: true,
-      error: backendError || 'Google Gemini API key is required. Click "⚙️ Free API Key" to add your free key in 10 seconds!'
+      error: 'Gemini API key is not connected yet. Click the button below to add your free key in 5 seconds, or redeploy on Vercel!'
     };
   }
 
