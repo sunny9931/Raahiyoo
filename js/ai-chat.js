@@ -1,21 +1,38 @@
 /**
- * RAAHIYOO AI — CLIENT-SIDE CHAT CONTROLLER
- * Connects frontend interface to /api/chat backend endpoint with Google Gemini AI.
+ * RAAHIYOO AI — CLIENT-SIDE CHAT CONTROLLER (Hybrid Architecture)
  * 
- * Features:
- * - Multi-turn conversational session history
- * - Smooth auto-scroll & typing indicator
- * - Markdown parser (headers, bold, lists, code, tables)
- * - Mobile responsive keyboard viewport adjustments
- * - Robust error handling with inline retry
- * - Voice speech-to-text input (Web Speech API)
+ * Supports:
+ * 1. Backend Serverless API (/api/chat) if available
+ * 2. 100% FREE Direct Client-Side Gemini API (Zero Vercel/Server cost)
+ * 3. Multi-turn conversation memory (last 20 turns)
+ * 4. Automatic fallback handling
  */
+
+const SYSTEM_PROMPT = `You are Raahiyoo AI, an intelligent travel assistant and general AI assistant.
+
+You help users with:
+- Travel planning
+- Trek recommendations
+- Budget travel
+- Itinerary creation
+- Packing advice
+- Transportation guidance
+- Travel safety
+
+You can also answer normal questions outside travel just like a modern AI assistant.
+
+Be conversational, intelligent, friendly, and helpful.
+
+Do not simply repeat website content.
+
+Understand user intent and provide detailed, useful responses.`;
 
 class RaahiyooAIChat {
   constructor() {
     this.history = [];
     this.isLoading = false;
     this.apiUrl = '/api/chat';
+    this.clientApiKey = localStorage.getItem('raahiyoo_gemini_key') || '';
     this.loadSessionHistory();
   }
 
@@ -45,8 +62,21 @@ class RaahiyooAIChat {
     } catch (e) {}
   }
 
+  setApiKey(key) {
+    this.clientApiKey = key.trim();
+    if (this.clientApiKey) {
+      localStorage.setItem('raahiyoo_gemini_key', this.clientApiKey);
+    } else {
+      localStorage.removeItem('raahiyoo_gemini_key');
+    }
+  }
+
+  getApiKey() {
+    return this.clientApiKey || localStorage.getItem('raahiyoo_gemini_key') || '';
+  }
+
   /**
-   * Send user message to /api/chat backend
+   * Send user message to AI (Backend first, fallback to direct client-side Gemini)
    */
   async sendMessage(userText) {
     const trimmed = userText.trim();
@@ -54,7 +84,7 @@ class RaahiyooAIChat {
 
     this.isLoading = true;
 
-    // 1. Add User Message to History & UI
+    // 1. Add User Message to History
     this.history.push({
       role: 'user',
       content: trimmed,
@@ -62,11 +92,15 @@ class RaahiyooAIChat {
     });
     this.saveSessionHistory();
 
-    // 2. Prepare History for Backend (excluding the very message being sent now)
+    // 2. Prepare History Payload (excluding current message)
     const historyPayload = this.history.slice(0, -1).map(h => ({
       role: h.role,
       content: h.content
     }));
+
+    // 3. Try Backend /api/chat First
+    let backendFailed = false;
+    let backendError = '';
 
     try {
       const response = await fetch(this.apiUrl, {
@@ -80,35 +114,117 @@ class RaahiyooAIChat {
         })
       });
 
-      const data = await response.json();
-
-      if (!response.ok || !data.success) {
-        const errorMsg = data.error || `Server responded with status ${response.status}`;
-        throw new Error(errorMsg);
+      if (response.ok) {
+        const data = await response.json();
+        if (data && data.success && data.reply) {
+          this.history.push({
+            role: 'assistant',
+            content: data.reply,
+            model: data.model || 'gemini-1.5-flash',
+            timestamp: new Date().toISOString()
+          });
+          this.saveSessionHistory();
+          this.isLoading = false;
+          return { success: true, reply: data.reply };
+        }
+      } else {
+        const data = await response.json().catch(() => ({}));
+        backendError = data.error || `Server status ${response.status}`;
+        backendFailed = true;
       }
-
-      const aiReply = data.reply;
-
-      // 3. Save AI Reply to History
-      this.history.push({
-        role: 'assistant',
-        content: aiReply,
-        model: data.model || 'gemini-1.5-flash',
-        timestamp: new Date().toISOString()
-      });
-      this.saveSessionHistory();
-
-      this.isLoading = false;
-      return { success: true, reply: aiReply };
-
-    } catch (err) {
-      this.isLoading = false;
-      console.error('Chat error:', err);
-      return {
-        success: false,
-        error: err.message || 'Failed to connect to AI server. Please check your internet connection.'
-      };
+    } catch (e) {
+      backendFailed = true;
+      backendError = e.message || 'Backend unreachable';
     }
+
+    // 4. If backend failed or not configured, try Direct Client-Side Gemini Call
+    const clientKey = this.getApiKey();
+    if (clientKey) {
+      try {
+        const directReply = await this.callGeminiDirect(trimmed, historyPayload, clientKey);
+        this.history.push({
+          role: 'assistant',
+          content: directReply,
+          model: 'gemini-1.5-flash-direct',
+          timestamp: new Date().toISOString()
+        });
+        this.saveSessionHistory();
+        this.isLoading = false;
+        return { success: true, reply: directReply };
+      } catch (clientErr) {
+        this.isLoading = false;
+        console.error('Client Gemini API Error:', clientErr);
+        return {
+          success: false,
+          error: clientErr.message || 'Direct Gemini API error. Please verify your API key.'
+        };
+      }
+    }
+
+    // 5. If no backend and no client key set
+    this.isLoading = false;
+    return {
+      success: false,
+      needsKey: true,
+      error: backendError || 'Google Gemini API key is required. Click "⚙️ Free API Key" to add your free key in 10 seconds!'
+    };
+  }
+
+  /**
+   * Direct Browser-to-Gemini Call (100% Free, No Backend Required)
+   */
+  async callGeminiDirect(message, history, apiKey) {
+    const contents = [];
+
+    if (Array.isArray(history)) {
+      for (const turn of history.slice(-16)) {
+        if (turn && turn.content) {
+          contents.push({
+            role: turn.role === 'assistant' ? 'model' : 'user',
+            parts: [{ text: turn.content }]
+          });
+        }
+      }
+    }
+
+    contents.push({
+      role: 'user',
+      parts: [{ text: message }]
+    });
+
+    const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${encodeURIComponent(apiKey)}`;
+
+    const response = await fetch(endpoint, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        systemInstruction: {
+          parts: [{ text: SYSTEM_PROMPT }]
+        },
+        contents: contents,
+        generationConfig: {
+          temperature: 0.75,
+          topP: 0.95,
+          maxOutputTokens: 2048
+        }
+      })
+    });
+
+    if (!response.ok) {
+      const errText = await response.text();
+      throw new Error(`Gemini API Error (${response.status}): ${errText}`);
+    }
+
+    const data = await response.json();
+    const reply = data.candidates?.[0]?.content?.parts?.[0]?.text;
+
+    if (!reply) {
+      throw new Error('AI returned an empty response.');
+    }
+
+    return reply;
   }
 }
 
