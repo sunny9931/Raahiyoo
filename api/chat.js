@@ -3,12 +3,12 @@
  * Route: POST /api/chat
  * 
  * Features:
- * 1. Google Gemini 1.5 API Integration
- * 2. Multi-turn conversation history support
+ * 1. Google Gemini 1.5/2.0 API Integration with Multi-Model Fallback
+ * 2. Strict Alternating Multi-turn conversation history formatting
  * 3. Secure environment variable loading (process.env.GEMINI_API_KEY)
  * 4. Request validation & input sanitization
  * 5. In-memory sliding window rate limiting
- * 6. Graceful failure and error handling
+ * 6. Transparent and graceful error handling
  * 7. Full Vercel Serverless compatibility
  */
 
@@ -30,7 +30,7 @@ setInterval(() => {
   }
 }, 5 * 60 * 1000).unref?.();
 
-// System prompt defining Raahiyoo AI identity and behavior
+// Official Raahiyoo AI System Prompt
 const SYSTEM_PROMPT = `You are Raahiyoo AI, an intelligent travel assistant and general AI assistant.
 
 You help users with:
@@ -50,6 +50,15 @@ Do not simply repeat website content.
 
 Understand user intent and provide detailed, useful responses.`;
 
+// Candidate models to try in order of speed and capability
+const GEMINI_MODELS = [
+  'gemini-1.5-flash',
+  'gemini-1.5-flash-latest',
+  'gemini-1.5-pro',
+  'gemini-2.0-flash',
+  'gemini-pro'
+];
+
 /**
  * Check if the requesting IP is within rate limits
  */
@@ -68,6 +77,51 @@ function isRateLimited(ip) {
 }
 
 /**
+ * Helper to build valid alternating Google Gemini contents array
+ */
+function buildGeminiContents(history, currentMessage) {
+  const rawTurns = [];
+
+  if (Array.isArray(history)) {
+    for (const turn of history.slice(-16)) {
+      if (turn && typeof turn.content === 'string' && turn.content.trim()) {
+        rawTurns.push({
+          role: turn.role === 'assistant' || turn.role === 'model' ? 'model' : 'user',
+          text: turn.content.trim()
+        });
+      }
+    }
+  }
+
+  // Add current user turn
+  rawTurns.push({
+    role: 'user',
+    text: currentMessage.trim()
+  });
+
+  // Ensure first turn is 'user'
+  while (rawTurns.length > 0 && rawTurns[0].role !== 'user') {
+    rawTurns.shift();
+  }
+
+  // Merge consecutive same-role turns to satisfy Gemini strict alternating requirement
+  const mergedContents = [];
+  for (const turn of rawTurns) {
+    const last = mergedContents[mergedContents.length - 1];
+    if (last && last.role === turn.role) {
+      last.parts[0].text += `\n\n${turn.text}`;
+    } else {
+      mergedContents.push({
+        role: turn.role,
+        parts: [{ text: turn.text }]
+      });
+    }
+  }
+
+  return mergedContents;
+}
+
+/**
  * Vercel Serverless Function Handler
  */
 export default async function handler(req, res) {
@@ -75,7 +129,7 @@ export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Credentials', 'true');
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET,OPTIONS,PATCH,DELETE,POST,PUT');
-  res.setHeader('Access-Control-Allow-Headers', 'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version');
+  res.setHeader('Access-Control-Allow-Headers', 'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version, x-gemini-key');
 
   if (req.method === 'OPTIONS') {
     return res.status(200).end();
@@ -120,7 +174,7 @@ export default async function handler(req, res) {
       });
     }
 
-    // 5. Verify Gemini API Key exists in environment variables or client header
+    // 5. Verify Gemini API Key exists
     const apiKey = (process.env.GEMINI_API_KEY || req.headers['x-gemini-key'] || body.apiKey || '').trim();
     if (!apiKey || apiKey === 'your_gemini_api_key_here') {
       console.error('ERROR: GEMINI_API_KEY is not configured in environment variables.');
@@ -130,102 +184,88 @@ export default async function handler(req, res) {
       });
     }
 
-    // 6. Format Conversation History for Google Gemini API
-    const contents = [];
+    // 6. Build alternating Gemini contents
+    const contents = buildGeminiContents(history, message);
 
-    // Add previous valid conversation turns (up to last 16 turns for context memory)
-    if (Array.isArray(history)) {
-      const sanitizedHistory = history
-        .slice(-16)
-        .filter(item => item && (item.role === 'user' || item.role === 'assistant' || item.role === 'model') && typeof item.content === 'string');
+    // 7. Try candidate Gemini models with fallback
+    let lastError = null;
 
-      for (const turn of sanitizedHistory) {
-        contents.push({
-          role: turn.role === 'assistant' ? 'model' : 'user',
-          parts: [{ text: turn.content }]
+    for (const model of GEMINI_MODELS) {
+      try {
+        const geminiEndpoint = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${encodeURIComponent(apiKey)}`;
+
+        const geminiPayload = {
+          systemInstruction: {
+            parts: [{ text: SYSTEM_PROMPT }]
+          },
+          contents: contents,
+          generationConfig: {
+            temperature: 0.75,
+            topP: 0.95,
+            maxOutputTokens: 2048
+          }
+        };
+
+        const apiResponse = await fetch(geminiEndpoint, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(geminiPayload)
         });
+
+        if (apiResponse.ok) {
+          const data = await apiResponse.json();
+          const replyText = data.candidates?.[0]?.content?.parts?.[0]?.text;
+
+          if (replyText) {
+            return res.status(200).json({
+              success: true,
+              reply: replyText,
+              model: model
+            });
+          }
+        } else {
+          const errText = await apiResponse.text();
+          let parsedError = '';
+          try {
+            const errJson = JSON.parse(errText);
+            parsedError = errJson.error?.message || errText;
+          } catch(e) {
+            parsedError = errText;
+          }
+
+          console.warn(`Model ${model} returned [${apiResponse.status}]: ${parsedError}`);
+          lastError = {
+            status: apiResponse.status,
+            message: parsedError
+          };
+
+          // If unauthorized/bad key (401/403), stop trying other models as key is invalid
+          if (apiResponse.status === 401 || apiResponse.status === 403) {
+            return res.status(401).json({
+              success: false,
+              error: `Google Gemini API Error (Invalid API Key): ${parsedError}`
+            });
+          }
+        }
+      } catch (fetchErr) {
+        console.warn(`Fetch failed for model ${model}:`, fetchErr.message);
+        lastError = { status: 502, message: fetchErr.message };
       }
     }
 
-    // Add current user message
-    contents.push({
-      role: 'user',
-      parts: [{ text: message.trim() }]
-    });
-
-    // 7. Call Google Gemini 1.5 Flash API
-    const geminiEndpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${encodeURIComponent(apiKey)}`;
-
-    const geminiPayload = {
-      systemInstruction: {
-        parts: [{ text: SYSTEM_PROMPT }]
-      },
-      contents: contents,
-      generationConfig: {
-        temperature: 0.75,
-        topP: 0.95,
-        maxOutputTokens: 2048
-      }
-    };
-
-    const apiResponse = await fetch(geminiEndpoint, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(geminiPayload)
-    });
-
-    // 8. Handle Gemini API response status
-    if (!apiResponse.ok) {
-      const errBody = await apiResponse.text();
-      console.error(`Gemini API Error [${apiResponse.status}]:`, errBody);
-
-      if (apiResponse.status === 400) {
-        return res.status(400).json({
-          success: false,
-          error: 'Invalid request format sent to AI engine.'
-        });
-      } else if (apiResponse.status === 403 || apiResponse.status === 401) {
-        return res.status(401).json({
-          success: false,
-          error: 'Invalid or unauthorized GEMINI_API_KEY. Please verify your API key in Google AI Studio.'
-        });
-      } else if (apiResponse.status === 429) {
-        return res.status(429).json({
-          success: false,
-          error: 'Gemini API rate limit exceeded. Please wait a few seconds and try again.'
-        });
-      } else {
-        return res.status(502).json({
-          success: false,
-          error: 'Failed to communicate with AI engine. Please try again in a few moments.'
-        });
-      }
-    }
-
-    const data = await apiResponse.json();
-    const replyText = data.candidates?.[0]?.content?.parts?.[0]?.text;
-
-    if (!replyText) {
-      return res.status(500).json({
-        success: false,
-        error: 'AI returned an empty response. Please try rephrasing your message.'
-      });
-    }
-
-    // 9. Return Successful AI Response
-    return res.status(200).json({
-      success: true,
-      reply: replyText,
-      model: 'gemini-1.5-flash'
+    // If all models failed, return detailed last error
+    return res.status(lastError?.status || 502).json({
+      success: false,
+      error: lastError?.message ? `Google Gemini Error: ${lastError.message}` : 'Failed to communicate with Google Gemini AI. Please try again in a moment.'
     });
 
   } catch (error) {
     console.error('Unhandled server error in /api/chat:', error);
     return res.status(500).json({
       success: false,
-      error: 'An internal server error occurred while generating response. Please try again.'
+      error: `Server Error: ${error.message || 'An unexpected error occurred while processing your message.'}`
     });
   }
 }

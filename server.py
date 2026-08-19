@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 RAAHIYOO LOCAL DEVELOPMENT SERVER (Python 3 — Zero Dependencies Required)
-Runs static file server and routes POST /api/chat directly with Google Gemini 1.5 API.
+Runs static file server and routes POST /api/chat directly with Google Gemini API.
 Run locally with: python3 server.py
 """
 
@@ -43,6 +43,37 @@ Do not simply repeat website content.
 
 Understand user intent and provide detailed, useful responses."""
 
+GEMINI_MODELS = [
+    "gemini-1.5-flash",
+    "gemini-1.5-flash-latest",
+    "gemini-1.5-pro",
+    "gemini-2.0-flash",
+    "gemini-pro"
+]
+
+
+def build_gemini_contents(history, current_message):
+    raw_turns = []
+    if isinstance(history, list):
+        for turn in history[-16:]:
+            if isinstance(turn, dict) and "content" in turn and str(turn["content"]).strip():
+                role = "model" if turn.get("role") in ["assistant", "model"] else "user"
+                raw_turns.append({"role": role, "text": str(turn["content"]).strip()})
+
+    raw_turns.append({"role": "user", "text": current_message.strip()})
+
+    while raw_turns and raw_turns[0]["role"] != "user":
+        raw_turns.pop(0)
+
+    merged = []
+    for turn in raw_turns:
+        if merged and merged[-1]["role"] == turn["role"]:
+            merged[-1]["parts"][0]["text"] += f"\n\n{turn['text']}"
+        else:
+            merged.append({"role": turn["role"], "parts": [{"text": turn["text"]}]})
+
+    return merged
+
 
 class RaahiyooDevServer(SimpleHTTPRequestHandler):
     def __init__(self, *args, **kwargs):
@@ -52,7 +83,7 @@ class RaahiyooDevServer(SimpleHTTPRequestHandler):
         self.send_response(200)
         self.send_header("Access-Control-Allow-Origin", "*")
         self.send_header("Access-Control-Allow-Methods", "GET, POST, OPTIONS")
-        self.send_header("Access-Control-Allow-Headers", "Content-Type")
+        self.send_header("Access-Control-Allow-Headers", "Content-Type, x-gemini-key")
         self.end_headers()
 
     def do_POST(self):
@@ -73,51 +104,49 @@ class RaahiyooDevServer(SimpleHTTPRequestHandler):
                 self.send_json({"success": False, "error": "'message' field is required"}, 400)
                 return
 
-            api_key = os.environ.get("GEMINI_API_KEY", "")
+            api_key = (
+                os.environ.get("GEMINI_API_KEY", "")
+                or self.headers.get("x-gemini-key", "")
+                or body.get("apiKey", "")
+            ).strip()
+
             if not api_key or api_key == "your_gemini_api_key_here":
                 self.send_json({
                     "success": False,
-                    "error": "GEMINI_API_KEY is not configured in .env file. Please add your key to .env."
+                    "error": "GEMINI_API_KEY is not configured in .env file or Vercel dashboard."
                 }, 500)
                 return
 
-            # Format Gemini contents
-            contents = []
-            if isinstance(history, list):
-                for turn in history[-16:]:
-                    if isinstance(turn, dict) and "content" in turn:
-                        role = "model" if turn.get("role") == "assistant" else "user"
-                        contents.append({"role": role, "parts": [{"text": str(turn["content"])}]})
+            contents = build_gemini_contents(history, message)
+            last_err = ""
 
-            contents.append({"role": "user", "parts": [{"text": message}]})
+            for model in GEMINI_MODELS:
+                endpoint = f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent?key={api_key}"
+                payload = {
+                    "systemInstruction": {"parts": [{"text": SYSTEM_PROMPT}]},
+                    "contents": contents,
+                    "generationConfig": {"temperature": 0.75, "maxOutputTokens": 2048}
+                }
 
-            payload = {
-                "systemInstruction": {"parts": [{"text": SYSTEM_PROMPT}]},
-                "contents": contents,
-                "generationConfig": {"temperature": 0.75, "maxOutputTokens": 2048}
-            }
+                try:
+                    req = urllib.request.Request(
+                        endpoint,
+                        data=json.dumps(payload).encode("utf-8"),
+                        headers={"Content-Type": "application/json"}
+                    )
+                    with urllib.request.urlopen(req, timeout=30) as resp:
+                        resp_data = json.loads(resp.read().decode("utf-8"))
+                        reply = resp_data.get("candidates", [{}])[0].get("content", {}).get("parts", [{}])[0].get("text", "")
+                        if reply:
+                            self.send_json({"success": True, "reply": reply, "model": model})
+                            return
+                except urllib.error.HTTPError as e:
+                    err_body = e.read().decode("utf-8")
+                    last_err = f"Model {model} [{e.code}]: {err_body}"
+                except Exception as e:
+                    last_err = f"Model {model} error: {str(e)}"
 
-            endpoint = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key={api_key}"
-
-            try:
-                req = urllib.request.Request(
-                    endpoint,
-                    data=json.dumps(payload).encode("utf-8"),
-                    headers={"Content-Type": "application/json"}
-                )
-                with urllib.request.urlopen(req, timeout=30) as resp:
-                    resp_data = json.loads(resp.read().decode("utf-8"))
-                    reply = resp_data.get("candidates", [{}])[0].get("content", {}).get("parts", [{}])[0].get("text", "")
-                    if reply:
-                        self.send_json({"success": True, "reply": reply, "model": "gemini-1.5-flash"})
-                    else:
-                        self.send_json({"success": False, "error": "AI returned empty response"}, 500)
-
-            except urllib.error.HTTPError as e:
-                err_msg = e.read().decode("utf-8")
-                self.send_json({"success": False, "error": f"Gemini API Error [{e.code}]: {err_msg}"}, e.code)
-            except Exception as e:
-                self.send_json({"success": False, "error": f"Internal Error: {str(e)}"}, 500)
+            self.send_json({"success": False, "error": f"Google Gemini Error: {last_err}"}, 502)
         else:
             self.send_error(404, "Endpoint not found")
 
