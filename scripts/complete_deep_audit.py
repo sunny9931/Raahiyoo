@@ -51,7 +51,10 @@ for d in destinations:
 print(f"✅ Image Files Check: All {len(dest_ids)} local images verified on disk.")
 
 # 3. Check HTML files for valid structure and linked scripts
-html_files = ["index.html", "destination.html", "how-to-reach.html", "calculator.html"]
+html_files = [
+    "index.html", "destination.html", "how-to-reach.html", "calculator.html", 
+    "ai-planner.html", "ai-chat.html", "circuits.html", "compare.html", "sos.html", "stays.html"
+]
 for hf in html_files:
     path = os.path.join(base_dir, hf)
     if not os.path.exists(path):

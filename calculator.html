@@ -9,6 +9,7 @@
   <!-- Stylesheets -->
   <link rel="stylesheet" href="css/style.css" />
   <link rel="stylesheet" href="css/components.css" />
+  <script src="js/theme.js"></script>
 </head>
 <body>
 
@@ -27,12 +28,22 @@
 
       <nav class="nav-menu">
         <a href="index.html#exploreSection" class="nav-item">All Destinations</a>
-        <a href="calculator.html" class="nav-item active" style="color: var(--primary);">Budget Calculator</a>
-        <a href="how-to-reach.html" class="nav-item">How to Reach</a>
-        <a href="index.html#reviewsSection" class="nav-item">Reviews</a>
+        <a href="ai-chat.html" class="nav-item">💬 Raahiyoo AI</a>
+        <a href="ai-planner.html" class="nav-item">✨ AI Planner</a>
+        <a href="circuits.html" class="nav-item">🗺️ Circuits</a>
+        <a href="stays.html" class="nav-item">🏡 Stays</a>
+        <a href="compare.html" class="nav-item">⚖️ Compare</a>
+        <a href="calculator.html" class="nav-item active" style="color: var(--primary);">Calculator</a>
       </nav>
 
       <div class="nav-actions">
+        <!-- Theme Switcher Toggle -->
+        <button class="theme-toggle-btn" id="themeToggleBtn" aria-label="Toggle Midnight Theme" title="Toggle Midnight Mountain Mode">
+          <span class="theme-icon theme-icon-moon">🌙</span>
+          <span class="theme-icon theme-icon-sun">☀️</span>
+          <span class="theme-label">Theme</span>
+        </button>
+
         <!-- Instagram Profile Link -->
         <a href="https://www.instagram.com/sunnio.3/" target="_blank" rel="noopener" class="insta-header-btn" title="Follow @sunnio.3 on Instagram">
           <svg class="insta-svg-icon" viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
@@ -70,12 +81,43 @@
       <button class="drawer-close-btn" id="mobileMenuCloseBtn" style="position: static; width: 34px; height: 34px; font-size: 1.2rem;">&times;</button>
     </div>
 
+    <!-- Mobile Theme Switcher Row -->
+    <div class="mobile-theme-row" id="mobileThemeRow">
+      <div style="display: flex; align-items: center; gap: 0.5rem;">
+        <span id="mobileThemeIcon">🌙</span>
+        <span id="mobileThemeText" style="font-weight: 700; font-size: 0.95rem;">Midnight Dark Mode</span>
+      </div>
+      <div class="theme-switch-pill" id="mobileThemeSwitchPill">
+        <span class="switch-handle"></span>
+      </div>
+    </div>
+
     <nav style="display: flex; flex-direction: column; gap: 0.5rem; margin-top: 1rem;">
       <a href="index.html#exploreSection" class="mobile-menu-link">
         <span>📍 All Destinations</span>
         <span>&rarr;</span>
       </a>
-      <a href="calculator.html" class="mobile-menu-link active" style="color: var(--primary);">
+      <a href="ai-chat.html" class="mobile-menu-link" style="color: var(--primary); font-weight: 800;">
+        <span>💬 Raahiyoo AI Copilot</span>
+        <span>&rarr;</span>
+      </a>
+      <a href="ai-planner.html" class="mobile-menu-link">
+        <span>✨ AI Trip Planner</span>
+        <span>&rarr;</span>
+      </a>
+      <a href="circuits.html" class="mobile-menu-link">
+        <span>🗺️ Road Trip Circuits</span>
+        <span>&rarr;</span>
+      </a>
+      <a href="stays.html" class="mobile-menu-link">
+        <span>🏡 Verified Homestays</span>
+        <span>&rarr;</span>
+      </a>
+      <a href="compare.html" class="mobile-menu-link">
+        <span>⚖️ Compare Destinations</span>
+        <span>&rarr;</span>
+      </a>
+      <a href="calculator.html" class="mobile-menu-link active">
         <span>💰 Trip Budget Calculator</span>
         <span>&rarr;</span>
       </a>
@@ -538,5 +580,11 @@
     if (closeBtn) closeBtn.onclick = closeMobileMenu;
     if (navBackdrop) navBackdrop.onclick = closeMobileMenu;
   </script>
+
+  <!-- Floating Raahiyoo AI Copilot Launcher -->
+  <a href="ai-chat.html" class="floating-ai-launcher" title="Chat with Raahiyoo AI 24/7 Travel Copilot">
+    <span style="font-size: 1.15rem;">💬</span>
+    <span>Ask Raahiyoo AI</span>
+  </a>
 </body>
 </html>

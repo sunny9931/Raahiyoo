@@ -1,0 +1,21 @@
+{
+  "name": "RAAHIYOO — India's Premier Travel Platform",
+  "short_name": "RAAHIYOO",
+  "description": "Discover 106+ Indian destinations with verified transit, AI trip planner, road circuits, and offline mountain guides.",
+  "start_url": "index.html",
+  "display": "standalone",
+  "background_color": "#090d16",
+  "theme_color": "#ff6b35",
+  "icons": [
+    {
+      "src": "images/manali.jpg",
+      "sizes": "192x192",
+      "type": "image/jpeg"
+    },
+    {
+      "src": "images/leh.jpg",
+      "sizes": "512x512",
+      "type": "image/jpeg"
+    }
+  ]
+}

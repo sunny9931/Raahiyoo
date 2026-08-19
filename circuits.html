@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Indian Road Trip Circuits &amp; Multi-Stop Loops | RAAHIYOO</title>
+  <meta name="description" content="Discover India's greatest road trip circuits — Spiti Valley Loop, Golden Triangle, Kashmir Valley, Kerala Backwaters, and Rajasthan Royal Loop with exact KMs, tolls, and fuel budgets." />
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <script src="js/theme.js"></script>
+
+  <style>
+    .circuit-chip-group {
+      display: flex;
+      gap: 0.65rem;
+      overflow-x: auto;
+      padding-bottom: 0.75rem;
+      scrollbar-width: thin;
+      margin-bottom: 2rem;
+    }
+    .circuit-chip {
+      background: var(--bg-surface);
+      border: 1.5px solid var(--border-light);
+      border-radius: 9999px;
+      padding: 0.65rem 1.25rem;
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: var(--text-main);
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.2s ease;
+    }
+    .circuit-chip:hover {
+      border-color: var(--primary);
+      transform: translateY(-1px);
+    }
+    .circuit-chip.active {
+      background: var(--primary);
+      color: #ffffff;
+      border-color: var(--primary);
+      box-shadow: 0 4px 14px var(--primary-glow);
+    }
+
+    .circuit-stop-card {
+      display: flex;
+      gap: 1.25rem;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-light);
+      border-radius: var(--radius-lg);
+      padding: 1.25rem;
+      margin-bottom: 1rem;
+      position: relative;
+      transition: transform 0.2s;
+    }
+    [data-theme="dark"] .circuit-stop-card {
+      background: #111827;
+      border-color: #1f293d;
+    }
+    .circuit-stop-card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .stop-num-badge {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: var(--primary-light);
+      color: var(--primary);
+      font-weight: 900;
+      font-size: 1.2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      border: 1px solid rgba(255, 107, 53, 0.3);
+    }
+
+    .route-connector-line {
+      position: absolute;
+      left: 33px;
+      bottom: -15px;
+      width: 3px;
+      height: 15px;
+      background: var(--primary);
+      opacity: 0.4;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- SITE HEADER -->
+  <header class="site-header">
+    <div class="container nav-wrap">
+      <a href="index.html" class="brand">
+        <svg class="brand-icon" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M14 6l-3.75 5 2.85 3.8-1.6 1.2L7 10l-6 8h22L14 6z"/>
+        </svg>
+        <div class="brand-text-wrap">
+          <span class="brand-title">RAAHIYOO</span>
+          <span class="brand-byline">by sunnio</span>
+        </div>
+      </a>
+
+      <nav class="nav-menu">
+        <a href="index.html#exploreSection" class="nav-item">All Destinations</a>
+        <a href="ai-chat.html" class="nav-item">💬 Raahiyoo AI</a>
+        <a href="ai-planner.html" class="nav-item">✨ AI Planner</a>
+        <a href="circuits.html" class="nav-item active" style="color: var(--primary);">🗺️ Circuits</a>
+        <a href="stays.html" class="nav-item">🏡 Stays</a>
+        <a href="compare.html" class="nav-item">⚖️ Compare</a>
+      </nav>
+
+      <div class="nav-actions">
+        <!-- Theme Switcher Toggle -->
+        <button class="theme-toggle-btn" id="themeToggleBtn" aria-label="Toggle Midnight Theme" title="Toggle Midnight Mountain Mode">
+          <span class="theme-icon theme-icon-moon">🌙</span>
+          <span class="theme-icon theme-icon-sun">☀️</span>
+          <span class="theme-label">Theme</span>
+        </button>
+
+        <a href="https://www.instagram.com/sunnio.3/" target="_blank" rel="noopener" class="insta-header-btn" title="Follow @sunnio.3 on Instagram">
+          <svg class="insta-svg-icon" viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+          <span>@sunnio.3</span>
+        </a>
+
+        <button class="btn btn-primary btn-sm" onclick="openLeadModal('Road Trip Circuit Consultation')">Plan Trip</button>
+        <button class="mobile-nav-toggle" id="mobileMenuOpenBtn" aria-label="Open Navigation Menu">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- MOBILE SLIDE-IN NAVIGATION MENU -->
+  <div class="drawer-backdrop" id="mobileNavBackdrop"></div>
+  <aside class="mobile-menu-drawer" id="mobileNavDrawer" aria-label="Mobile Navigation">
+    <div style="display: flex; justify-content: space-between; align-items: center; padding-bottom: 1rem; border-bottom: 1px solid var(--border-light);">
+      <div class="brand">
+        <svg class="brand-icon" style="width: 24px; height: 24px;" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M14 6l-3.75 5 2.85 3.8-1.6 1.2L7 10l-6 8h22L14 6z"/>
+        </svg>
+        <div class="brand-text-wrap">
+          <span class="brand-title" style="font-size: 1.2rem;">RAAHIYOO</span>
+          <span class="brand-byline">by sunnio</span>
+        </div>
+      </div>
+      <button class="drawer-close-btn" id="mobileMenuCloseBtn">&times;</button>
+    </div>
+
+    <!-- Mobile Theme Switcher Row -->
+    <div class="mobile-theme-row" id="mobileThemeRow">
+      <div style="display: flex; align-items: center; gap: 0.5rem;">
+        <span id="mobileThemeIcon">🌙</span>
+        <span id="mobileThemeText" style="font-weight: 700; font-size: 0.95rem;">Midnight Dark Mode</span>
+      </div>
+      <div class="theme-switch-pill" id="mobileThemeSwitchPill">
+        <span class="switch-handle"></span>
+      </div>
+    </div>
+
+    <nav style="display: flex; flex-direction: column; gap: 0.5rem; margin-top: 1rem;">
+      <a href="index.html#exploreSection" class="mobile-menu-link"><span>📍 All Destinations</span><span>&rarr;</span></a>
+      <a href="ai-chat.html" class="mobile-menu-link" style="color: var(--primary); font-weight: 800;"><span>💬 Raahiyoo AI Copilot</span><span>&rarr;</span></a>
+      <a href="ai-planner.html" class="mobile-menu-link"><span>✨ AI Trip Planner</span><span>&rarr;</span></a>
+      <a href="circuits.html" class="mobile-menu-link active" style="color: var(--primary);"><span>🗺️ Road Trip Circuits</span><span>&rarr;</span></a>
+      <a href="stays.html" class="mobile-menu-link"><span>🏡 Verified Homestays</span><span>&rarr;</span></a>
+      <a href="compare.html" class="mobile-menu-link"><span>⚖️ Compare Destinations</span><span>&rarr;</span></a>
+      <a href="sos.html" class="mobile-menu-link" style="color: #ef4444;"><span>🆘 Emergency SOS</span><span>&rarr;</span></a>
+    </nav>
+  </aside>
+
+  <!-- HERO SECTION -->
+  <section class="section-spacing text-center" style="background: radial-gradient(circle at 50% 10%, rgba(255, 107, 53, 0.08) 0%, rgba(248, 250, 252, 1) 70%); padding-bottom: 2rem;">
+    <div class="container">
+      <span class="section-eyebrow">ROAD TRIP BLUEPRINTS</span>
+      <h1 style="font-size: clamp(2rem, 4.5vw, 3.25rem); color: var(--text-main); margin: 0.75rem 0 0.5rem;">
+        Legendary Multi-Stop Indian Road Circuits
+      </h1>
+      <p class="section-subtitle" style="margin: 0 auto; max-width: 680px;">
+        Curated multi-day road loops with verified highway conditions, toll booth budgets, high-altitude advice, and stop-by-stop night breakdowns.
+      </p>
+    </div>
+  </section>
+
+  <!-- CIRCUIT SELECTOR CHIPS -->
+  <main class="container">
+    <div class="circuit-chip-group" id="circuitChipsContainer">
+      <!-- Injected via js -->
+    </div>
+
+    <!-- ACTIVE CIRCUIT DISPLAY CARD -->
+    <div id="activeCircuitView">
+      <!-- Injected via js -->
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <a href="index.html" class="brand" style="margin-bottom: 0.75rem;">
+            <svg class="brand-icon" fill="currentColor" viewBox="0 0 24 24"><path d="M14 6l-3.75 5 2.85 3.8-1.6 1.2L7 10l-6 8h22L14 6z"/></svg>
+            <div class="brand-text-wrap">
+              <span class="brand-title">RAAHIYOO</span>
+              <span class="brand-byline">by sunnio</span>
+            </div>
+          </a>
+          <p style="color: var(--text-muted); font-size: 0.88rem; max-width: 320px;">
+            India's most trusted commercial travel discovery platform.
+          </p>
+        </div>
+        <div>
+          <h4 class="footer-col-title">Explore</h4>
+          <ul class="footer-list">
+            <li><a href="index.html#exploreSection">All Destinations</a></li>
+            <li><a href="ai-planner.html">✨ AI Trip Planner</a></li>
+            <li><a href="circuits.html">Road Trip Circuits</a></li>
+            <li><a href="calculator.html">Budget Calculator</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="footer-col-title">Direct Contact</h4>
+          <p style="font-size: 0.88rem; color: var(--text-muted);">
+            Author: Sunnio (<a href="https://www.instagram.com/sunnio.3/" target="_blank" rel="noopener" style="color: var(--primary); font-weight: 700;">@sunnio.3</a>)
+          </p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div>&copy; 2026 RAAHIYOO by Sunnio. All rights reserved.</div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/data.js"></script>
+  <script src="js/circuits.js"></script>
+  <script src="js/app.js"></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      initCircuitChips();
+      renderCircuit(ROAD_CIRCUITS[0].id);
+      initMobileDrawerHandlers();
+    });
+
+    function initCircuitChips() {
+      const container = document.getElementById('circuitChipsContainer');
+      if (!container || typeof ROAD_CIRCUITS === 'undefined') return;
+
+      container.innerHTML = ROAD_CIRCUITS.map((c, i) => `
+        <button class="circuit-chip ${i === 0 ? 'active' : ''}" data-id="${c.id}" onclick="selectCircuit('${c.id}')">
+          🚗 ${c.name}
+        </button>
+      `).join('');
+    }
+
+    function selectCircuit(id) {
+      document.querySelectorAll('.circuit-chip').forEach(btn => {
+        btn.classList.toggle('active', btn.getAttribute('data-id') === id);
+      });
+      renderCircuit(id);
+    }
+
+    function renderCircuit(id) {
+      const circuit = getCircuitById(id);
+      const view = document.getElementById('activeCircuitView');
+      if (!circuit || !view) return;
+
+      view.innerHTML = `
+        <!-- Circuit Hero Card -->
+        <div style="position: relative; border-radius: 20px; overflow: hidden; min-height: 280px; display: flex; align-items: flex-end; padding: clamp(1.5rem, 4vw, 2.5rem); color: #fff; margin-bottom: 2rem; box-shadow: var(--shadow-lg); background: #0f172a;">
+          <img src="${circuit.heroImage}" alt="${circuit.name}" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.45;" />
+          <div style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(15, 23, 42, 0.2) 0%, rgba(15, 23, 42, 0.95) 100%);"></div>
+          <div style="position: relative; z-index: 2; width: 100%;">
+            <span style="background: var(--primary); color: #fff; font-size: 0.75rem; font-weight: 800; padding: 0.25rem 0.65rem; border-radius: 9999px; font-family: var(--font-mono); text-transform: uppercase;">
+              ${circuit.duration} &bull; ${circuit.totalDistanceKM} KM Loop
+            </span>
+            <h2 style="font-size: clamp(1.8rem, 3.5vw, 2.75rem); color: #fff; margin: 0.5rem 0 0.35rem;">
+              ${circuit.name}
+            </h2>
+            <p style="color: #cbd5e1; font-size: 0.95rem; margin: 0;">
+              ${circuit.tagline} &bull; Best: ${circuit.bestMonths}
+            </p>
+          </div>
+        </div>
+
+        <!-- Road Trip Metrics HUD -->
+        <div class="grid-4" style="gap: 1rem; margin-bottom: 2rem;">
+          <div class="transit-step-box">
+            <span style="font-size: 0.75rem; font-weight: 700; color: var(--primary); text-transform: uppercase;">🛣️ Total Distance</span>
+            <div style="font-size: 1.3rem; font-weight: 900; color: var(--text-main); margin-top: 0.2rem;">${circuit.totalDistanceKM} KM</div>
+            <span style="font-size: 0.75rem; color: var(--text-muted);">${circuit.estimatedDrivingHours} driving</span>
+          </div>
+          <div class="transit-step-box">
+            <span style="font-size: 0.75rem; font-weight: 700; color: #059669; text-transform: uppercase;">⛽ Fuel Estimate</span>
+            <div style="font-size: 1.3rem; font-weight: 900; color: var(--text-main); margin-top: 0.2rem;">~ ₹${circuit.estimatedFuelCostINR.toLocaleString('en-IN')}</div>
+            <span style="font-size: 0.75rem; color: var(--text-muted);">Petrol / Diesel avg</span>
+          </div>
+          <div class="transit-step-box">
+            <span style="font-size: 0.75rem; font-weight: 700; color: #0284c7; text-transform: uppercase;">💳 Toll Booths</span>
+            <div style="font-size: 1.3rem; font-weight: 900; color: var(--text-main); margin-top: 0.2rem;">~ ₹${circuit.estimatedTollsINR.toLocaleString('en-IN')}</div>
+            <span style="font-size: 0.75rem; color: var(--text-muted);">Fastag expressway tolls</span>
+          </div>
+          <div class="transit-step-box">
+            <span style="font-size: 0.75rem; font-weight: 700; color: #7c3aed; text-transform: uppercase;">🚙 Vehicle Advice</span>
+            <div style="font-size: 0.95rem; font-weight: 800; color: var(--text-main); margin-top: 0.2rem; line-height: 1.3;">${circuit.recommendedVehicle}</div>
+          </div>
+        </div>
+
+        <!-- Essential Circuit Tip -->
+        <div style="background: rgba(255, 107, 53, 0.08); border-left: 4px solid var(--primary); padding: 1rem 1.25rem; border-radius: 8px; margin-bottom: 2rem;">
+          <strong style="color: var(--text-main); font-size: 0.95rem; display: block; margin-bottom: 0.25rem;">💡 Ground-Truth Circuit Rule:</strong>
+          <p style="color: var(--text-body); font-size: 0.9rem; margin: 0; line-height: 1.5;">${circuit.essentialTip}</p>
+        </div>
+
+        <!-- Stop by Stop Interactive Timeline -->
+        <h3 style="font-size: 1.4rem; color: var(--text-main); margin-bottom: 1.25rem;">
+          📍 Stop-by-Stop Itinerary &amp; Night Stays (${circuit.routeStops.length} Stops)
+        </h3>
+
+        <div style="margin-bottom: 2.5rem;">
+          ${circuit.routeStops.map((stop, idx) => `
+            <div class="circuit-stop-card">
+              <div class="stop-num-badge">${stop.stop}</div>
+              <div style="flex: 1;">
+                <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.35rem;">
+                  <h4 style="font-size: 1.15rem; color: var(--text-main); margin: 0;">${stop.name}</h4>
+                  <span style="background: var(--bg-subtle); color: var(--text-main); font-size: 0.78rem; font-weight: 700; padding: 0.2rem 0.6rem; border-radius: 9999px; border: 1px solid var(--border-light);">
+                    🛏️ ${stop.nights} Night${stop.nights > 1 ? 's' : ''} &bull; ⛰️ ${stop.altitude}
+                  </span>
+                </div>
+                <p style="color: var(--text-body); font-size: 0.9rem; margin: 0; line-height: 1.5;">
+                  <strong>Top Experience:</strong> ${stop.highlight}
+                </p>
+              </div>
+              ${idx < circuit.routeStops.length - 1 ? '<div class="route-connector-line"></div>' : ''}
+            </div>
+          `).join('')}
+        </div>
+
+        <!-- Road Condition Notes -->
+        <div class="story-box" style="margin-bottom: 2.5rem;">
+          <h4 style="font-size: 1.15rem; margin-bottom: 0.5rem;">🛣️ Terrain &amp; Road Condition Notes</h4>
+          <p style="color: var(--text-body); font-size: 0.92rem; line-height: 1.6; margin: 0;">${circuit.roadConditions}</p>
+        </div>
+
+        <!-- Action Row -->
+        <div style="display: flex; gap: 0.75rem; flex-wrap: wrap; margin-bottom: 3rem;">
+          <a href="ai-planner.html" class="btn btn-primary btn-md">
+            ✨ Generate Custom AI Itinerary for this Circuit &rarr;
+          </a>
+          <button class="btn btn-secondary btn-md" onclick="window.print()">🖨️ Print Circuit Map</button>
+        </div>
+      `;
+    }
+
+    function initMobileDrawerHandlers() {
+      const openBtn = document.getElementById('mobileMenuOpenBtn');
+      const closeBtn = document.getElementById('mobileMenuCloseBtn');
+      const navBackdrop = document.getElementById('mobileNavBackdrop');
+      const drawer = document.getElementById('mobileNavDrawer');
+      if (openBtn) openBtn.onclick = () => { drawer.classList.add('active'); navBackdrop.classList.add('active'); };
+      if (closeBtn) closeBtn.onclick = () => { drawer.classList.remove('active'); navBackdrop.classList.remove('active'); };
+      if (navBackdrop) navBackdrop.onclick = () => { drawer.classList.remove('active'); navBackdrop.classList.remove('active'); };
+    }
+  </script>
+
+  <!-- Floating Raahiyoo AI Copilot Launcher -->
+  <a href="ai-chat.html" class="floating-ai-launcher" title="Chat with Raahiyoo AI 24/7 Travel Copilot">
+    <span style="font-size: 1.15rem;">💬</span>
+    <span>Ask Raahiyoo AI</span>
+  </a>
+</body>
+</html>

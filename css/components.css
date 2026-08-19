@@ -1941,3 +1941,608 @@
   position: relative;
   z-index: 2;
 }
+
+/* ==========================================================================
+   14. THEME TOGGLE BUTTON & MOBILE THEME SWITCH
+   ========================================================================== */
+
+.theme-toggle-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.45rem 0.85rem;
+  border-radius: 9999px;
+  border: 1px solid var(--border-light);
+  background: var(--bg-surface);
+  color: var(--text-main);
+  font-size: 0.85rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: var(--shadow-sm);
+  user-select: none;
+  text-decoration: none;
+}
+
+.theme-toggle-btn:hover {
+  border-color: var(--primary);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+}
+
+.theme-icon {
+  font-size: 1rem;
+  line-height: 1;
+  display: inline-block;
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.theme-icon-sun {
+  display: none;
+}
+
+.theme-icon-moon {
+  display: inline-block;
+}
+
+[data-theme="dark"] .theme-icon-sun {
+  display: inline-block;
+  transform: rotate(360deg);
+}
+
+[data-theme="dark"] .theme-icon-moon {
+  display: none;
+}
+
+.mobile-theme-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.85rem 1rem;
+  background: var(--bg-subtle);
+  border: 1px solid var(--border-light);
+  border-radius: 12px;
+  margin-top: 0.75rem;
+  color: var(--text-main);
+  cursor: pointer;
+  user-select: none;
+  transition: all 0.2s ease;
+}
+
+.mobile-theme-row:hover {
+  border-color: var(--primary);
+}
+
+.theme-switch-pill {
+  width: 48px;
+  height: 26px;
+  border-radius: 9999px;
+  background: #cbd5e1;
+  border: none;
+  cursor: pointer;
+  position: relative;
+  transition: background-color 0.25s ease;
+  padding: 2px;
+  display: inline-block;
+}
+
+[data-theme="dark"] .theme-switch-pill,
+.theme-switch-pill.active {
+  background: var(--primary);
+}
+
+.switch-handle {
+  display: block;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: #ffffff;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25);
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+[data-theme="dark"] .switch-handle,
+.theme-switch-pill.active .switch-handle {
+  transform: translateX(22px);
+}
+
+/* ==========================================================================
+   15. MIDNIGHT MOUNTAIN DARK THEME COMPONENT OVERRIDES
+   ========================================================================== */
+
+[data-theme="dark"] body {
+  background-color: var(--bg-page);
+  color: var(--text-body);
+}
+
+[data-theme="dark"] .site-header {
+  background: rgba(9, 13, 22, 0.92);
+  border-bottom-color: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 4px 25px rgba(0, 0, 0, 0.6);
+}
+
+[data-theme="dark"] .brand-title {
+  color: #f8fafc;
+}
+
+[data-theme="dark"] .nav-item {
+  color: #cbd5e1;
+}
+
+[data-theme="dark"] .nav-item:hover,
+[data-theme="dark"] .nav-item.active {
+  color: var(--primary);
+}
+
+[data-theme="dark"] .insta-header-btn {
+  background: rgba(225, 48, 108, 0.12);
+  border-color: rgba(225, 48, 108, 0.25);
+  color: #f472b6;
+}
+
+[data-theme="dark"] .mobile-nav-toggle {
+  background: #1e293b;
+  border-color: #334155;
+  color: #f8fafc;
+}
+
+[data-theme="dark"] .mobile-menu-drawer {
+  background: #0f172a;
+  border-left-color: #1e293b;
+  color: #f8fafc;
+}
+
+[data-theme="dark"] .mobile-menu-link {
+  background: #1e293b;
+  border-color: #334155;
+  color: #f1f5f9;
+}
+
+[data-theme="dark"] .mobile-menu-link:hover {
+  background: #334155;
+  color: #ffffff;
+}
+
+[data-theme="dark"] .drawer-close-btn {
+  background: #1e293b;
+  color: #cbd5e1;
+}
+
+[data-theme="dark"] .drawer-close-btn:hover {
+  background: #334155;
+  color: #ffffff;
+}
+
+/* Hero Section in Dark Mode */
+[data-theme="dark"] .hero-wrap {
+  background: radial-gradient(circle at 50% 20%, rgba(255, 120, 73, 0.08) 0%, rgba(9, 13, 22, 1) 70%);
+}
+
+[data-theme="dark"] .hero-stats-pill {
+  background: #111827;
+  border-color: #1f293d;
+  color: #cbd5e1;
+}
+
+[data-theme="dark"] .hero-title {
+  color: #f8fafc;
+}
+
+[data-theme="dark"] .hero-sub {
+  color: #94a3b8;
+}
+
+/* Luxury Segmented Search */
+[data-theme="dark"] .luxury-search-card {
+  background: #111827;
+  border-color: #1f293d;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.7);
+}
+
+[data-theme="dark"] .search-segment {
+  background: #1e293b;
+  border-color: #334155;
+}
+
+[data-theme="dark"] .search-segment:focus-within {
+  border-color: var(--primary);
+  background: #0f172a;
+}
+
+[data-theme="dark"] .search-segment .segment-header {
+  color: #94a3b8;
+}
+
+[data-theme="dark"] .search-segment input {
+  color: #f8fafc;
+}
+
+[data-theme="dark"] .search-segment input::placeholder {
+  color: #64748b;
+}
+
+/* Dropdown Suggest */
+[data-theme="dark"] .suggest-dropdown {
+  background: #111827;
+  border-color: #334155;
+  box-shadow: 0 15px 45px rgba(0, 0, 0, 0.8);
+}
+
+[data-theme="dark"] .suggest-section-title {
+  color: #94a3b8;
+  background: #0f172a;
+  border-bottom-color: #1f293d;
+}
+
+[data-theme="dark"] .suggest-item:hover {
+  background: #1e293b;
+}
+
+[data-theme="dark"] .suggest-name {
+  color: #f8fafc;
+}
+
+[data-theme="dark"] .suggest-sub {
+  color: #94a3b8;
+}
+
+/* Category Buttons & Related Chips */
+[data-theme="dark"] .cat-btn {
+  background: #111827;
+  border-color: #1f293d;
+  color: #cbd5e1;
+}
+
+[data-theme="dark"] .cat-btn:hover {
+  background: #1e293b;
+  color: #f8fafc;
+}
+
+[data-theme="dark"] .cat-btn.active {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: #ffffff;
+}
+
+[data-theme="dark"] .related-chip {
+  background: #111827;
+  border-color: #1f293d;
+  color: #cbd5e1;
+}
+
+[data-theme="dark"] .related-chip:hover {
+  background: #1e293b;
+  color: var(--primary);
+  border-color: var(--primary);
+}
+
+/* Destination Cards */
+[data-theme="dark"] .dest-card {
+  background: #111827;
+  border-color: #1f293d;
+  box-shadow: var(--shadow-sm);
+}
+
+[data-theme="dark"] .dest-card:hover {
+  border-color: rgba(255, 120, 73, 0.4);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
+}
+
+[data-theme="dark"] .dest-card-title a {
+  color: #f8fafc;
+}
+
+[data-theme="dark"] .dest-card-title a:hover {
+  color: var(--primary);
+}
+
+[data-theme="dark"] .dest-card-desc {
+  color: #94a3b8;
+}
+
+[data-theme="dark"] .meta-budget {
+  color: #f8fafc;
+}
+
+[data-theme="dark"] .meta-budget span {
+  color: #64748b;
+}
+
+/* Secondary Buttons */
+[data-theme="dark"] .btn-secondary {
+  background-color: #1e293b;
+  color: #f8fafc;
+  border-color: #334155;
+}
+
+[data-theme="dark"] .btn-secondary:hover {
+  background-color: #334155;
+  border-color: #475569;
+}
+
+/* Pass Advisory Ticker Cards */
+[data-theme="dark"] .pass-card {
+  background: #111827;
+  border-color: #1f293d;
+}
+
+[data-theme="dark"] .pass-name {
+  color: #f8fafc;
+}
+
+[data-theme="dark"] .pass-card div[style*="background: #f8fafc"],
+[data-theme="dark"] .pass-card div[style*="background:#f8fafc"] {
+  background: #1e293b !important;
+  color: #cbd5e1 !important;
+}
+
+/* Regional Explorer Cards */
+[data-theme="dark"] .region-card-btn {
+  background: #111827;
+  border-color: #1f293d;
+}
+
+[data-theme="dark"] .region-card-btn:hover {
+  background: #1e293b;
+  border-color: #334155;
+}
+
+[data-theme="dark"] .region-card-btn.active {
+  background: rgba(255, 120, 73, 0.12);
+  border-color: var(--primary);
+}
+
+[data-theme="dark"] .region-card-title {
+  color: #f8fafc;
+}
+
+[data-theme="dark"] .region-card-count {
+  color: #94a3b8;
+}
+
+/* Taxi Rates Guide */
+[data-theme="dark"] .taxi-rate-card {
+  background: #111827;
+  border-color: #1f293d;
+}
+
+[data-theme="dark"] .taxi-route-title {
+  color: #f8fafc;
+}
+
+[data-theme="dark"] .taxi-rate-price {
+  color: var(--primary);
+}
+
+/* Community Reviews Cards */
+[data-theme="dark"] .review-card {
+  background: #111827;
+  border-color: #1f293d;
+}
+
+[data-theme="dark"] .review-author .author-info h5 {
+  color: #f8fafc;
+}
+
+[data-theme="dark"] .review-card p {
+  color: #cbd5e1 !important;
+}
+
+[data-theme="dark"] .review-card strong[style*="color: #0f172a"] {
+  color: #f8fafc !important;
+}
+
+/* Destination Detail Page Overrides */
+[data-theme="dark"] .fact-box {
+  background: #111827;
+  border-color: #1f293d;
+}
+
+[data-theme="dark"] .fact-box-val {
+  color: #f8fafc;
+}
+
+[data-theme="dark"] .story-box {
+  background: #111827;
+  border-color: #1f293d;
+}
+
+[data-theme="dark"] .story-box h2,
+[data-theme="dark"] .story-box h3,
+[data-theme="dark"] .story-box h4 {
+  color: #f8fafc !important;
+}
+
+[data-theme="dark"] .story-box p {
+  color: #cbd5e1 !important;
+}
+
+[data-theme="dark"] .story-box div[style*="background: #f8fafc"],
+[data-theme="dark"] .story-box div[style*="background:#f8fafc"],
+[data-theme="dark"] .story-box div[style*="background: #f1f5f9"],
+[data-theme="dark"] .story-box div[style*="background:#f1f5f9"] {
+  background: #1e293b !important;
+  border-color: #334155 !important;
+  color: #cbd5e1 !important;
+}
+
+[data-theme="dark"] .story-box div[style*="background: #f8fafc"] span,
+[data-theme="dark"] .story-box div[style*="background: #f1f5f9"] div {
+  color: #f1f5f9 !important;
+}
+
+[data-theme="dark"] .story-box label[style*="background: #f8fafc"] {
+  background: #1e293b !important;
+  border-color: #334155 !important;
+}
+
+[data-theme="dark"] .transit-highlight-box {
+  background: #1e293b;
+  border-color: #334155;
+  color: #e2e8f0;
+}
+
+/* Modals & Forms */
+[data-theme="dark"] .inquiry-modal {
+  background: #111827;
+  border: 1px solid #1f293d;
+  color: #f8fafc;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8);
+}
+
+[data-theme="dark"] .inquiry-modal h3,
+[data-theme="dark"] .inquiry-modal h4 {
+  color: #f8fafc !important;
+}
+
+[data-theme="dark"] .inquiry-modal p {
+  color: #94a3b8 !important;
+}
+
+[data-theme="dark"] .form-label {
+  color: #e2e8f0;
+}
+
+[data-theme="dark"] .form-input {
+  background: #1e293b;
+  border-color: #334155;
+  color: #f8fafc;
+}
+
+[data-theme="dark"] .form-input:focus {
+  background: #0f172a;
+  border-color: var(--primary);
+}
+
+[data-theme="dark"] .modal-close-btn {
+  background: #1e293b;
+  color: #cbd5e1;
+}
+
+[data-theme="dark"] .modal-close-btn:hover {
+  background: #334155;
+  color: #ffffff;
+}
+
+/* Footer in Dark Mode */
+[data-theme="dark"] .site-footer {
+  background: #030712;
+  border-top-color: #1f293d;
+}
+
+[data-theme="dark"] .footer-col-title {
+  color: #f8fafc;
+}
+
+[data-theme="dark"] .footer-list a {
+  color: #94a3b8;
+}
+
+[data-theme="dark"] .footer-list a:hover {
+  color: var(--primary);
+}
+
+[data-theme="dark"] .footer-bottom {
+  border-top-color: #1f293d;
+  color: #64748b;
+}
+
+/* Calculator Dark Overrides */
+[data-theme="dark"] .calc-studio-card {
+  background: #111827;
+  border-color: #1f293d;
+}
+
+[data-theme="dark"] .calc-tier-card {
+  background: #1e293b;
+  border-color: #334155;
+}
+
+[data-theme="dark"] .calc-tier-card:hover {
+  border-color: #475569;
+}
+
+[data-theme="dark"] .calc-tier-card.active {
+  background: rgba(255, 120, 73, 0.15);
+  border-color: var(--primary);
+}
+
+[data-theme="dark"] .calc-tier-title {
+  color: #f8fafc;
+}
+
+[data-theme="dark"] .calc-dest-select {
+  background: #1e293b;
+  border-color: #334155;
+  color: #f8fafc;
+}
+
+[data-theme="dark"] .calc-stepper-btn {
+  background: #1e293b;
+  border-color: #334155;
+  color: #f8fafc;
+}
+
+[data-theme="dark"] .calc-stepper-val {
+  color: #f8fafc;
+}
+
+/* How to Reach Planner Dark Overrides */
+[data-theme="dark"] .transit-planner-card {
+  background: #111827;
+  border-color: #1f293d;
+}
+
+[data-theme="dark"] .transit-step-box {
+  background: #1e293b;
+  border-color: #334155;
+}
+
+[data-theme="dark"] .transit-step-box strong[style*="color: #0f172a"] {
+  color: #f8fafc !important;
+}
+
+[data-theme="dark"] .transit-step-box div[style*="color: #475569"] {
+  color: #cbd5e1 !important;
+}
+
+/* ==========================================================================
+   16. FLOATING AI COPILOT LAUNCHER BUTTON
+   ========================================================================== */
+
+.floating-ai-launcher {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  z-index: 999;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: linear-gradient(135deg, #ff6b35 0%, #ff5216 100%);
+  color: #ffffff !important;
+  padding: 0.75rem 1.25rem;
+  border-radius: 9999px;
+  font-weight: 800;
+  font-size: 0.92rem;
+  text-decoration: none;
+  box-shadow: 0 8px 25px rgba(255, 107, 53, 0.4);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  border: 1.5px solid rgba(255, 255, 255, 0.25);
+  animation: pulseGlow 3s infinite ease-in-out;
+}
+
+.floating-ai-launcher:hover {
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: 0 12px 35px rgba(255, 107, 53, 0.6);
+  color: #ffffff !important;
+}
+
+@keyframes pulseGlow {
+  0%, 100% {
+    box-shadow: 0 8px 25px rgba(255, 107, 53, 0.4);
+  }
+  50% {
+    box-shadow: 0 10px 30px rgba(255, 107, 53, 0.7), 0 0 20px rgba(255, 107, 53, 0.3);
+  }
+}
+

@@ -26,6 +26,7 @@
   --bg-surface: #ffffff;
   --bg-dark: #0f172a;
   --bg-subtle: #f1f5f9;
+  --bg-card: #ffffff;
 
   /* Typography Colors */
   --text-main: #0f172a;
@@ -55,6 +56,41 @@
   --font-display: 'Plus Jakarta Sans', sans-serif;
   --font-serif: 'Playfair Display', serif;
   --font-mono: 'JetBrains Mono', monospace;
+}
+
+/* 🏔️ Midnight Mountain Luxury Dark Theme */
+[data-theme="dark"] {
+  --primary: #ff7849;
+  --primary-hover: #ff8e66;
+  --primary-light: rgba(255, 120, 73, 0.15);
+  --primary-glow: rgba(255, 120, 73, 0.35);
+
+  --secondary: #f8fafc;
+  --secondary-light: #e2e8f0;
+
+  --accent-forest: #10b981;
+  --accent-gold: #fcd34d;
+  --accent-sky: #38bdf8;
+
+  --bg-page: #090d16;
+  --bg-surface: #111827;
+  --bg-dark: #030712;
+  --bg-subtle: #1e293b;
+  --bg-card: #111827;
+
+  --text-main: #f8fafc;
+  --text-body: #cbd5e1;
+  --text-muted: #94a3b8;
+  --text-light: #64748b;
+  --text-white: #ffffff;
+
+  --border-light: #1f293d;
+  --border-focus: #374151;
+
+  --shadow-sm: 0 2px 10px rgba(0, 0, 0, 0.35);
+  --shadow-md: 0 8px 30px rgba(0, 0, 0, 0.5);
+  --shadow-lg: 0 20px 50px rgba(0, 0, 0, 0.7);
+  --shadow-drawer: -10px 0 40px rgba(0, 0, 0, 0.8);
 }
 
 /* 3. CSS RESET & GLOBAL RESILIENCE */

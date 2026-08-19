@@ -1,0 +1,24 @@
+{
+  "name": "raahiyoo-travel-platform",
+  "version": "2.0.0",
+  "description": "Raahiyoo — AI-Powered Commercial Travel Discovery & Planning Platform",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "keywords": [
+    "travel",
+    "ai",
+    "gemini",
+    "itinerary",
+    "india"
+  ],
+  "author": "Sunnio (@sunnio.3)",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2"
+  }
+}

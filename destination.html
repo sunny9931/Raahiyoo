@@ -9,6 +9,7 @@
   <!-- Stylesheets -->
   <link rel="stylesheet" href="css/style.css" />
   <link rel="stylesheet" href="css/components.css" />
+  <script src="js/theme.js"></script>
   <style>
     html, body {
       width: 100%;
@@ -123,11 +124,21 @@
 
       <nav class="nav-menu">
         <a href="index.html#exploreSection" class="nav-item">All Destinations</a>
-        <a href="calculator.html" class="nav-item">Budget Calculator</a>
-        <a href="how-to-reach.html" class="nav-item">How to Reach</a>
+        <a href="ai-chat.html" class="nav-item" style="color: var(--primary);">💬 Raahiyoo AI</a>
+        <a href="ai-planner.html" class="nav-item">✨ AI Planner</a>
+        <a href="circuits.html" class="nav-item">🗺️ Circuits</a>
+        <a href="stays.html" class="nav-item">🏡 Stays</a>
+        <a href="compare.html" class="nav-item">⚖️ Compare</a>
       </nav>
 
       <div class="nav-actions">
+        <!-- Theme Switcher Toggle -->
+        <button class="theme-toggle-btn" id="themeToggleBtn" aria-label="Toggle Midnight Theme" title="Toggle Midnight Mountain Mode">
+          <span class="theme-icon theme-icon-moon">🌙</span>
+          <span class="theme-icon theme-icon-sun">☀️</span>
+          <span class="theme-label">Theme</span>
+        </button>
+
         <!-- Instagram Profile Link -->
         <a href="https://www.instagram.com/sunnio.3/" target="_blank" rel="noopener" class="insta-header-btn" title="Follow @sunnio.3 on Instagram">
           <svg class="insta-svg-icon" viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
@@ -159,9 +170,28 @@
       <button class="drawer-close-btn" id="mobileMenuCloseBtn" style="position: static; width: 34px; height: 34px; font-size: 1.2rem;">&times;</button>
     </div>
 
+    <!-- Mobile Theme Switcher Row -->
+    <div class="mobile-theme-row" id="mobileThemeRow">
+      <div style="display: flex; align-items: center; gap: 0.5rem;">
+        <span id="mobileThemeIcon">🌙</span>
+        <span id="mobileThemeText" style="font-weight: 700; font-size: 0.95rem;">Midnight Dark Mode</span>
+      </div>
+      <div class="theme-switch-pill" id="mobileThemeSwitchPill">
+        <span class="switch-handle"></span>
+      </div>
+    </div>
+
     <nav style="display: flex; flex-direction: column; gap: 0.5rem; margin-top: 1rem;">
       <a href="index.html#exploreSection" class="mobile-menu-link">
         <span>📍 All Destinations</span>
+        <span>&rarr;</span>
+      </a>
+      <a href="ai-chat.html" class="mobile-menu-link" style="color: var(--primary); font-weight: 800;">
+        <span>💬 Raahiyoo AI Copilot</span>
+        <span>&rarr;</span>
+      </a>
+      <a href="ai-planner.html" class="mobile-menu-link">
+        <span>✨ AI Trip Planner</span>
         <span>&rarr;</span>
       </a>
       <a href="calculator.html" class="mobile-menu-link">
@@ -413,7 +443,8 @@
               ${dest.tagline}
             </p>
             <div style="display: flex; gap: 0.65rem; flex-wrap: wrap;">
-              <button class="btn btn-primary btn-md" onclick="openLeadModal('${dest.name}')">Plan Custom Itinerary &rarr;</button>
+              <a href="ai-planner.html?to=${dest.id}" class="btn btn-primary btn-md">✨ Generate AI Trip Blueprint &rarr;</a>
+              <button class="btn btn-secondary btn-md" onclick="openLeadModal('${dest.name}')">Custom Itinerary</button>
               <button class="btn btn-secondary btn-md dest-header-print-btn" onclick="window.print()">📄 Print PDF</button>
               <a href="#howToReachSection" class="btn btn-secondary btn-md">How to Reach &darr;</a>
             </div>
@@ -438,6 +469,37 @@
             <div class="fact-box">
               <div class="fact-box-label">⭐ Traveler Rating</div>
               <div class="fact-box-val" style="font-size: 1.05rem;">${dest.rating} (${dest.reviewsCount})</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- LIVE WEATHER & SEASONALITY INTELLIGENCE -->
+        <div class="container" style="margin-top: 1.25rem;">
+          <div class="fact-box" style="background: linear-gradient(135deg, rgba(2, 132, 199, 0.06) 0%, rgba(16, 185, 129, 0.06) 100%); border-color: rgba(2, 132, 199, 0.25);">
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.75rem;">
+              <div style="display: flex; align-items: center; gap: 0.5rem;">
+                <span style="font-size: 1.3rem;">🌤️</span>
+                <div>
+                  <strong style="font-size: 0.95rem; color: var(--text-main); display: block;">Live Seasonality &amp; Weather Index</strong>
+                  <span style="font-size: 0.78rem; color: var(--text-muted);">Current season trends &bull; Best time: <strong>${dest.bestTime}</strong></span>
+                </div>
+              </div>
+              <div style="background: var(--bg-surface); padding: 0.35rem 0.75rem; border-radius: 9999px; font-size: 0.82rem; font-weight: 800; color: #0284c7; border: 1px solid var(--border-light);">
+                ⛰️ Elevation: ${dest.elevation}
+              </div>
+            </div>
+
+            <!-- 12-Month Visual Best-Time Bar -->
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(60px, 1fr)); gap: 0.35rem; text-align: center; margin-top: 0.75rem;">
+              ${['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'].map(m => {
+                const isBest = (dest.bestTime || '').includes(m) || (dest.bestTime || '').toLowerCase().includes('all year');
+                return `
+                  <div style="background: ${isBest ? 'rgba(16, 185, 129, 0.15)' : 'var(--bg-surface)'}; border: 1px solid ${isBest ? '#10b981' : 'var(--border-light)'}; border-radius: 6px; padding: 0.35rem 0.15rem;">
+                    <div style="font-size: 0.7rem; font-weight: 800; color: ${isBest ? '#059669' : 'var(--text-muted)'};">${m}</div>
+                    <div style="font-size: 0.65rem; color: ${isBest ? '#059669' : 'var(--text-light)'}; font-weight: 700;">${isBest ? '★ Peak' : 'Fair'}</div>
+                  </div>
+                `;
+              }).join('')}
             </div>
           </div>
         </div>
@@ -601,5 +663,11 @@
     if (closeBtn) closeBtn.onclick = closeMobileMenu;
     if (navBackdrop) navBackdrop.onclick = closeMobileMenu;
   </script>
+
+  <!-- Floating Raahiyoo AI Copilot Launcher -->
+  <a href="ai-chat.html" class="floating-ai-launcher" title="Chat with Raahiyoo AI 24/7 Travel Copilot">
+    <span style="font-size: 1.15rem;">💬</span>
+    <span>Ask Raahiyoo AI</span>
+  </a>
 </body>
 </html>

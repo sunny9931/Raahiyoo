@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Compare Destinations Head-to-Head | RAAHIYOO</title>
+  <meta name="description" content="Can't decide between Manali vs Kasol, Leh vs Spiti, or Goa vs Gokarna? Compare budgets, crowd levels, transit routes, and weather side-by-side." />
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <script src="js/theme.js"></script>
+
+  <style>
+    .compare-select-grid {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      gap: 1rem;
+      align-items: center;
+      margin-bottom: 2rem;
+    }
+    @media (max-width: 768px) {
+      .compare-select-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    .vs-circle {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: var(--primary);
+      color: #fff;
+      font-weight: 900;
+      font-size: 1.1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 14px var(--primary-glow);
+      margin: 0 auto;
+    }
+
+    .compare-side-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-light);
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+    }
+    [data-theme="dark"] .compare-side-card {
+      background: #111827;
+      border-color: #1f293d;
+    }
+
+    .compare-img-wrap {
+      position: relative;
+      height: 220px;
+      overflow: hidden;
+    }
+    .compare-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .compare-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      padding: 1.25rem 0;
+      border-bottom: 1px solid var(--border-light);
+    }
+    [data-theme="dark"] .compare-row {
+      border-bottom-color: #1f293d;
+    }
+    .compare-cell {
+      padding: 0 1rem;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- SITE HEADER -->
+  <header class="site-header">
+    <div class="container nav-wrap">
+      <a href="index.html" class="brand">
+        <svg class="brand-icon" fill="currentColor" viewBox="0 0 24 24"><path d="M14 6l-3.75 5 2.85 3.8-1.6 1.2L7 10l-6 8h22L14 6z"/></svg>
+        <div class="brand-text-wrap">
+          <span class="brand-title">RAAHIYOO</span>
+          <span class="brand-byline">by sunnio</span>
+        </div>
+      </a>
+
+      <nav class="nav-menu">
+        <a href="index.html#exploreSection" class="nav-item">All Destinations</a>
+        <a href="ai-chat.html" class="nav-item">💬 Raahiyoo AI</a>
+        <a href="ai-planner.html" class="nav-item">✨ AI Planner</a>
+        <a href="circuits.html" class="nav-item">🗺️ Circuits</a>
+        <a href="stays.html" class="nav-item">🏡 Stays</a>
+        <a href="compare.html" class="nav-item active" style="color: var(--primary);">⚖️ Compare</a>
+      </nav>
+
+      <div class="nav-actions">
+        <button class="theme-toggle-btn" id="themeToggleBtn" aria-label="Toggle Midnight Theme" title="Toggle Midnight Mountain Mode">
+          <span class="theme-icon theme-icon-moon">🌙</span>
+          <span class="theme-icon theme-icon-sun">☀️</span>
+          <span class="theme-label">Theme</span>
+        </button>
+
+        <a href="https://www.instagram.com/sunnio.3/" target="_blank" rel="noopener" class="insta-header-btn" title="Follow @sunnio.3 on Instagram">
+          <svg class="insta-svg-icon" viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+          <span>@sunnio.3</span>
+        </a>
+        <button class="btn btn-primary btn-sm" onclick="openLeadModal('Comparison Trip Consultation')">Plan Trip</button>
+        <button class="mobile-nav-toggle" id="mobileMenuOpenBtn" aria-label="Open Navigation Menu">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- MOBILE SLIDE-IN NAVIGATION MENU -->
+  <div class="drawer-backdrop" id="mobileNavBackdrop"></div>
+  <aside class="mobile-menu-drawer" id="mobileNavDrawer" aria-label="Mobile Navigation">
+    <div style="display: flex; justify-content: space-between; align-items: center; padding-bottom: 1rem; border-bottom: 1px solid var(--border-light);">
+      <div class="brand">
+        <svg class="brand-icon" style="width: 24px; height: 24px;" fill="currentColor" viewBox="0 0 24 24"><path d="M14 6l-3.75 5 2.85 3.8-1.6 1.2L7 10l-6 8h22L14 6z"/></svg>
+        <div class="brand-text-wrap">
+          <span class="brand-title" style="font-size: 1.2rem;">RAAHIYOO</span>
+          <span class="brand-byline">by sunnio</span>
+        </div>
+      </div>
+      <button class="drawer-close-btn" id="mobileMenuCloseBtn">&times;</button>
+    </div>
+
+    <!-- Mobile Theme Switcher Row -->
+    <div class="mobile-theme-row" id="mobileThemeRow">
+      <div style="display: flex; align-items: center; gap: 0.5rem;">
+        <span id="mobileThemeIcon">🌙</span>
+        <span id="mobileThemeText" style="font-weight: 700; font-size: 0.95rem;">Midnight Dark Mode</span>
+      </div>
+      <div class="theme-switch-pill" id="mobileThemeSwitchPill"><span class="switch-handle"></span></div>
+    </div>
+
+    <nav style="display: flex; flex-direction: column; gap: 0.5rem; margin-top: 1rem;">
+      <a href="index.html#exploreSection" class="mobile-menu-link"><span>📍 All Destinations</span><span>&rarr;</span></a>
+      <a href="ai-chat.html" class="mobile-menu-link" style="color: var(--primary); font-weight: 800;"><span>💬 Raahiyoo AI Copilot</span><span>&rarr;</span></a>
+      <a href="ai-planner.html" class="mobile-menu-link"><span>✨ AI Trip Planner</span><span>&rarr;</span></a>
+      <a href="circuits.html" class="mobile-menu-link"><span>🗺️ Road Trip Circuits</span><span>&rarr;</span></a>
+      <a href="stays.html" class="mobile-menu-link"><span>🏡 Verified Homestays</span><span>&rarr;</span></a>
+      <a href="compare.html" class="mobile-menu-link active" style="color: var(--primary);"><span>⚖️ Compare Destinations</span><span>&rarr;</span></a>
+      <a href="sos.html" class="mobile-menu-link" style="color: #ef4444;"><span>🆘 Emergency SOS</span><span>&rarr;</span></a>
+    </nav>
+  </aside>
+
+  <!-- HERO SECTION -->
+  <section class="section-spacing text-center" style="background: radial-gradient(circle at 50% 10%, rgba(255, 107, 53, 0.08) 0%, rgba(248, 250, 252, 1) 70%); padding-bottom: 2rem;">
+    <div class="container">
+      <span class="section-eyebrow">HEAD-TO-HEAD BATTLE</span>
+      <h1 style="font-size: clamp(2rem, 4.5vw, 3.25rem); color: var(--text-main); margin: 0.75rem 0 0.5rem;">
+        Compare 2 Destinations Side-by-Side
+      </h1>
+      <p class="section-subtitle" style="margin: 0 auto; max-width: 680px;">
+        Confused between Manali vs Kasol or Leh vs Spiti? Compare daily budgets, transit convenience, weather, and crowd levels.
+      </p>
+    </div>
+  </section>
+
+  <!-- POPULAR PRESETS -->
+  <main class="container">
+    <div class="circuit-chip-group" id="presetBattlesContainer" style="justify-content: center; flex-wrap: wrap;">
+      <!-- Injected via js -->
+    </div>
+
+    <!-- DUAL SELECTOR -->
+    <div class="compare-select-grid">
+      <div>
+        <label class="form-label">Destination 1</label>
+        <select class="form-input" id="selectDestA" onchange="handleSelectChange()"></select>
+      </div>
+      <div class="vs-circle">VS</div>
+      <div>
+        <label class="form-label">Destination 2</label>
+        <select class="form-input" id="selectDestB" onchange="handleSelectChange()"></select>
+      </div>
+    </div>
+
+    <!-- SIDE BY SIDE RESULT VIEW -->
+    <div id="comparisonResultsView" style="margin-bottom: 3rem;">
+      <!-- Injected via js -->
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <a href="index.html" class="brand" style="margin-bottom: 0.75rem;">
+            <svg class="brand-icon" fill="currentColor" viewBox="0 0 24 24"><path d="M14 6l-3.75 5 2.85 3.8-1.6 1.2L7 10l-6 8h22L14 6z"/></svg>
+            <div class="brand-text-wrap">
+              <span class="brand-title">RAAHIYOO</span>
+              <span class="brand-byline">by sunnio</span>
+            </div>
+          </a>
+        </div>
+        <div>
+          <h4 class="footer-col-title">Explore</h4>
+          <ul class="footer-list">
+            <li><a href="index.html#exploreSection">All Destinations</a></li>
+            <li><a href="ai-planner.html">✨ AI Trip Planner</a></li>
+            <li><a href="compare.html">Compare Places</a></li>
+            <li><a href="circuits.html">Road Circuits</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div>&copy; 2026 RAAHIYOO by Sunnio. All rights reserved.</div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/data.js"></script>
+  <script src="js/compare.js"></script>
+  <script src="js/app.js"></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      populateDropdowns();
+      initPresetChips();
+      renderComparison('manali', 'kasol');
+      initMobileDrawerHandlers();
+    });
+
+    function populateDropdowns() {
+      const a = document.getElementById('selectDestA');
+      const b = document.getElementById('selectDestB');
+      if (!a || !b || typeof DESTINATIONS === 'undefined') return;
+
+      const opts = DESTINATIONS.map(d => `<option value="${d.id}">${d.name} (${d.state})</option>`).join('');
+      a.innerHTML = opts;
+      b.innerHTML = opts;
+
+      a.value = 'manali';
+      b.value = 'kasol';
+    }
+
+    function initPresetChips() {
+      const container = document.getElementById('presetBattlesContainer');
+      if (!container || typeof POPULAR_BATTLES === 'undefined') return;
+
+      container.innerHTML = POPULAR_BATTLES.map(p => `
+        <button class="btn btn-secondary btn-sm" style="border-radius: 9999px;" onclick="loadPresetBattle('${p.destA}', '${p.destB}')">
+          ⚔️ ${p.name}
+        </button>
+      `).join('');
+    }
+
+    function loadPresetBattle(idA, idB) {
+      document.getElementById('selectDestA').value = idA;
+      document.getElementById('selectDestB').value = idB;
+      renderComparison(idA, idB);
+    }
+
+    function handleSelectChange() {
+      const idA = document.getElementById('selectDestA').value;
+      const idB = document.getElementById('selectDestB').value;
+      renderComparison(idA, idB);
+    }
+
+    function renderComparison(idA, idB) {
+      const data = compareTwoDestinations(idA, idB);
+      const container = document.getElementById('comparisonResultsView');
+      if (!data || !container) return;
+
+      const { destA, destB } = data;
+
+      container.innerHTML = `
+        <div class="grid-2" style="gap: 1.5rem; margin-bottom: 2rem;">
+          <!-- Card A -->
+          <div class="compare-side-card">
+            <div class="compare-img-wrap">
+              <img src="${destA.heroImage}" alt="${destA.name}" />
+              <div style="position: absolute; bottom: 1rem; left: 1rem; color: #fff; z-index: 2;">
+                <span style="background: var(--primary); font-size: 0.75rem; font-weight: 800; padding: 0.2rem 0.6rem; border-radius: 9999px; font-family: var(--font-mono); text-transform: uppercase;">
+                  ${destA.state}
+                </span>
+                <h3 style="font-size: 1.6rem; color: #fff; margin: 0.25rem 0 0;">${destA.name}</h3>
+              </div>
+              <div style="position: absolute; inset: 0; background: linear-gradient(180deg, transparent 40%, rgba(15,23,42,0.9) 100%);"></div>
+            </div>
+            <div style="padding: 1.25rem;">
+              <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 1rem; line-height: 1.5;">${destA.tagline}</p>
+              <a href="destination.html?id=${destA.id}" class="btn btn-primary btn-sm" style="width: 100%;">View Full ${destA.name} Guide &rarr;</a>
+            </div>
+          </div>
+
+          <!-- Card B -->
+          <div class="compare-side-card">
+            <div class="compare-img-wrap">
+              <img src="${destB.heroImage}" alt="${destB.name}" />
+              <div style="position: absolute; bottom: 1rem; left: 1rem; color: #fff; z-index: 2;">
+                <span style="background: #059669; font-size: 0.75rem; font-weight: 800; padding: 0.2rem 0.6rem; border-radius: 9999px; font-family: var(--font-mono); text-transform: uppercase;">
+                  ${destB.state}
+                </span>
+                <h3 style="font-size: 1.6rem; color: #fff; margin: 0.25rem 0 0;">${destB.name}</h3>
+              </div>
+              <div style="position: absolute; inset: 0; background: linear-gradient(180deg, transparent 40%, rgba(15,23,42,0.9) 100%);"></div>
+            </div>
+            <div style="padding: 1.25rem;">
+              <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 1rem; line-height: 1.5;">${destB.tagline}</p>
+              <a href="destination.html?id=${destB.id}" class="btn btn-primary btn-sm" style="width: 100%;">View Full ${destB.name} Guide &rarr;</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Comparative Metrics Matrix -->
+        <div class="story-box">
+          <h3 style="font-size: 1.35rem; margin-bottom: 1rem;">📊 Metric-by-Metric Breakdown</h3>
+
+          <!-- Row 1: Daily Budget -->
+          <div class="compare-row">
+            <div class="compare-cell">
+              <span style="font-size: 0.75rem; font-weight: 700; color: var(--primary); text-transform: uppercase;">DAILY BUDGET (AVG)</span>
+              <div style="font-size: 1.35rem; font-weight: 900; color: var(--text-main); margin-top: 0.2rem;">₹${destA.basePriceINR.toLocaleString('en-IN')}/day</div>
+            </div>
+            <div class="compare-cell">
+              <span style="font-size: 0.75rem; font-weight: 700; color: var(--primary); text-transform: uppercase;">DAILY BUDGET (AVG)</span>
+              <div style="font-size: 1.35rem; font-weight: 900; color: var(--text-main); margin-top: 0.2rem;">₹${destB.basePriceINR.toLocaleString('en-IN')}/day</div>
+            </div>
+          </div>
+
+          <!-- Row 2: Best Season & Duration -->
+          <div class="compare-row">
+            <div class="compare-cell">
+              <span style="font-size: 0.75rem; font-weight: 700; color: #059669; text-transform: uppercase;">BEST TIME &amp; DURATION</span>
+              <div style="font-size: 1rem; font-weight: 800; color: var(--text-main); margin-top: 0.2rem;">${destA.bestTime} &bull; ${destA.idealDays}</div>
+            </div>
+            <div class="compare-cell">
+              <span style="font-size: 0.75rem; font-weight: 700; color: #059669; text-transform: uppercase;">BEST TIME &amp; DURATION</span>
+              <div style="font-size: 1rem; font-weight: 800; color: var(--text-main); margin-top: 0.2rem;">${destB.bestTime} &bull; ${destB.idealDays}</div>
+            </div>
+          </div>
+
+          <!-- Row 3: Elevation & Category -->
+          <div class="compare-row">
+            <div class="compare-cell">
+              <span style="font-size: 0.75rem; font-weight: 700; color: #0284c7; text-transform: uppercase;">ELEVATION &amp; VIBE</span>
+              <div style="font-size: 1rem; font-weight: 800; color: var(--text-main); margin-top: 0.2rem;">${destA.elevation || 'Valley'} &bull; ${(destA.mood || []).join(', ')}</div>
+            </div>
+            <div class="compare-cell">
+              <span style="font-size: 0.75rem; font-weight: 700; color: #0284c7; text-transform: uppercase;">ELEVATION &amp; VIBE</span>
+              <div style="font-size: 1rem; font-weight: 800; color: var(--text-main); margin-top: 0.2rem;">${destB.elevation || 'Valley'} &bull; ${(destB.mood || []).join(', ')}</div>
+            </div>
+          </div>
+
+          <!-- Row 4: Transit Summary -->
+          <div class="compare-row" style="border-bottom: none;">
+            <div class="compare-cell">
+              <span style="font-size: 0.75rem; font-weight: 700; color: #7c3aed; text-transform: uppercase;">TRANSIT CONNECTION</span>
+              <div style="font-size: 0.88rem; color: var(--text-body); margin-top: 0.2rem; line-height: 1.5;">${destA.transitSummary || 'Well connected via state rail & highways.'}</div>
+            </div>
+            <div class="compare-cell">
+              <span style="font-size: 0.75rem; font-weight: 700; color: #7c3aed; text-transform: uppercase;">TRANSIT CONNECTION</span>
+              <div style="font-size: 0.88rem; color: var(--text-body); margin-top: 0.2rem; line-height: 1.5;">${destB.transitSummary || 'Well connected via state rail & highways.'}</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- AI Blueprint Generation Links -->
+        <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+          <a href="ai-planner.html?to=${destA.id}" class="btn btn-primary btn-md" style="flex: 1; text-align: center;">
+            ✨ Generate AI Blueprint for ${destA.name} &rarr;
+          </a>
+          <a href="ai-planner.html?to=${destB.id}" class="btn btn-primary btn-md" style="flex: 1; text-align: center;">
+            ✨ Generate AI Blueprint for ${destB.name} &rarr;
+          </a>
+        </div>
+      `;
+    }
+
+    function initMobileDrawerHandlers() {
+      const openBtn = document.getElementById('mobileMenuOpenBtn');
+      const closeBtn = document.getElementById('mobileMenuCloseBtn');
+      const navBackdrop = document.getElementById('mobileNavBackdrop');
+      const drawer = document.getElementById('mobileNavDrawer');
+      if (openBtn) openBtn.onclick = () => { drawer.classList.add('active'); navBackdrop.classList.add('active'); };
+      if (closeBtn) closeBtn.onclick = () => { drawer.classList.remove('active'); navBackdrop.classList.remove('active'); };
+      if (navBackdrop) navBackdrop.onclick = () => { drawer.classList.remove('active'); navBackdrop.classList.remove('active'); };
+    }
+  </script>
+
+  <!-- Floating Raahiyoo AI Copilot Launcher -->
+  <a href="ai-chat.html" class="floating-ai-launcher" title="Chat with Raahiyoo AI 24/7 Travel Copilot">
+    <span style="font-size: 1.15rem;">💬</span>
+    <span>Ask Raahiyoo AI</span>
+  </a>
+</body>
+</html>

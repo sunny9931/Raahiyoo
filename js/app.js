@@ -1214,4 +1214,13 @@ if (typeof window !== 'undefined') {
   window.takeMountainPledge = takeMountainPledge;
   window.openTermsModal = openTermsModal;
   window.closeTermsModal = closeTermsModal;
+
+  // Register PWA Service Worker for zero-network mountain resilience
+  if ('serviceWorker' in navigator && window.location.protocol.startsWith('http')) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('sw.js').then(() => {
+        console.log('🏔️ RAAHIYOO 2.0 Offline Service Worker Active');
+      }).catch(() => {});
+    });
+  }
 }
