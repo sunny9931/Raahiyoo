@@ -50,13 +50,12 @@ Do not simply repeat website content.
 
 Understand user intent and provide detailed, useful responses.`;
 
-// Candidate models to try in order of speed and capability
+// Supported active Google Gemini models (no deprecated models)
 const GEMINI_MODELS = [
   'gemini-1.5-flash',
-  'gemini-1.5-flash-latest',
+  'gemini-1.5-flash-8b',
   'gemini-1.5-pro',
-  'gemini-2.0-flash',
-  'gemini-pro'
+  'gemini-2.0-flash'
 ];
 
 /**
@@ -82,7 +81,7 @@ function isRateLimited(ip) {
 function buildGeminiContents(history, currentMessage) {
   const rawTurns = [];
 
-  if (Array.isArray(history)) {
+  if (Array.isArray(history) && history.length > 0) {
     for (const turn of history.slice(-16)) {
       if (turn && typeof turn.content === 'string' && turn.content.trim()) {
         rawTurns.push({
@@ -103,6 +102,13 @@ function buildGeminiContents(history, currentMessage) {
   while (rawTurns.length > 0 && rawTurns[0].role !== 'user') {
     rawTurns.shift();
   }
+
+  if (rawTurns.length === 0) {
+    rawTurns.push({ role: 'user', text: currentMessage.trim() });
+  }
+
+  // Prepend system prompt to the first user turn for 100% universal Gemini API compatibility
+  rawTurns[0].text = `[SYSTEM INSTRUCTIONS]:\n${SYSTEM_PROMPT}\n\n[USER QUERY]:\n${rawTurns[0].text}`;
 
   // Merge consecutive same-role turns to satisfy Gemini strict alternating requirement
   const mergedContents = [];
@@ -195,9 +201,6 @@ export default async function handler(req, res) {
         const geminiEndpoint = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${encodeURIComponent(apiKey)}`;
 
         const geminiPayload = {
-          systemInstruction: {
-            parts: [{ text: SYSTEM_PROMPT }]
-          },
           contents: contents,
           generationConfig: {
             temperature: 0.75,

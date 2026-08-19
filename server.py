@@ -45,10 +45,9 @@ Understand user intent and provide detailed, useful responses."""
 
 GEMINI_MODELS = [
     "gemini-1.5-flash",
-    "gemini-1.5-flash-latest",
+    "gemini-1.5-flash-8b",
     "gemini-1.5-pro",
-    "gemini-2.0-flash",
-    "gemini-pro"
+    "gemini-2.0-flash"
 ]
 
 
@@ -64,6 +63,11 @@ def build_gemini_contents(history, current_message):
 
     while raw_turns and raw_turns[0]["role"] != "user":
         raw_turns.pop(0)
+
+    if not raw_turns:
+        raw_turns.append({"role": "user", "text": current_message.strip()})
+
+    raw_turns[0]["text"] = f"[SYSTEM INSTRUCTIONS]:\n{SYSTEM_PROMPT}\n\n[USER QUERY]:\n{raw_turns[0]['text']}"
 
     merged = []
     for turn in raw_turns:
@@ -123,7 +127,6 @@ class RaahiyooDevServer(SimpleHTTPRequestHandler):
             for model in GEMINI_MODELS:
                 endpoint = f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent?key={api_key}"
                 payload = {
-                    "systemInstruction": {"parts": [{"text": SYSTEM_PROMPT}]},
                     "contents": contents,
                     "generationConfig": {"temperature": 0.75, "maxOutputTokens": 2048}
                 }
