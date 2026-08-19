@@ -6,6 +6,7 @@ Run locally with: python3 server.py
 """
 
 import os
+import re
 import json
 import urllib.request
 import urllib.error
@@ -44,10 +45,11 @@ Do not simply repeat website content.
 Understand user intent and provide detailed, useful responses."""
 
 GEMINI_MODELS = [
+    "gemini-3.6-flash",
+    "gemini-2.5-flash",
     "gemini-1.5-flash",
     "gemini-1.5-flash-8b",
-    "gemini-1.5-pro",
-    "gemini-2.0-flash"
+    "gemini-1.5-pro"
 ]
 
 
@@ -122,9 +124,11 @@ class RaahiyooDevServer(SimpleHTTPRequestHandler):
                 return
 
             contents = build_gemini_contents(history, message)
+            models_to_try = list(GEMINI_MODELS)
             last_err = ""
 
-            for model in GEMINI_MODELS:
+            while models_to_try:
+                model = models_to_try.pop(0)
                 endpoint = f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent?key={api_key}"
                 payload = {
                     "contents": contents,
@@ -146,6 +150,9 @@ class RaahiyooDevServer(SimpleHTTPRequestHandler):
                 except urllib.error.HTTPError as e:
                     err_body = e.read().decode("utf-8")
                     last_err = f"Model {model} [{e.code}]: {err_body}"
+                    match = re.search(r"use models/([a-zA-Z0-9\.\-_]+)", err_body, re.I)
+                    if match and match.group(1) not in models_to_try:
+                        models_to_try.insert(0, match.group(1))
                 except Exception as e:
                     last_err = f"Model {model} error: {str(e)}"
 

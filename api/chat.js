@@ -3,12 +3,12 @@
  * Route: POST /api/chat
  * 
  * Features:
- * 1. Google Gemini 1.5/2.0 API Integration with Multi-Model Fallback
- * 2. Strict Alternating Multi-turn conversation history formatting
- * 3. Secure environment variable loading (process.env.GEMINI_API_KEY)
- * 4. Request validation & input sanitization
- * 5. In-memory sliding window rate limiting
- * 6. Transparent and graceful error handling
+ * 1. Google Gemini Latest Models (gemini-3.6-flash, gemini-2.5-flash, gemini-1.5-flash)
+ * 2. Self-healing model auto-negotiation
+ * 3. Strict Alternating Multi-turn conversation history formatting
+ * 4. Secure environment variable loading (process.env.GEMINI_API_KEY)
+ * 5. Request validation & input sanitization
+ * 6. In-memory sliding window rate limiting
  * 7. Full Vercel Serverless compatibility
  */
 
@@ -50,12 +50,13 @@ Do not simply repeat website content.
 
 Understand user intent and provide detailed, useful responses.`;
 
-// Supported active Google Gemini models (no deprecated models)
+// Supported active Google Gemini models in prioritized order
 const GEMINI_MODELS = [
+  'gemini-3.6-flash',
+  'gemini-2.5-flash',
   'gemini-1.5-flash',
   'gemini-1.5-flash-8b',
-  'gemini-1.5-pro',
-  'gemini-2.0-flash'
+  'gemini-1.5-pro'
 ];
 
 /**
@@ -107,7 +108,7 @@ function buildGeminiContents(history, currentMessage) {
     rawTurns.push({ role: 'user', text: currentMessage.trim() });
   }
 
-  // Prepend system prompt to the first user turn for 100% universal Gemini API compatibility
+  // Prepend system prompt to the first user turn for 100% universal compatibility
   rawTurns[0].text = `[SYSTEM INSTRUCTIONS]:\n${SYSTEM_PROMPT}\n\n[USER QUERY]:\n${rawTurns[0].text}`;
 
   // Merge consecutive same-role turns to satisfy Gemini strict alternating requirement
@@ -193,10 +194,13 @@ export default async function handler(req, res) {
     // 6. Build alternating Gemini contents
     const contents = buildGeminiContents(history, message);
 
-    // 7. Try candidate Gemini models with fallback
+    // 7. Try candidate Gemini models with fallback and self-healing
+    const modelsToTry = [...GEMINI_MODELS];
     let lastError = null;
 
-    for (const model of GEMINI_MODELS) {
+    while (modelsToTry.length > 0) {
+      const model = modelsToTry.shift();
+
       try {
         const geminiEndpoint = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${encodeURIComponent(apiKey)}`;
 
@@ -243,6 +247,12 @@ export default async function handler(req, res) {
             status: apiResponse.status,
             message: parsedError
           };
+
+          // Self-healing: if Google suggests a specific model in the error message, try that recommended model!
+          const suggestedModelMatch = parsedError.match(/use models\/([a-zA-Z0-9\.\-_]+)/i);
+          if (suggestedModelMatch && suggestedModelMatch[1] && !modelsToTry.includes(suggestedModelMatch[1])) {
+            modelsToTry.unshift(suggestedModelMatch[1]);
+          }
 
           // If unauthorized/bad key (401/403), stop trying other models as key is invalid
           if (apiResponse.status === 401 || apiResponse.status === 403) {
