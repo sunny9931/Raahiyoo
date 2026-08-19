@@ -323,21 +323,27 @@
         <p style="color: #64748b; font-size: 0.9rem;">Receive verified itinerary, trusted drivers &amp; stay rates via WhatsApp.</p>
       </div>
 
-      <form id="leadCaptureForm">
+      <form id="leadCaptureForm" novalidate>
         <input type="hidden" id="leadDestField" value="Calculated Budget Trip" />
-        <div class="form-group">
-          <label class="form-label" for="leadName">Your Full Name</label>
-          <input type="text" id="leadName" class="form-input" placeholder="e.g. Rahul Sharma" required />
+
+        <div class="form-group" style="margin-bottom: 1rem;">
+          <label class="form-label" for="leadName">Your Full Name <span style="color:#ef4444;">*</span></label>
+          <input type="text" id="leadName" class="form-input" placeholder="e.g. Rahul Sharma" autocomplete="name" />
+          <div id="leadNameError" style="display:none; color: #ef4444; font-size: 0.82rem; font-weight: 600; margin-top: 0.35rem;"></div>
         </div>
-        <div class="form-group">
-          <label class="form-label" for="leadPhone">WhatsApp Number</label>
-          <input type="tel" id="leadPhone" class="form-input" placeholder="e.g. +91 98765 43210" required />
+
+        <div class="form-group" style="margin-bottom: 1rem;">
+          <label class="form-label" for="leadPhone">WhatsApp Phone Number <span style="color:#ef4444;">*</span></label>
+          <input type="tel" id="leadPhone" class="form-input" placeholder="e.g. 98765 43210" autocomplete="tel" />
+          <div id="leadPhoneError" style="display:none; color: #ef4444; font-size: 0.82rem; font-weight: 600; margin-top: 0.35rem;"></div>
         </div>
-        <div class="form-group">
-          <label class="form-label" for="leadTravelDate">Estimated Month / Dates</label>
+
+        <div class="form-group" style="margin-bottom: 1.25rem;">
+          <label class="form-label" for="leadTravelDate">Estimated Month / Dates (Optional)</label>
           <input type="text" id="leadTravelDate" class="form-input" placeholder="e.g. Next Month / Long Weekend" />
         </div>
-        <button type="submit" class="btn btn-primary btn-lg" style="width: 100%; margin-top: 0.5rem;">
+
+        <button type="submit" class="btn btn-primary btn-lg" style="width: 100%; margin-top: 0.25rem;">
           Send Complete Plan on WhatsApp &rarr;
         </button>
       </form>
@@ -506,35 +512,6 @@
   <script src="js/app.js"></script>
   <script src="js/calculator.js"></script>
   <script>
-    function openLeadModal(destName) {
-      const modal = document.getElementById('leadModalBackdrop');
-      const field = document.getElementById('leadDestField');
-      if (modal) {
-        if (field) field.value = destName;
-        modal.classList.add('active');
-      }
-    }
-    function closeLeadModal() {
-      const modal = document.getElementById('leadModalBackdrop');
-      if (modal) modal.classList.remove('active');
-    }
-    document.getElementById('leadModalCloseBtn').onclick = closeLeadModal;
-    document.getElementById('leadCaptureForm').onsubmit = (e) => {
-      e.preventDefault();
-      const name = document.getElementById('leadName').value;
-      const phone = document.getElementById('leadPhone').value;
-      document.getElementById('leadCaptureForm').innerHTML = `
-        <div style="text-align: center; padding: 2rem 1rem;">
-          <div style="font-size: 3rem; color: #10b981; margin-bottom: 1rem;">✓</div>
-          <h3 style="color: #0f172a; margin-bottom: 0.5rem;">Quotation Sent, ${name}!</h3>
-          <p style="color: #475569; font-size: 0.95rem; margin-bottom: 1.5rem;">
-            Our travel team will send the full itemized budget breakdown &amp; stay options to <strong>${phone}</strong> via WhatsApp within 15 minutes.
-          </p>
-          <button class="btn btn-primary" onclick="closeLeadModal()">Done</button>
-        </div>
-      `;
-    };
-
     // Mobile Navigation Drawer Handlers
     function openMobileMenu() {
       const drawer = document.getElementById('mobileNavDrawer');

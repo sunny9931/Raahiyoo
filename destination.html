@@ -198,21 +198,27 @@
         <p style="color: #64748b; font-size: 0.9rem;">Direct verified itinerary, stays &amp; cost estimate via WhatsApp.</p>
       </div>
 
-      <form id="leadCaptureForm">
+      <form id="leadCaptureForm" novalidate>
         <input type="hidden" id="leadDestField" value="" />
-        <div class="form-group">
-          <label class="form-label" for="leadName">Your Full Name</label>
-          <input type="text" id="leadName" class="form-input" placeholder="e.g. Rahul Sharma" required />
+
+        <div class="form-group" style="margin-bottom: 1rem;">
+          <label class="form-label" for="leadName">Your Full Name <span style="color:#ef4444;">*</span></label>
+          <input type="text" id="leadName" class="form-input" placeholder="e.g. Rahul Sharma" autocomplete="name" />
+          <div id="leadNameError" style="display:none; color: #ef4444; font-size: 0.82rem; font-weight: 600; margin-top: 0.35rem;"></div>
         </div>
-        <div class="form-group">
-          <label class="form-label" for="leadPhone">WhatsApp Number</label>
-          <input type="tel" id="leadPhone" class="form-input" placeholder="e.g. +91 98765 43210" required />
+
+        <div class="form-group" style="margin-bottom: 1rem;">
+          <label class="form-label" for="leadPhone">WhatsApp Phone Number <span style="color:#ef4444;">*</span></label>
+          <input type="tel" id="leadPhone" class="form-input" placeholder="e.g. 98765 43210" autocomplete="tel" />
+          <div id="leadPhoneError" style="display:none; color: #ef4444; font-size: 0.82rem; font-weight: 600; margin-top: 0.35rem;"></div>
         </div>
-        <div class="form-group">
-          <label class="form-label" for="leadTravelDate">Estimated Month / Dates</label>
-          <input type="text" id="leadTravelDate" class="form-input" placeholder="e.g. Next Month / Diwali" />
+
+        <div class="form-group" style="margin-bottom: 1.25rem;">
+          <label class="form-label" for="leadTravelDate">Estimated Travel Month / Dates (Optional)</label>
+          <input type="text" id="leadTravelDate" class="form-input" placeholder="e.g. Next Month / Diwali Holidays" />
         </div>
-        <button type="submit" class="btn btn-primary btn-lg" style="width: 100%; margin-top: 0.5rem;">
+
+        <button type="submit" class="btn btn-primary btn-lg" style="width: 100%; margin-top: 0.25rem;">
           Send Me Itinerary on WhatsApp &rarr;
         </button>
       </form>
@@ -378,6 +384,7 @@
 
   <!-- Scripts -->
   <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       const main = document.getElementById('destPageMain');
@@ -504,14 +511,19 @@
           <!-- INTERACTIVE CHECKLIST -->
           <div class="story-box">
             <div class="section-eyebrow">Smart Packing</div>
-            <h2 style="margin-bottom: 0.5rem; color: #0f172a; font-size: clamp(1.4rem, 3vw, 1.8rem);">Essential Packing Checklist</h2>
+            <div style="display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.5rem;">
+              <h2 style="margin: 0; color: #0f172a; font-size: clamp(1.4rem, 3vw, 1.8rem);">Essential Packing Checklist</h2>
+              <span id="packingProgressText" style="font-family: monospace; font-size: 0.85rem; font-weight: 700; color: #ff6b35;">
+                ${Object.values(savedChecklist).filter(Boolean).length} of ${dest.packing.length} packed (${Math.round((Object.values(savedChecklist).filter(Boolean).length / dest.packing.length) * 100)}%)
+              </span>
+            </div>
             <p style="color: #64748b; margin-bottom: 1.25rem; font-size: 0.92rem;">Check off items as you pack. Automatically saved in your browser!</p>
 
             <div style="display: flex; flex-direction: column; gap: 0.65rem;">
               ${dest.packing.map((item, idx) => `
-                <label style="display: flex; align-items: center; gap: 0.75rem; background: #f8fafc; padding: 0.75rem 1rem; border-radius: 10px; border: 1px solid #e2e8f0; cursor: pointer;">
-                  <input type="checkbox" ${savedChecklist[idx] ? 'checked' : ''} onchange="toggleChecklistItem('${dest.id}', ${idx}, this.checked)" style="width: 18px; height: 18px; accent-color: #ff6b35;" />
-                  <span style="font-size: 0.95rem; font-weight: 600; color: #1e293b; ${savedChecklist[idx] ? 'text-decoration: line-through; color: #94a3b8;' : ''}">${item}</span>
+                <label style="display: flex; align-items: center; gap: 0.75rem; background: #f8fafc; padding: 0.75rem 1rem; border-radius: 10px; border: 1px solid #e2e8f0; cursor: pointer; transition: all 0.2s ease;">
+                  <input type="checkbox" class="packing-chk-input" ${savedChecklist[idx] ? 'checked' : ''} onchange="toggleChecklistItem('${dest.id}', ${idx}, this)" style="width: 18px; height: 18px; accent-color: #ff6b35; cursor: pointer;" />
+                  <span id="chk-item-${idx}" style="font-size: 0.95rem; font-weight: 600; color: ${savedChecklist[idx] ? '#94a3b8' : '#1e293b'}; ${savedChecklist[idx] ? 'text-decoration: line-through;' : ''}">${item}</span>
                 </label>
               `).join('')}
             </div>
@@ -537,48 +549,31 @@
       document.getElementById('pageInquiryBtn').onclick = () => openLeadModal(dest.name);
     });
 
-    function toggleChecklistItem(destId, index, isChecked) {
+    function toggleChecklistItem(destId, index, inputEl) {
       const storageKey = `raahiyoo_chk_${destId}`;
       const saved = JSON.parse(localStorage.getItem(storageKey) || '{}');
-      saved[index] = isChecked;
+      saved[index] = inputEl.checked;
       localStorage.setItem(storageKey, JSON.stringify(saved));
-      location.reload();
-    }
+      
+      const span = document.getElementById(`chk-item-${index}`);
+      if (span) {
+        if (inputEl.checked) {
+          span.style.textDecoration = 'line-through';
+          span.style.color = '#94a3b8';
+        } else {
+          span.style.textDecoration = 'none';
+          span.style.color = '#1e293b';
+        }
+      }
 
-    function openLeadModal(destName) {
-      const modal = document.getElementById('leadModalBackdrop');
-      const title = document.getElementById('modalDestTitle');
-      const field = document.getElementById('leadDestField');
-      if (modal) {
-        if (title) title.textContent = `Plan Trip to ${destName}`;
-        if (field) field.value = destName;
-        modal.classList.add('active');
+      const allInputs = document.querySelectorAll('.packing-chk-input');
+      const checkedCount = Object.values(saved).filter(Boolean).length;
+      const progressText = document.getElementById('packingProgressText');
+      if (progressText && allInputs.length > 0) {
+        const pct = Math.round((checkedCount / allInputs.length) * 100);
+        progressText.textContent = `${checkedCount} of ${allInputs.length} packed (${pct}%)`;
       }
     }
-
-    function closeLeadModal() {
-      const modal = document.getElementById('leadModalBackdrop');
-      if (modal) modal.classList.remove('active');
-    }
-
-    document.getElementById('leadModalCloseBtn').onclick = closeLeadModal;
-    document.getElementById('leadCaptureForm').onsubmit = (e) => {
-      e.preventDefault();
-      const name = document.getElementById('leadName').value;
-      const phone = document.getElementById('leadPhone').value;
-      const dest = document.getElementById('leadDestField').value;
-
-      document.getElementById('leadCaptureForm').innerHTML = `
-        <div style="text-align: center; padding: 2rem 1rem;">
-          <div style="font-size: 3rem; color: #10b981; margin-bottom: 1rem;">✓</div>
-          <h3 style="color: #0f172a; margin-bottom: 0.5rem;">Inquiry Sent, ${name}!</h3>
-          <p style="color: #475569; font-size: 0.95rem; margin-bottom: 1.5rem;">
-            Our travel expert will send the complete verified itinerary and cost breakdown for <strong>${dest}</strong> to <strong>${phone}</strong> via WhatsApp within 15 minutes.
-          </p>
-          <button class="btn btn-primary" onclick="closeLeadModal()">Done</button>
-        </div>
-      `;
-    };
 
     // Mobile Navigation Drawer Handlers
     function openMobileMenu() {

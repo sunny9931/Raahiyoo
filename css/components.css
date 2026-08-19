@@ -1224,6 +1224,45 @@
   background: #ffffff;
 }
 
+.form-input.is-invalid {
+  border-color: #ef4444 !important;
+  background-color: #fff5f5 !important;
+  animation: shakeInput 0.3s ease-in-out;
+}
+
+.form-input.is-valid {
+  border-color: #10b981 !important;
+  background-color: #f0fdf4 !important;
+}
+
+.field-error-msg {
+  color: #ef4444;
+  font-size: 0.82rem;
+  font-weight: 600;
+  margin-top: 0.35rem;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  animation: fadeInDown 0.2s ease;
+}
+
+@keyframes shakeInput {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-4px); }
+  75% { transform: translateX(4px); }
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 /* ==========================================================================
    13. VERIFIED REVIEWS & RATINGS GRID
    ========================================================================== */

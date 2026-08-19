@@ -2,7 +2,7 @@ import os
 import json
 import re
 
-base_dir = "/home/linuxlite/.gemini/antigravity/scratch/raahiyoo"
+base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 print("=" * 70)
 print("🚀 RAAHIYOO 2.0 — COMPLETE DEEP AUDIT SUITE")

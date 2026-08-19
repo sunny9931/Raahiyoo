@@ -59,9 +59,16 @@ document.addEventListener('DOMContentLoaded', () => {
  * Format Price with Current Active Currency
  */
 function formatPrice(inrAmount) {
-  const curr = CURRENCIES[currentCurrency] || CURRENCIES.INR;
-  const converted = Math.round(inrAmount * curr.rate);
-  return `${curr.symbol}${converted.toLocaleString('en-IN')}`;
+  if (typeof CURRENCIES === 'undefined') {
+    return `₹${Math.round(inrAmount).toLocaleString('en-IN')}`;
+  }
+  const curr = (CURRENCIES && CURRENCIES[currentCurrency]) || (CURRENCIES && CURRENCIES.INR) || { symbol: '₹', rate: 1 };
+  const converted = Math.round(inrAmount * (curr.rate || 1));
+  return `${curr.symbol || '₹'}${converted.toLocaleString('en-IN')}`;
+}
+
+if (typeof window !== 'undefined') {
+  window.formatPrice = formatPrice;
 }
 
 /**
@@ -761,45 +768,302 @@ function initReviewFormEvents() {
 }
 
 /**
- * 10. Lead Capture & WhatsApp Consultation Modal
+ * 10. Lead Capture & WhatsApp Consultation Modal with Real-World Validation
  */
+const JUNK_NAMES = ['test', 'asdf', 'qwerty', 'none', 'na', 'null', 'undefined', 'abc', 'xyz', 'demo', 'admin', 'user', 'fake', 'dummy'];
+const SPAM_PHONES = [
+  '0000000000', '1111111111', '2222222222', '3333333333', '4444444444',
+  '5555555555', '6666666666', '7777777777', '8888888888', '9999999999',
+  '1234567890', '0123456789', '9876543210'
+];
+
+function validateFullName(name) {
+  const trimmed = (name || '').trim();
+  if (!trimmed) {
+    return { valid: false, message: 'Please enter your full name.' };
+  }
+  if (trimmed.length < 3) {
+    return { valid: false, message: 'Full name must be at least 3 characters long.' };
+  }
+  if (JUNK_NAMES.includes(trimmed.toLowerCase())) {
+    return { valid: false, message: 'Please enter your genuine full name.' };
+  }
+  const nameRegex = /^[a-zA-Z\u0900-\u097F\s'.]{3,50}$/;
+  if (!nameRegex.test(trimmed)) {
+    return { valid: false, message: 'Name should only contain letters and spaces.' };
+  }
+  if (/^(.)\1{3,}$/i.test(trimmed)) {
+    return { valid: false, message: 'Please enter a genuine full name, not repeated characters.' };
+  }
+  return { valid: true, cleanName: trimmed };
+}
+
+function validatePhoneNumber(phone) {
+  const trimmed = (phone || '').trim();
+  if (!trimmed) {
+    return { valid: false, message: 'Please enter your WhatsApp phone number.' };
+  }
+  const digits = trimmed.replace(/\D/g, '');
+  if (!digits) {
+    return { valid: false, message: 'Please enter a valid numeric phone number.' };
+  }
+
+  let nationalNumber = digits;
+  if (digits.length === 12 && digits.startsWith('91')) {
+    nationalNumber = digits.substring(2);
+  } else if (digits.length === 11 && digits.startsWith('0')) {
+    nationalNumber = digits.substring(1);
+  }
+
+  if (SPAM_PHONES.includes(nationalNumber)) {
+    return { valid: false, message: 'Please enter your real WhatsApp number, not a dummy number.' };
+  }
+
+  const indianMobileRegex = /^[6-9]\d{9}$/;
+  if (nationalNumber.length === 10 && indianMobileRegex.test(nationalNumber)) {
+    return {
+      valid: true,
+      formatted: `+91 ${nationalNumber.slice(0, 5)} ${nationalNumber.slice(5)}`,
+      raw: `91${nationalNumber}`
+    };
+  }
+
+  if (digits.length >= 10 && digits.length <= 14) {
+    return {
+      valid: true,
+      formatted: `+${digits}`,
+      raw: digits
+    };
+  }
+
+  return { valid: false, message: 'Please enter a valid 10-digit mobile number starting with 6, 7, 8, or 9.' };
+}
+
 function openLeadModal(destName = 'Custom Journey') {
   const modal = document.getElementById('leadModalBackdrop');
+  if (!modal) return;
+
+  const title = document.getElementById('modalDestTitle');
   const destField = document.getElementById('leadDestField');
-  if (modal) {
-    if (destField) destField.value = destName;
-    modal.classList.add('active');
+  const container = modal.querySelector('.inquiry-modal');
+  const existingForm = document.getElementById('leadCaptureForm');
+
+  if (title) title.textContent = `Plan Trip to ${destName}`;
+  if (destField) destField.value = destName;
+
+  // If modal was previously replaced by success screen, restore form
+  if (!existingForm && container) {
+    container.innerHTML = `
+      <button class="modal-close-btn" id="leadModalCloseBtn" onclick="closeLeadModal()">&times;</button>
+      <div style="text-align: center; margin-bottom: 1.25rem;">
+        <span style="font-family: monospace; font-size: 0.78rem; font-weight: 700; color: var(--primary); text-transform: uppercase;">Custom Trip Consultation</span>
+        <h3 style="font-size: 1.5rem; color: #0f172a; margin: 0.25rem 0 0.4rem;" id="modalDestTitle">Plan Trip to ${destName}</h3>
+        <p style="color: #64748b; font-size: 0.9rem;">Direct verified itinerary, stays &amp; cost estimate via WhatsApp.</p>
+      </div>
+
+      <form id="leadCaptureForm" novalidate>
+        <input type="hidden" id="leadDestField" value="${destName}" />
+
+        <div class="form-group" style="margin-bottom: 1rem;">
+          <label class="form-label" for="leadName">Your Full Name <span style="color:#ef4444;">*</span></label>
+          <input type="text" id="leadName" class="form-input" placeholder="e.g. Rahul Sharma" autocomplete="name" />
+          <div id="leadNameError" style="display:none; color: #ef4444; font-size: 0.82rem; font-weight: 600; margin-top: 0.35rem;"></div>
+        </div>
+
+        <div class="form-group" style="margin-bottom: 1rem;">
+          <label class="form-label" for="leadPhone">WhatsApp Phone Number <span style="color:#ef4444;">*</span></label>
+          <input type="tel" id="leadPhone" class="form-input" placeholder="e.g. 98765 43210" autocomplete="tel" />
+          <div id="leadPhoneError" style="display:none; color: #ef4444; font-size: 0.82rem; font-weight: 600; margin-top: 0.35rem;"></div>
+        </div>
+
+        <div class="form-group" style="margin-bottom: 1.25rem;">
+          <label class="form-label" for="leadTravelDate">Estimated Travel Month / Dates (Optional)</label>
+          <input type="text" id="leadTravelDate" class="form-input" placeholder="e.g. Next Month / October Holidays" />
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-lg" style="width: 100%; margin-top: 0.25rem;">
+          Send Me Plan on WhatsApp &rarr;
+        </button>
+      </form>
+    `;
+    initLeadModalEvents();
+  } else if (existingForm) {
+    clearLeadErrors();
   }
+
+  modal.classList.add('active');
 }
 
 function closeLeadModal() {
   const modal = document.getElementById('leadModalBackdrop');
   if (modal) modal.classList.remove('active');
+  clearLeadErrors();
+}
+
+function clearLeadErrors() {
+  const nameInput = document.getElementById('leadName');
+  const phoneInput = document.getElementById('leadPhone');
+  const nameErr = document.getElementById('leadNameError');
+  const phoneErr = document.getElementById('leadPhoneError');
+
+  if (nameInput) {
+    nameInput.style.borderColor = '';
+    nameInput.style.backgroundColor = '';
+  }
+  if (phoneInput) {
+    phoneInput.style.borderColor = '';
+    phoneInput.style.backgroundColor = '';
+  }
+  if (nameErr) nameErr.style.display = 'none';
+  if (phoneErr) phoneErr.style.display = 'none';
 }
 
 function initLeadModalEvents() {
   const closeBtn = document.getElementById('leadModalCloseBtn');
   const form = document.getElementById('leadCaptureForm');
+  const nameInput = document.getElementById('leadName');
+  const phoneInput = document.getElementById('leadPhone');
 
-  if (closeBtn) closeBtn.addEventListener('click', closeLeadModal);
-  if (form) {
-    form.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const name = document.getElementById('leadName').value;
-      const phone = document.getElementById('leadPhone').value;
-      const dest = document.getElementById('leadDestField').value;
+  if (closeBtn) closeBtn.onclick = closeLeadModal;
 
-      form.innerHTML = `
-        <div style="text-align: center; padding: 2rem 1rem;">
-          <div style="font-size: 3rem; color: #10b981; margin-bottom: 1rem;">✓</div>
-          <h3 style="color: #0f172a; margin-bottom: 0.5rem;">Inquiry Received, ${name}!</h3>
-          <p style="color: #475569; font-size: 0.95rem; margin-bottom: 1.5rem;">
-            Our travel specialist will send the complete verified itinerary and cost breakdown for <strong>${dest}</strong> to <strong>${phone}</strong> via WhatsApp within 15 minutes.
-          </p>
-          <button class="btn btn-primary" onclick="closeLeadModal()">Done</button>
-        </div>
-      `;
+  if (nameInput) {
+    nameInput.addEventListener('input', () => {
+      nameInput.style.borderColor = '';
+      nameInput.style.backgroundColor = '';
+      const err = document.getElementById('leadNameError');
+      if (err) err.style.display = 'none';
     });
+  }
+
+  if (phoneInput) {
+    phoneInput.addEventListener('input', () => {
+      phoneInput.style.borderColor = '';
+      phoneInput.style.backgroundColor = '';
+      const err = document.getElementById('leadPhoneError');
+      if (err) err.style.display = 'none';
+    });
+  }
+
+  if (form) {
+    form.onsubmit = (e) => {
+      e.preventDefault();
+
+      const nameVal = document.getElementById('leadName')?.value || '';
+      const phoneVal = document.getElementById('leadPhone')?.value || '';
+      const dateVal = document.getElementById('leadTravelDate')?.value || '';
+      const destVal = document.getElementById('leadDestField')?.value || 'Custom Journey';
+
+      const nameRes = validateFullName(nameVal);
+      const phoneRes = validatePhoneNumber(phoneVal);
+
+      let hasError = false;
+
+      const nameInputEl = document.getElementById('leadName');
+      let nameErrEl = document.getElementById('leadNameError');
+      if (!nameErrEl && nameInputEl) {
+        nameErrEl = document.createElement('div');
+        nameErrEl.id = 'leadNameError';
+        nameErrEl.style.cssText = 'color: #ef4444; font-size: 0.82rem; font-weight: 600; margin-top: 0.35rem;';
+        nameInputEl.parentElement.appendChild(nameErrEl);
+      }
+
+      const phoneInputEl = document.getElementById('leadPhone');
+      let phoneErrEl = document.getElementById('leadPhoneError');
+      if (!phoneErrEl && phoneInputEl) {
+        phoneErrEl = document.createElement('div');
+        phoneErrEl.id = 'leadPhoneError';
+        phoneErrEl.style.cssText = 'color: #ef4444; font-size: 0.82rem; font-weight: 600; margin-top: 0.35rem;';
+        phoneInputEl.parentElement.appendChild(phoneErrEl);
+      }
+
+      if (!nameRes.valid) {
+        hasError = true;
+        if (nameInputEl) {
+          nameInputEl.style.borderColor = '#ef4444';
+          nameInputEl.style.backgroundColor = '#fff5f5';
+          nameInputEl.focus();
+        }
+        if (nameErrEl) {
+          nameErrEl.textContent = nameRes.message;
+          nameErrEl.style.display = 'block';
+        }
+      } else {
+        if (nameInputEl) {
+          nameInputEl.style.borderColor = '#10b981';
+          nameInputEl.style.backgroundColor = '#f0fdf4';
+        }
+        if (nameErrEl) nameErrEl.style.display = 'none';
+      }
+
+      if (!phoneRes.valid) {
+        hasError = true;
+        if (phoneInputEl) {
+          phoneInputEl.style.borderColor = '#ef4444';
+          phoneInputEl.style.backgroundColor = '#fff5f5';
+          if (nameRes.valid) phoneInputEl.focus();
+        }
+        if (phoneErrEl) {
+          phoneErrEl.textContent = phoneRes.message;
+          phoneErrEl.style.display = 'block';
+        }
+      } else {
+        if (phoneInputEl) {
+          phoneInputEl.style.borderColor = '#10b981';
+          phoneInputEl.style.backgroundColor = '#f0fdf4';
+        }
+        if (phoneErrEl) phoneErrEl.style.display = 'none';
+      }
+
+      if (hasError) return;
+
+      // Save valid inquiry to localStorage
+      try {
+        const savedLeads = JSON.parse(localStorage.getItem('raahiyoo_leads') || '[]');
+        savedLeads.unshift({
+          name: nameRes.cleanName,
+          phone: phoneRes.formatted,
+          destination: destVal,
+          travelDate: dateVal.trim() || 'Flexible',
+          timestamp: new Date().toISOString()
+        });
+        localStorage.setItem('raahiyoo_leads', JSON.stringify(savedLeads));
+      } catch(err) {}
+
+      // Pre-filled WhatsApp message URL
+      const waMsg = encodeURIComponent(
+        `Hi Sunnio! I just requested a verified travel plan for *${destVal}* on RAAHIYOO.\n\n` +
+        `👤 *Name:* ${nameRes.cleanName}\n` +
+        `📱 *WhatsApp:* ${phoneRes.formatted}\n` +
+        `🗓️ *Estimated Dates:* ${dateVal.trim() || 'Flexible'}\n\n` +
+        `Please share the detailed itinerary blueprint & stay recommendations!`
+      );
+      const waUrl = `https://wa.me/919931000000?text=${waMsg}`;
+
+      const modalContainer = form.closest('.inquiry-modal') || form.parentElement;
+      if (modalContainer) {
+        modalContainer.innerHTML = `
+          <button class="modal-close-btn" onclick="closeLeadModal()">&times;</button>
+          <div style="text-align: center; padding: 1.25rem 0.5rem;">
+            <div style="width: 60px; height: 60px; background: #ecfdf5; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 2rem; color: #10b981; margin: 0 auto 0.85rem; border: 2px solid #a7f3d0;">✓</div>
+            <span style="font-family: monospace; font-size: 0.78rem; font-weight: 800; color: #059669; text-transform: uppercase; background: rgba(16, 185, 129, 0.12); padding: 0.25rem 0.75rem; border-radius: 9999px;">
+              Request Verified
+            </span>
+            <h3 style="color: #0f172a; margin: 0.65rem 0 0.35rem; font-size: 1.45rem;">Thank You, ${nameRes.cleanName}!</h3>
+            <p style="color: #475569; font-size: 0.92rem; margin-bottom: 1.35rem; line-height: 1.6;">
+              Your customized itinerary request for <strong style="color: #0f172a;">${destVal}</strong> has been received. We will send the full itinerary &amp; budget blueprint to <strong style="color: #0f172a;">${phoneRes.formatted}</strong> on WhatsApp.
+            </p>
+
+            <div style="display: flex; flex-direction: column; gap: 0.65rem;">
+              <a href="${waUrl}" target="_blank" rel="noopener" class="btn btn-primary btn-lg" style="background: #25d366; border-color: #25d366; display: flex; align-items: center; justify-content: center; gap: 0.5rem; text-decoration: none; color: #fff;">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.275.072.376-.043c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.045.072.045.419-.099.824zm-3.423-14.416c-6.627 0-12 5.373-12 12 0 2.112.553 4.095 1.519 5.819l-1.619 5.914 6.074-1.593c1.657.904 3.553 1.42 5.567 1.42 6.627 0 12-5.373 12-12 0-6.627-5.373-12-12-12z"/></svg>
+                <span>Connect with Sunnio on WhatsApp</span>
+              </a>
+              <button class="btn btn-secondary" onclick="closeLeadModal()">Done</button>
+            </div>
+          </div>
+        `;
+      }
+    };
   }
 }
 

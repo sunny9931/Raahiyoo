@@ -39,10 +39,31 @@ function initLuxuryBudgetStudio() {
 
   if (typeof DESTINATIONS === 'undefined' || DESTINATIONS.length === 0) return;
 
-  let currentDest = DESTINATIONS[0];
-  let selectedDays = 3;
-  let selectedPax = 2;
-  let selectedTier = 'moderate'; // 'budget', 'moderate', 'luxury'
+  const urlParams = new URLSearchParams(window.location.search);
+  const destParam = urlParams.get('destination') || urlParams.get('dest') || urlParams.get('id');
+
+  let currentDest = (destParam && DESTINATIONS.find(d => 
+    d.id.toLowerCase() === destParam.toLowerCase() || 
+    d.name.toLowerCase() === destParam.toLowerCase()
+  )) || DESTINATIONS[0];
+
+  let selectedDays = parseInt(urlParams.get('days'), 10) || 3;
+  if (selectedDays < 1 || selectedDays > 20) selectedDays = 3;
+
+  let selectedPax = parseInt(urlParams.get('pax'), 10) || 2;
+  if (selectedPax < 1 || selectedPax > 12) selectedPax = 2;
+
+  let selectedTier = urlParams.get('tier') || 'moderate'; // 'budget', 'moderate', 'luxury'
+  if (!['budget', 'moderate', 'luxury'].includes(selectedTier)) selectedTier = 'moderate';
+
+  // Sync initial UI states
+  if (daysVal) daysVal.textContent = `${selectedDays} Days`;
+  if (paxVal) paxVal.textContent = selectedPax === 1 ? '1 Person' : `${selectedPax} Persons`;
+  updateActivePreset();
+
+  tierCards.forEach(c => {
+    c.classList.toggle('active', c.dataset.tier === selectedTier);
+  });
 
   // 1. Populate & Setup Searchable Destination Dropdown
   function renderDestOptions(q = '') {

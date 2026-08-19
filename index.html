@@ -423,25 +423,27 @@
         <p style="color: #64748b; font-size: 0.9rem;">Direct day-by-day plan, hotel recommendations &amp; cost estimate.</p>
       </div>
 
-      <form id="leadCaptureForm">
+      <form id="leadCaptureForm" novalidate>
         <input type="hidden" id="leadDestField" value="" />
 
-        <div class="form-group">
-          <label class="form-label" for="leadName">Your Full Name</label>
-          <input type="text" id="leadName" class="form-input" placeholder="e.g. Rahul Sharma" required />
+        <div class="form-group" style="margin-bottom: 1rem;">
+          <label class="form-label" for="leadName">Your Full Name <span style="color:#ef4444;">*</span></label>
+          <input type="text" id="leadName" class="form-input" placeholder="e.g. Rahul Sharma" autocomplete="name" />
+          <div id="leadNameError" style="display:none; color: #ef4444; font-size: 0.82rem; font-weight: 600; margin-top: 0.35rem;"></div>
         </div>
 
-        <div class="form-group">
-          <label class="form-label" for="leadPhone">WhatsApp Phone Number</label>
-          <input type="tel" id="leadPhone" class="form-input" placeholder="e.g. +91 98765 43210" required />
+        <div class="form-group" style="margin-bottom: 1rem;">
+          <label class="form-label" for="leadPhone">WhatsApp Phone Number <span style="color:#ef4444;">*</span></label>
+          <input type="tel" id="leadPhone" class="form-input" placeholder="e.g. 98765 43210" autocomplete="tel" />
+          <div id="leadPhoneError" style="display:none; color: #ef4444; font-size: 0.82rem; font-weight: 600; margin-top: 0.35rem;"></div>
         </div>
 
-        <div class="form-group">
-          <label class="form-label" for="leadTravelDate">Estimated Travel Month / Dates</label>
+        <div class="form-group" style="margin-bottom: 1.25rem;">
+          <label class="form-label" for="leadTravelDate">Estimated Travel Month / Dates (Optional)</label>
           <input type="text" id="leadTravelDate" class="form-input" placeholder="e.g. Next Month / Diwali Holidays" />
         </div>
 
-        <button type="submit" class="btn btn-primary btn-lg" style="width: 100%; margin-top: 0.5rem;">
+        <button type="submit" class="btn btn-primary btn-lg" style="width: 100%; margin-top: 0.25rem;">
           Send Me Plan on WhatsApp &rarr;
         </button>
       </form>
